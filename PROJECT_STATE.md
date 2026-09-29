@@ -1,5 +1,81 @@
 # PROJECT STATE
 
+## Fase 46 - Actualización consolidada del prototipo
+
+Se consolidaron en el repositorio los ajustes recientes de portada, dashboard, observaciones, temas claro/oscuro, navegación lateral y pruebas asociadas. La aplicación mantiene datos demostrativos, rutas funcionales y verificación automática de la eliminación de burbujas decorativas.
+
+## Fase 45 - Navegación lateral premium
+
+Se reemplazaron los emojis del sidebar por iconos consistentes, se mejoraron las áreas de clic, el espaciado, la jerarquía, los estados activos y el hover para una navegación más refinada en temas claro y oscuro.
+
+## Fase 44 - Tema claro consistente en Observaciones
+
+Se corrigió el shell de Observaciones para que el tema blanco coincida con el dashboard: sidebar blanco, navegación activa naranja, barra superior clara, breadcrumb claro, formulario blanco y contraste coherente. El tema oscuro mantiene su variante carbón/naranja.
+
+## Fase 43 - Cambio de tema disponible en Observaciones
+
+Se añadió el control luna/sol a la barra superior de Observaciones. El botón comparte `rc_dashboard_theme` con el dashboard, actualiza el tema claro/oscuro y conserva la preferencia entre ambas vistas.
+
+## Fase 42 - Observaciones con shell CoreUI completo
+
+El apartado de observaciones ahora comparte la misma estructura visual del dashboard: sidebar, barra superior con búsqueda y acciones, breadcrumb, superficies temáticas, formulario alineado, acentos naranja y soporte claro/oscuro. Se conserva el contenido funcional de captura y guardado demo.
+
+## Fase 41 - Observaciones alineadas con el sistema visual
+
+Se aplicó al formulario de nueva observación la misma composición del dashboard: superficie tipo tarjeta, acento naranja, campos consistentes, estados de foco, botón de acción, mensaje de guardado y soporte para tema claro/oscuro.
+
+## Fase 40 - Tema oscuro gris carbón y naranja
+
+Se ajustó el tema oscuro a un gris muy oscuro con superficies carbón y detalles naranjas coordinados con el tema claro. Se actualizaron sidebar, barra superior, widgets, tarjetas, estados, botones, gráfico y controles para mantener contraste sin volver al azul dominante.
+
+## Fase 39 - Dashboard sin franjas exteriores
+
+Se eliminó el padding del contenedor privado únicamente para el dashboard y se hizo que la vista ocupe todo su lienzo. Ya no quedan separaciones blancas alrededor de la barra superior, contenido ni tarjetas.
+
+## Fase 38 - Modo oscuro alineado con referencia CoreUI
+
+Se ajustó el modo oscuro del dashboard para usar la composición azul grisácea de la referencia: sidebar y barra superior en tonos CoreUI, contenido en gris carbón, widgets violeta/azul/amarillo/coral, tarjetas oscuras y botón de menú visible. Se conserva la marca Carolina y la información demostrativa del proyecto.
+
+## Fase 37 - Paleta naranja para temas claro y oscuro
+
+Se unificó la paleta del dashboard: el tema claro usa superficies blancas, texto oscuro y detalles naranjas; el tema oscuro usa superficies negras, texto claro y detalles naranjas. Se ajustaron sidebar, barra superior, widgets, tarjetas, estados, controles y gráfico para mantener contraste.
+
+## Fase 36 - Sidebar contraíble y barra superior simplificada
+
+El logo Carolina ahora alterna el sidebar entre expandido y compacto, conservando el contenido principal visible. Se eliminó el botón de tres rayas junto a la búsqueda del dashboard para evitar controles duplicados.
+
+## Fase 35 - Tema oscuro accesible para el dashboard
+
+Se añadió un control de tema claro/oscuro en la barra superior del dashboard. El modo negro ajusta fondo, tarjetas, textos, bordes, tabla, leyenda y controles del gráfico para conservar contraste y legibilidad; la preferencia se guarda localmente.
+
+## Fase 34 - Dashboard reconstruido con referencia CoreUI
+
+Se reconstruyó la vista privada del dashboard con una composición tipo CoreUI: barra superior, búsqueda, acciones, breadcrumb, cuatro widgets con mini-gráficos, panel temporal, selector Día/Mes/Año, descarga visual, tabla de observaciones y tarjeta de contexto. La paleta conserva azul profundo, turquesa y coral para mantener la identidad de Restauración Carolina; todos los datos siguen siendo demostrativos.
+
+## Fase 33 - Estética CoreUI adaptada al dashboard
+
+Se adaptó la composición del dashboard a la referencia CoreUI: fondo administrativo claro, tarjetas compactas, bordes y sombras sutiles, tipografía sans para el panel, sidebar estructurada y mejor densidad de información. Se conserva la paleta marina de Restauración Carolina y no se incorporan dependencias nuevas ni datos comerciales de la plantilla.
+
+## Fase 32 - Acceso de usuario con tarjeta visual
+
+Se adaptó el enlace de acceso público a una tarjeta de perfil inspirada en el componente compartido, con icono, gradiente marino, borde suave, estado hover/focus visible y ajuste responsive. El enlace conserva su navegación al login demo.
+
+## Fase 31 - Dashboard alineado con la experiencia marina
+
+Se rediseñó visualmente el área privada con una navegación lateral submarina, fondo marino sutil, tarjetas de indicadores, superficies translúcidas, acentos coral y turquesa, gráfico con mejor contraste y responsive para pantallas pequeñas. Se conservaron los datos demostrativos y el funcionamiento actual del panel.
+
+## Fase 30 - Eliminación de círculos flotantes
+
+Se eliminaron las burbujas animadas y los patrones radiales de la atmósfera submarina para retirar los círculos blancos visibles sobre la imagen. Se conservan únicamente la textura marina, la luz difusa y los degradados no circulares.
+
+## Fase 29 - Burbujas submarinas realistas
+
+Se reintrodujo una corriente de 64 burbujas suaves que se activa al descender más allá del header. Cada partícula tiene variación determinista de tamaño, brillo, desenfoque, opacidad y deriva para conservar volumen visual sin formar anillos decorativos.
+
+## Fase 28 - Retiro de círculos decorativos
+
+Se retiró la capa de burbujas circulares de la portada porque interfería con la lectura visual. Se conservan el fondo marino, la atmósfera de luz y las partículas ambientales no circulares.
+
 ## Fase 27 - Limpieza de numeración visual
 
 Se eliminaron el contador “01 / 04” del hero y los marcadores ordinales “01”, “02” y “03” de las tarjetas de indicadores. Se conservaron únicamente los valores principales de datos del prototipo.

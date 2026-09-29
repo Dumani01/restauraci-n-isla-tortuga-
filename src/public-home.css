@@ -21,8 +21,7 @@
 
 .velorah-home::before { background-image: linear-gradient(180deg, rgba(3, 24, 34, .1), rgba(2, 22, 36, .22)), var(--vh-underwater-image); background-position: center top; background-repeat: no-repeat; background-size: 100% 100%; content: ''; inset: 0; opacity: .98; pointer-events: none; position: absolute; z-index: 0; }
 
-.velorah-home::after { animation: vh-water-light 18s ease-in-out infinite alternate; background: radial-gradient(circle at center, rgba(236, 255, 248, .08) 0 38%, rgba(178, 244, 225, .72) 43% 48%, rgba(255, 255, 255, .26) 49% 53%, transparent 61%), radial-gradient(circle at center, rgba(236, 255, 248, .06) 0 38%, rgba(178, 244, 225, .58) 43% 48%, rgba(255, 255, 255, .2) 49% 53%, transparent 61%), radial-gradient(circle at center, rgba(236, 255, 248, .07) 0 38%, rgba(178, 244, 225, .64) 43% 48%, rgba(255, 255, 255, .22) 49% 53%, transparent 61%), radial-gradient(circle at center, rgba(236, 255, 248, .06) 0 38%, rgba(178, 244, 225, .54) 43% 48%, rgba(255, 255, 255, .18) 49% 53%, transparent 61%), linear-gradient(108deg, transparent 0 16%, rgba(178, 244, 225, .12) 22%, transparent 31% 45%, rgba(126, 224, 211, .09) 53%, transparent 62%), radial-gradient(ellipse at 30% 24%, rgba(181, 247, 225, .18), transparent 36%), radial-gradient(ellipse at 74% 68%, rgba(30, 150, 164, .18), transparent 42%); background-repeat: no-repeat; background-size: 18px 18px, 25px 25px, 14px 14px, 31px 31px, 145% 100%, 100% 100%, 100% 100%; background-position: 18% 112%, 61% 126%, 84% 138%, 39% 153%, 0 0, 0 0, 0 0; content: ''; inset: 0; mix-blend-mode: screen; opacity: calc(var(--vh-scroll, 0) * .78); pointer-events: none; position: fixed; z-index: 6; }
-
+.velorah-home::after { animation: vh-water-light 18s ease-in-out infinite alternate; background: linear-gradient(108deg, transparent 0 16%, rgba(178, 244, 225, .12) 22%, transparent 31% 45%, rgba(126, 224, 211, .09) 53%, transparent 62%), radial-gradient(ellipse at 30% 24%, rgba(181, 247, 225, .18), transparent 36%), radial-gradient(ellipse at 74% 68%, rgba(30, 150, 164, .18), transparent 42%); background-repeat: no-repeat; background-size: 145% 100%, 100% 100%, 100% 100%; background-position: 0 0, 0 0, 0 0; content: ''; inset: 0; mix-blend-mode: screen; opacity: calc(var(--vh-scroll, 0) * .78); pointer-events: none; position: fixed; z-index: 6; }
 
 .vh-hero,
 .vh-statement,
@@ -162,7 +161,10 @@
   gap: 11px;
   justify-content: center;
   min-height: 48px;
+  overflow: hidden;
   padding: 0 20px;
+  position: relative;
+  text-decoration: none;
   transition: background-color .2s ease, transform .2s ease;
 }
 
@@ -176,7 +178,7 @@
 .vh-button--glass { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .36); color: #f4fbf8; backdrop-filter: blur(10px); }
 .vh-button--glass:hover { background: rgba(255, 255, 255, .16); }
 .vh-button--glass, .vh-coral-card { box-shadow: inset 0 1px 1px rgba(255, 255, 255, .18); position: relative; }
-.vh-button--glass::before, .vh-coral-card::before { background: linear-gradient(180deg, rgba(255, 255, 255, .3), transparent 38%); content: ''; inset: 0; pointer-events: none; position: absolute; }
+.vh-button--glass::before, .vh-coral-card::before { background: linear-gradient(180deg, rgba(255, 255, 255, .3), transparent 38%); border-radius: inherit; content: ''; inset: 0; pointer-events: none; position: absolute; }
 .vh-coral-card { box-shadow: none; }
 .vh-coral-card::before { display: none; }
 
@@ -270,7 +272,6 @@
 .vh-reef__intro > p:last-child { color: rgba(230, 243, 239, .7); line-height: 1.75; margin: 26px 0 0; max-width: 390px; }
 .vh-reef__scene { align-self: stretch; background: transparent; border: 0; min-height: 430px; overflow: hidden; position: relative; }
 .vh-reef__scene::before { display: none; }
-.vh-reef__scene::after { background: radial-gradient(circle at 10% 20%, rgba(230, 249, 239, .5) 0 1px, transparent 2px), radial-gradient(circle at 34% 42%, rgba(230, 249, 239, .4) 0 1px, transparent 2px), radial-gradient(circle at 75% 16%, rgba(230, 249, 239, .36) 0 1px, transparent 2px), radial-gradient(circle at 84% 58%, rgba(230, 249, 239, .32) 0 2px, transparent 3px); background-size: 170px 210px, 230px 260px, 190px 240px, 270px 290px; content: ''; inset: 0; opacity: calc(.15 + var(--vh-scroll, 0) * .6); pointer-events: none; position: absolute; }
 .vh-reef__rays { background: linear-gradient(112deg, transparent 24%, rgba(172, 244, 222, .09) 42%, transparent 58%), linear-gradient(70deg, transparent 35%, rgba(172, 244, 222, .08) 48%, transparent 63%); inset: 0; position: absolute; }
 .vh-reef__sand { background: #082b35; border-radius: 50% 50% 0 0 / 30% 30% 0 0; bottom: -29%; height: 55%; left: -6%; position: absolute; transform: rotate(-3deg); width: 116%; }
 .vh-coral { background: none; border: 0; bottom: 22%; cursor: pointer; height: 230px; padding: 0; position: absolute; width: 150px; z-index: 2; }
@@ -285,7 +286,6 @@
 .vh-coral--1 .vh-coral__image { height: 225px; width: 235px; }
 .vh-coral--2 .vh-coral__image { height: 175px; width: 235px; }
 .vh-coral--3 .vh-coral__image { height: 225px; width: 225px; }
-.vh-coral__bubble { animation: vh-bubble 4s ease-in-out infinite; background: #f8b18d; border-radius: 50%; box-shadow: 0 0 0 8px rgba(242, 160, 129, .1), 0 0 25px rgba(242, 160, 129, .34); height: 16px; left: 55px; position: absolute; top: 17px; width: 16px; }
 .vh-coral__code { background: transparent; border: 0; color: #e7f6ef; font-size: .68rem; left: 27px; padding: 5px 7px; position: absolute; text-shadow: 0 2px 8px rgba(0, 16, 27, .8); top: -4px; transform: translateY(-100%); }
 .vh-coral.is-active { filter: drop-shadow(0 0 18px rgba(242, 160, 129, .55)); }
 .vh-coral.is-active .vh-coral__image { animation: vh-sway 3.5s ease-in-out infinite alternate; }
@@ -332,19 +332,9 @@
   to { transform: translateX(-50%) rotate(-5deg) translateY(-4px); }
 }
 
-@keyframes vh-bubble {
-  0%, 100% { opacity: .5; transform: translateY(5px) scale(.82); }
-  50% { opacity: 1; transform: translateY(-9px) scale(1); }
-}
-
 @keyframes vh-caustics {
   from { background-position: 0 0; }
   to { background-position: 120px 80px; }
-}
-
-@keyframes vh-scroll-bubbles {
-  from { background-position: 12vw 110vh, 68vw 118vh, 88vw 125vh; }
-  to { background-position: 18vw -18vh, 62vw -26vh, 82vw -10vh; }
 }
 
 @keyframes vh-water-light {
@@ -402,7 +392,6 @@
   .vh-hero__content,
   .vh-water-atmosphere::after,
   .vh-coral.is-active .vh-coral__image,
-  .vh-coral__bubble,
   .velorah-home::after,
   .vh-reef__scene::before,
   .vh-underwater-scene { animation: none; transition: none; }

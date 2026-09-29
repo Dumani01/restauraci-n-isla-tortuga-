@@ -38,7 +38,6 @@ const coralCards = [
 ];
 
 const coralAssets = [branchingCoral, brainCoral, fanCoral];
-
 export function PublicHome() {
   const [activeId, setActiveId] = useState(stories[0].id);
   const [activeCoralId, setActiveCoralId] = useState(coralCards[0].id);
@@ -51,6 +50,7 @@ export function PublicHome() {
     const updateDepth = () => {
       const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
       setScrollProgress(Math.min(window.scrollY / maxScroll, 1));
+
     };
     updateDepth();
     window.addEventListener('scroll', updateDepth, { passive: true });
@@ -158,7 +158,6 @@ export function PublicHome() {
               onClick={() => setActiveCoralId(coral.id)}
             >
               <img className="vh-coral__image" src={coralAssets[index]} alt="" aria-hidden="true" />
-              <span className="vh-coral__bubble" aria-hidden="true" />
               <span className="vh-coral__code">{coral.code}</span>
             </button>
           ))}

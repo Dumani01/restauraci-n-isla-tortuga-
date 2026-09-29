@@ -13,3 +13,13 @@ test('la portada muestra el hero y cambia las pestañas de seguimiento', () => {
   expect(screen.getByRole('tab', { name: 'Observaciones' })).toHaveAttribute('aria-selected', 'true');
   expect(screen.getByRole('tabpanel')).toHaveTextContent('Una visita deja un registro trazable.');
 });
+
+test('el scroll no añade decoración circular a la portada', () => {
+  render(<MemoryRouter><PublicHome /></MemoryRouter>);
+
+  expect(screen.queryByTestId('bubble-field')).not.toBeInTheDocument();
+  Object.defineProperty(window, 'scrollY', { configurable: true, value: 100 });
+  fireEvent.scroll(window);
+
+  expect(screen.queryByTestId('bubble-field')).not.toBeInTheDocument();
+});
