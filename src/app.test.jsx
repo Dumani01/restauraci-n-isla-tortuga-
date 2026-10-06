@@ -1,17 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { PublicHome } from './PublicHome.jsx';
+import { PublicHome } from './pages/public/PublicHome.jsx';
 
-test('la portada muestra el hero y cambia las pestañas de seguimiento', () => {
+test('la portada muestra la restauración y cambia la información del proceso', () => {
   render(<MemoryRouter><PublicHome /></MemoryRouter>);
 
   expect(screen.getByRole('heading', { name: /restauración coralina/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /explorar zonas/i })).toHaveAttribute('href', '/mapa');
+  expect(screen.getByRole('link', { name: /ver el ciclo de vida/i })).toHaveAttribute('href', '/galeria');
 
-  fireEvent.click(screen.getByRole('tab', { name: 'Observaciones' }));
+  fireEvent.click(screen.getByRole('tab', { name: 'Cómo' }));
 
-  expect(screen.getByRole('tab', { name: 'Observaciones' })).toHaveAttribute('aria-selected', 'true');
-  expect(screen.getByRole('tabpanel')).toHaveTextContent('Una visita deja un registro trazable.');
+  expect(screen.getByRole('tab', { name: 'Cómo' })).toHaveAttribute('aria-selected', 'true');
+  expect(screen.getByRole('tabpanel')).toHaveTextContent('Restaurar requiere tiempo');
 });
 
 test('el scroll no añade decoración circular a la portada', () => {

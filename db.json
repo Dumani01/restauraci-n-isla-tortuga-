@@ -1,32 +1,23 @@
 {
-  "users": [
-    {"id":"u1","name":"Bernny Dumani Vásquez","email":"admin@restauracion.local","role":"admin","active":true},
-    {"id":"u2","name":"Operador demo","email":"investigador@restauracion.local","role":"investigador","active":true},
-    {"id":"u3","name":"Revisor demo","email":"revisor@restauracion.local","role":"revisor","active":true}
+  "project": {
+    "location": "Isla Tortuga · Golfo de Nicoya",
+    "focus": "Restauración coralina",
+    "activities": [
+      "Selección y recolección responsable de fragmentos de coral",
+      "Preparación y colocación en guarderías marinas y estructuras",
+      "Limpieza, mantenimiento y monitoreo de corales y condiciones del agua"
+    ],
+    "collaboration": "Investigadores, instituciones y comunidades trabajan juntos para cuidar los corales y recuperar las zonas afectadas."
+  },
+  "lifecycleStages": [
+    "Gametos",
+    "Embrión",
+    "Larva (plánula)",
+    "Asentamiento en sustrato",
+    "Coral juvenil",
+    "Coral adulto"
   ],
-  "zones": [
-    {"id":"z1","name":"Zona Carolina Norte","depth":8,"status":"En observación","public":true,"notes":"Dato demostrativo."},
-    {"id":"z2","name":"Sector Tortuga Sur","depth":12,"status":"Evidencia insuficiente","public":true,"notes":"Requiere más visitas comparables."}
-  ],
-  "structures": [
-    {"id":"s1","zoneId":"z1","name":"Estructura demostrativa A","type":"Módulo de prueba","material":"Sustrato modular","installedAt":"2026-06-10","condition":"Estable","maintenanceRequired":false},
-    {"id":"s2","zoneId":"z2","name":"Estructura demostrativa B","type":"Módulo de prueba","material":"Estructura de prueba","installedAt":"2026-06-20","condition":"Requiere mantenimiento","maintenanceRequired":true}
-  ],
-  "corals": [
-    {"id":"c1","code":"RC-001","species":"Porites sp.","status":"Vivo","zoneId":"z1","structureId":"s1","plantedAt":"2026-06-15","quality":"Revisada"},
-    {"id":"c2","code":"RC-002","species":"Pocillopora sp.","status":"En observación","zoneId":"z1","structureId":"s1","plantedAt":"2026-07-02","quality":"Pendiente"},
-    {"id":"c3","code":"RC-003","species":"Porites sp.","status":"Enfermo","zoneId":"z2","structureId":"s2","plantedAt":"2026-07-12","quality":"Pendiente"},
-    {"id":"c4","code":"RC-004","species":"Por confirmar","status":"Pendiente de siembra","zoneId":"z2","structureId":"s2","plantedAt":null,"quality":"Pendiente"},
-    {"id":"c5","code":"RC-005","species":"Por confirmar","status":"Perdido","zoneId":"z2","structureId":"s2","plantedAt":"2026-06-24","quality":"Validada"}
-  ],
-  "observations": [
-    {"id":"o1","coralId":"c1","zoneId":"z1","structureId":"s1","visitDate":"2026-09-10","observerId":"u2","status":"Vivo","validation":"Validada","evidenceCount":2,"notes":"Dato demostrativo."},
-    {"id":"o2","coralId":"c3","zoneId":"z2","structureId":"s2","visitDate":"2026-09-11","observerId":"u2","status":"Enfermo","validation":"Pendiente","evidenceCount":0,"notes":"Requiere revisión experta."}
-  ],
-  "maintenance": [{"id":"m1","structureId":"s2","date":"2026-09-12","action":"Inspección pendiente","responsibleId":"u2","result":"Pendiente"}],
-  "activities": [{"id":"a1","title":"Jornada demostrativa de restauración","date":"2026-10-04","location":"Isla Tortuga","participants":12,"status":"Planificada"}],
-  "news": [{"id":"n1","title":"Restauración Carolina inicia su prototipo de seguimiento","slug":"inicio-del-prototipo","date":"2026-09-25","excerpt":"Presentación del prototipo académico.","status":"Publicada"}],
-  "media": [],
-  "alerts": [{"id":"al1","type":"Datos incompletos","severity":"Media","entityId":"o2","reason":"Observación sin evidencia y pendiente de validación.","status":"Abierta"}],
-  "auditEvents": []
+  "observations": [],
+  "evidence": [],
+  "users": []
 }
