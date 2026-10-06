@@ -1,0 +1,110 @@
+{
+  "language": {
+    "name": "Français",
+    "short": "FR"
+  },
+  "nav": {
+    "home": "Accueil",
+    "project": "Projet",
+    "map": "Carte",
+    "gallery": "Galerie",
+    "news": "Actualités",
+    "access": "Accès",
+    "main": "Navigation principale"
+  },
+  "common": {
+    "search": "Rechercher",
+    "menu": "Menu",
+    "notifications": "Notifications",
+    "activity": "Activité",
+    "lightTheme": "Passer au thème clair",
+    "darkTheme": "Passer au thème sombre",
+    "backToTop": "Retour en haut",
+    "previous": "Étape précédente",
+    "next": "Étape suivante",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "logout": "Se déconnecter",
+    "home": "Accueil",
+    "breadcrumb": "Fil d’Ariane",
+    "demo": "Information de référence",
+    "fieldTracking": "Suivi de terrain"
+  },
+  "languageSelector": {
+    "label": "Langue",
+    "choose": "Choisir la langue",
+    "current": "Langue actuelle"
+  },
+  "home": {
+    "title": "Restauration corallienne,",
+    "titleEmphasis": "un effort collectif.",
+    "learnProject": "Découvrir le projet",
+    "viewLifecycle": "Voir le cycle de vie",
+    "explore": "Continuer l’exploration",
+    "tabsLabel": "Aspects de la restauration",
+    "tabLocation": "Où",
+    "tabProcess": "Comment",
+    "tabPeople": "Qui",
+    "processHeading": "La restauration demande du temps, du soin et des connaissances.",
+    "workLink": "Découvrir le travail",
+    "stagesLink": "Voir les étapes",
+    "carouselLabel": "Carrousel interactif des étapes du cycle de vie",
+    "selectStage": "Choisir une étape du cycle de vie",
+    "restorationLink": "Découvrir la restauration",
+    "illustrativeReef": "Récif corallien illustratif",
+    "highlight": "Mettre {{name}} en avant",
+    "model": "Modèle interactif de {{name}}"
+  },
+  "gallery": {
+    "stage": "Étape {{current}} sur {{total}}",
+    "reference": "Information de référence · pas un relevé de terrain",
+    "carousel": "Carrousel du cycle de vie du corail"
+  },
+  "login": {
+    "heading": "Se connecter",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "submit": "Accéder au suivi",
+    "private": "Accès privé"
+  },
+  "narrator": {
+    "label": "Narrateur",
+    "enable": "Activer le narrateur",
+    "disable": "Désactiver le narrateur",
+    "enabled": "Narrateur activé",
+    "disabled": "Narrateur désactivé",
+    "pause": "Mettre en pause",
+    "resume": "Reprendre la narration",
+    "stop": "Arrêter la narration",
+    "speed": "Vitesse",
+    "volume": "Volume",
+    "unavailable": "Le narrateur n’est pas disponible dans ce navigateur.",
+    "reading": "Lecture"
+  },
+  "lifecycle": {
+    "gametos": {
+      "name": "Gamètes",
+      "description": "Cellules reproductrices qui participent au début du cycle de vie du corail."
+    },
+    "embrion": {
+      "name": "Embryon",
+      "description": "Première étape après la fécondation."
+    },
+    "planula": {
+      "name": "Larve (planula)",
+      "description": "Larve mobile qui cherche un lieu adapté pour poursuivre son développement."
+    },
+    "asentamiento": {
+      "name": "Fixation sur le substrat",
+      "description": "La planula se fixe à un substrat adapté."
+    },
+    "juvenil": {
+      "name": "Corail juvénile",
+      "description": "Première phase de croissance après la fixation."
+    },
+    "adulto": {
+      "name": "Corail adulte",
+      "description": "Colonie développée qui peut poursuivre le cycle de vie."
+    }
+  }
+}

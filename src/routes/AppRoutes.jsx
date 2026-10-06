@@ -9,9 +9,30 @@ import { LoginPage } from '../pages/public/LoginPage.jsx';
 import { NewsPage } from '../pages/public/NewsPage.jsx';
 import { CoreDashboard } from '../pages/private/CoreDashboard.jsx';
 import { ObservationsPage } from '../pages/private/ObservationsPage.jsx';
+import { useLayoutEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+function RouteScrollManager() {
+  const { pathname, search, hash } = useLocation();
+  useLayoutEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    window.history.scrollRestoration = 'manual';
+    const frame = window.requestAnimationFrame(() => {
+      if (hash) {
+        document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname, search, hash]);
+  return null;
+}
 
 export function AppRoutes() {
   return (
+  <>
+  <RouteScrollManager />
   <Routes>
     <Route element={<PublicLayout />}>
       <Route path="/" element={<PublicHome />} />
@@ -28,5 +49,6 @@ export function AppRoutes() {
       </Route>
     </Route>
   </Routes>
+  </>
 );
 }

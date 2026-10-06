@@ -1,0 +1,110 @@
+{
+  "language": {
+    "name": "Deutsch",
+    "short": "DE"
+  },
+  "nav": {
+    "home": "Startseite",
+    "project": "Projekt",
+    "map": "Karte",
+    "gallery": "Galerie",
+    "news": "Neuigkeiten",
+    "access": "Zugang",
+    "main": "Hauptnavigation"
+  },
+  "common": {
+    "search": "Suchen",
+    "menu": "Menü",
+    "notifications": "Benachrichtigungen",
+    "activity": "Aktivität",
+    "lightTheme": "Helles Design aktivieren",
+    "darkTheme": "Dunkles Design aktivieren",
+    "backToTop": "Nach oben",
+    "previous": "Vorherige Phase",
+    "next": "Nächste Phase",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "logout": "Abmelden",
+    "home": "Startseite",
+    "breadcrumb": "Brotkrümelnavigation",
+    "demo": "Referenzinformation",
+    "fieldTracking": "Feldbeobachtung"
+  },
+  "languageSelector": {
+    "label": "Sprache",
+    "choose": "Sprache auswählen",
+    "current": "Aktuelle Sprache"
+  },
+  "home": {
+    "title": "Korallenrestauration,",
+    "titleEmphasis": "eine gemeinsame Aufgabe.",
+    "learnProject": "Projekt entdecken",
+    "viewLifecycle": "Lebenszyklus ansehen",
+    "explore": "Weiter erkunden",
+    "tabsLabel": "Aspekte der Restauration",
+    "tabLocation": "Wo",
+    "tabProcess": "Wie",
+    "tabPeople": "Wer",
+    "processHeading": "Restauration braucht Zeit, Pflege und Wissen.",
+    "workLink": "Arbeit kennenlernen",
+    "stagesLink": "Phasen ansehen",
+    "carouselLabel": "Interaktives Karussell der Lebenszyklusphasen",
+    "selectStage": "Lebenszyklusphase auswählen",
+    "restorationLink": "Restauration kennenlernen",
+    "illustrativeReef": "Illustratives Korallenriff",
+    "highlight": "{{name}} hervorheben",
+    "model": "Interaktives Modell von {{name}}"
+  },
+  "gallery": {
+    "stage": "Phase {{current}} von {{total}}",
+    "reference": "Referenzinformation · kein Felddatensatz",
+    "carousel": "Karussell des Korallenlebenszyklus"
+  },
+  "login": {
+    "heading": "Anmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "submit": "Tracking öffnen",
+    "private": "Privater Zugang"
+  },
+  "narrator": {
+    "label": "Vorleser",
+    "enable": "Vorleser aktivieren",
+    "disable": "Vorleser deaktivieren",
+    "enabled": "Vorleser aktiviert",
+    "disabled": "Vorleser deaktiviert",
+    "pause": "Vorlesen pausieren",
+    "resume": "Vorlesen fortsetzen",
+    "stop": "Vorlesen stoppen",
+    "speed": "Geschwindigkeit",
+    "volume": "Lautstärke",
+    "unavailable": "Der Vorleser ist in diesem Browser nicht verfügbar.",
+    "reading": "Wird vorgelesen"
+  },
+  "lifecycle": {
+    "gametos": {
+      "name": "Gameten",
+      "description": "Fortpflanzungszellen am Beginn des Korallenlebenszyklus."
+    },
+    "embrion": {
+      "name": "Embryo",
+      "description": "Frühe Phase nach der Befruchtung."
+    },
+    "planula": {
+      "name": "Larve (Planula)",
+      "description": "Bewegliche Larve auf der Suche nach einem geeigneten Ort."
+    },
+    "asentamiento": {
+      "name": "Ansiedlung auf Substrat",
+      "description": "Die Planula befestigt sich an einem geeigneten Substrat."
+    },
+    "juvenil": {
+      "name": "Junge Koralle",
+      "description": "Frühe Wachstumsphase nach der Ansiedlung."
+    },
+    "adulto": {
+      "name": "Erwachsene Koralle",
+      "description": "Eine entwickelte Kolonie, die den Lebenszyklus fortsetzen kann."
+    }
+  }
+}

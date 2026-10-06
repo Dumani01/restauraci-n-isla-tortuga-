@@ -1,0 +1,9 @@
+import { Pause, Play, Square, Volume2, VolumeX } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useNarrator } from '../../hooks/useNarrator.jsx';
+
+export function NarratorControls() {
+  const { t } = useTranslation(); const narrator = useNarrator(); if (!narrator) return null;
+  const { enabled, setEnabled, rate, setRate, volume, setVolume, speaking, supported, pause, resume, stop } = narrator;
+  return <div className="narrator-controls" data-narrator-ignore><button className="narrator-toggle" type="button" aria-pressed={enabled} aria-label={enabled ? t('narrator.disable') : t('narrator.enable')} title={enabled ? t('narrator.enabled') : t('narrator.disabled')} onClick={() => setEnabled((value) => !value)}>{volume > 0 ? <Volume2 size={15} /> : <VolumeX size={15} />}<span>{t('narrator.label')}</span></button>{enabled && supported && <div className="narrator-panel"><div className="narrator-panel__actions"><button type="button" aria-label={t('narrator.pause')} title={t('narrator.pause')} onClick={pause}><Pause size={14} /></button><button type="button" aria-label={t('narrator.resume')} title={t('narrator.resume')} onClick={resume}><Play size={14} /></button><button type="button" aria-label={t('narrator.stop')} title={t('narrator.stop')} onClick={stop}><Square size={14} /></button><span aria-live="polite">{speaking ? t('narrator.reading') : t('narrator.enabled')}</span></div><label>{t('narrator.speed')} <input type="range" min="0.5" max="2" step="0.1" value={rate} onChange={(event) => setRate(Number(event.target.value))} /></label><label>{t('narrator.volume')} <input type="range" min="0" max="1" step="0.1" value={volume} onChange={(event) => setVolume(Number(event.target.value))} /></label></div>}{!supported && <span className="narrator-fallback" role="status">{t('narrator.unavailable')}</span>}</div>;
+}

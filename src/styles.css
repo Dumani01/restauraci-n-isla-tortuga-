@@ -523,6 +523,25 @@ button { letter-spacing: .01em; }
 :root[data-dashboard-theme="dark"] .private aside .brand svg { color: #f28b2e; }
 :root[data-dashboard-theme="dark"] .private aside > a:not(.brand).active { background: #302117; border-color: #8a4d1d; color: #ffb36f; }
 :root[data-dashboard-theme="dark"] .private-section-theme-toggle { background: #303030; color: #f2a24f; }
+.language-selector { align-items: center; color: currentColor; display: inline-flex; gap: 5px; }
+.language-selector select { background: transparent; border: 0; color: inherit; cursor: pointer; font: inherit; font-size: .74rem; font-weight: 600; letter-spacing: .04em; outline: none; padding: 5px 2px; }
+.language-selector option { background: #0d3240; color: #fff; }
+.sr-only { height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+.narrator-controls { align-items: center; color: inherit; display: inline-flex; position: relative; }
+.narrator-toggle { align-items: center; background: transparent; border: 1px solid currentColor; border-radius: 999px; color: inherit; cursor: pointer; display: inline-flex; font-size: .72rem; gap: 5px; min-height: 34px; padding: 0 9px; }
+.narrator-toggle[aria-pressed="true"] { background: rgba(143, 216, 199, .16); }
+.narrator-panel { background: #092c3a; border: 1px solid rgba(230, 243, 239, .28); border-radius: 10px; box-shadow: 0 12px 28px rgba(0, 0, 0, .22); color: #f4fbf8; display: grid; gap: 8px; padding: 11px; position: absolute; right: 0; top: calc(100% + 8px); width: 210px; z-index: 20; }
+.narrator-panel__actions { align-items: center; display: flex; gap: 5px; }
+.narrator-panel__actions button { align-items: center; background: rgba(255, 255, 255, .08); border: 0; border-radius: 5px; color: inherit; cursor: pointer; display: inline-flex; height: 30px; justify-content: center; width: 30px; }
+.narrator-panel__actions span { font-size: .68rem; margin-left: auto; }
+.narrator-panel label { align-items: center; display: flex; font-size: .67rem; gap: 8px; justify-content: space-between; }
+.narrator-panel input { accent-color: #8fd8c7; width: 100px; }
+.narrator-fallback { background: rgba(160, 74, 50, .15); border: 1px solid rgba(255, 190, 160, .35); border-radius: 7px; font-size: .68rem; max-width: 220px; padding: 8px; position: absolute; right: 0; top: calc(100% + 8px); width: max-content; }
+.narrator-controls :focus-visible { outline: 2px solid #a8e1d2; outline-offset: 3px; }
+.private aside .narrator-controls { margin-top: 18px; }
+.private aside .narrator-toggle { color: rgba(230, 247, 240, .78); width: 100%; }
+.private aside .narrator-panel { left: 0; right: auto; }
+@media (max-width: 600px) { .narrator-toggle span { display: none; }.narrator-toggle { min-height: 36px; padding: 0 8px; }.narrator-panel { position: fixed; right: 12px; top: 112px; }.public-nav .narrator-controls { min-height: 44px; } }
 @media (max-width: 700px) { .private-main > section:not(.core-dashboard) > .panel.form { grid-template-columns: 1fr; padding: 22px 18px; }.private-main > section:not(.core-dashboard) .form .full { grid-column: auto; } }
 
 /* Cabecera CoreUI aplicada también a Observaciones. */

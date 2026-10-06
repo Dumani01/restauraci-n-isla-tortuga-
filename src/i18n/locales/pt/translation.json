@@ -1,0 +1,110 @@
+{
+  "language": {
+    "name": "Português",
+    "short": "PT"
+  },
+  "nav": {
+    "home": "Início",
+    "project": "Projeto",
+    "map": "Mapa",
+    "gallery": "Galeria",
+    "news": "Notícias",
+    "access": "Acesso",
+    "main": "Navegação principal"
+  },
+  "common": {
+    "search": "Buscar",
+    "menu": "Menu",
+    "notifications": "Notificações",
+    "activity": "Atividade",
+    "lightTheme": "Mudar para tema claro",
+    "darkTheme": "Mudar para tema escuro",
+    "backToTop": "Voltar ao topo",
+    "previous": "Etapa anterior",
+    "next": "Próxima etapa",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "logout": "Sair",
+    "home": "Início",
+    "breadcrumb": "Trilha de navegação",
+    "demo": "Informação de referência",
+    "fieldTracking": "Acompanhamento de campo"
+  },
+  "languageSelector": {
+    "label": "Idioma",
+    "choose": "Selecionar idioma",
+    "current": "Idioma atual"
+  },
+  "home": {
+    "title": "Restauração de corais,",
+    "titleEmphasis": "um trabalho coletivo.",
+    "learnProject": "Conhecer o projeto",
+    "viewLifecycle": "Ver o ciclo de vida",
+    "explore": "Continuar explorando",
+    "tabsLabel": "Aspectos da restauração",
+    "tabLocation": "Onde",
+    "tabProcess": "Como",
+    "tabPeople": "Quem",
+    "processHeading": "A restauração exige tempo, cuidado e conhecimento.",
+    "workLink": "Conhecer o trabalho",
+    "stagesLink": "Ver as etapas",
+    "carouselLabel": "Carrossel interativo das etapas do ciclo de vida",
+    "selectStage": "Selecionar etapa do ciclo de vida",
+    "restorationLink": "Conhecer a restauração",
+    "illustrativeReef": "Recife de corais ilustrativo",
+    "highlight": "Destacar {{name}}",
+    "model": "Modelo interativo de {{name}}"
+  },
+  "gallery": {
+    "stage": "Etapa {{current}} de {{total}}",
+    "reference": "Informação de referência · não é registro de campo",
+    "carousel": "Carrossel do ciclo de vida do coral"
+  },
+  "login": {
+    "heading": "Entrar",
+    "email": "E-mail",
+    "password": "Senha",
+    "submit": "Entrar no acompanhamento",
+    "private": "Acesso privado"
+  },
+  "narrator": {
+    "label": "Narrador",
+    "enable": "Ativar narrador",
+    "disable": "Desativar narrador",
+    "enabled": "Narrador ativado",
+    "disabled": "Narrador desativado",
+    "pause": "Pausar narração",
+    "resume": "Continuar narração",
+    "stop": "Parar narração",
+    "speed": "Velocidade",
+    "volume": "Volume",
+    "unavailable": "O narrador não está disponível neste navegador.",
+    "reading": "Lendo"
+  },
+  "lifecycle": {
+    "gametos": {
+      "name": "Gametos",
+      "description": "Células reprodutivas que participam do início do ciclo de vida do coral."
+    },
+    "embrion": {
+      "name": "Embrião",
+      "description": "Etapa inicial após a fecundação."
+    },
+    "planula": {
+      "name": "Larva (plânula)",
+      "description": "Larva móvel que busca um local adequado para continuar seu desenvolvimento."
+    },
+    "asentamiento": {
+      "name": "Assentamento no substrato",
+      "description": "A plânula se fixa em um substrato adequado."
+    },
+    "juvenil": {
+      "name": "Coral juvenil",
+      "description": "Etapa inicial de crescimento após o assentamento."
+    },
+    "adulto": {
+      "name": "Coral adulto",
+      "description": "Colônia desenvolvida que pode continuar o ciclo de vida."
+    }
+  }
+}
