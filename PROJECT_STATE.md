@@ -1,5 +1,195 @@
 # PROJECT STATE
 
+## Fase 81 - Fondo proporcional al cambiar pestañas
+
+Se corrigio el estiramiento visual del fondo submarino de la portada al cambiar la pestaña “Como”. El pseudo-elemento global de la portada ahora usa `background-size: cover` en lugar de `100% 100%`, conservando la proporcion de la imagen aunque cambie la altura del contenido.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS
+
+## Fase 80 - Limpieza de elementos decorativos del carrusel
+
+Se eliminaron del carrusel el numero grande de etapa y la leyenda auxiliar sobre el modelo. La ficha de informacion y el tooltip interactivo se mantienen para conservar el contexto sin elementos flotantes que compitan con las imagenes.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS
+
+## Fase 79 - Correccion visual del carrusel
+
+Se corrigio el desborde de nombres largos en la rail del carrusel: ahora las tarjetas reservan espacio para los controles, usan un ancho flexible y permiten envolver el texto/scroll horizontal. El tooltip de los modelos dejo de heredar la transformacion 3D del boton completo; la profundidad queda en la imagen y el texto usa una superficie nitida con ancho maximo responsive, contraste y z-index estable.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS
+
+## Fase 78 - Responsive + optimizacion visual (en revision)
+
+Se ajusto la base visual para responsive con `box-sizing` global, imagenes limitadas al contenedor y controles tipograficos heredados. La navegacion publica conserva todas las rutas y ahora ofrece areas tactiles minimas de 44px. El feature y el carrusel de ciclo pasan a una columna antes en tablet para evitar compresion y solapamientos. Las imagenes del ciclo reservan dimensiones, usan `object-fit: contain`, `decoding="async"` y `loading="lazy"` cuando corresponden.
+
+La auditoria de assets encontro 6 WebP del ciclo (aprox. 2.74 MB total) y 8 PNG heredados (aprox. 17.76 MB total). No se convirtieron los PNG porque no hay herramienta de conversion disponible en el entorno y no se debe degradar su calidad sin verificacion visual. La verificacion visual en las ocho resoluciones solicitadas queda pendiente porque no hay navegador conectado; el servidor Vite no pudo abrirse mediante la CLI ni el navegador integrado disponible.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS
+- `npm run lint`: no configurado en `package.json`
+- Verificacion visual multi-resolucion: PENDIENTE por falta de navegador conectado
+
+## Fase 74 - Carrusel 3D interactivo del ciclo de vida
+
+Se reconstruyo la ruta publica `/galeria` como un carrusel interactivo con seis modelos visuales CSS con profundidad: gametos, embrion, larva (planula), asentamiento en sustrato, coral juvenil y coral adulto. Cada modelo responde al hover y al foco de teclado, muestra un destaque visual y un tooltip con el nombre; la ficha activa conserva la descripcion centralizada en `src/services/projectData.js`. Se agregaron controles anterior/siguiente, miniaturas por etapa, estados accesibles y una nota explicita de contenido informativo de referencia. Los modelos son representaciones visuales y no evidencia ni resultados de campo.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS
+
+## Fase 75 - Carrusel 3D integrado en la pagina principal
+
+Se traslado la experiencia de modelos 3D al bloque `#corales` de la portada. El apartado ahora sustituye los tres corales rasterizados por las seis etapas del ciclo de vida, con hover/foco, tooltip, ficha informativa, controles anterior/siguiente y selector de etapas dentro de la misma escena marina. La ruta `/galeria` conserva su carrusel de referencia.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS
+
+## Fase 76 - Assets optimizados para el carrusel coralino
+
+Se incorporaron los seis assets WebP transparentes proporcionados en `src/assets/ciclo-coral/` y se sustituyeron los modelos CSS por las imagenes de cada etapa tanto en el carrusel de portada como en la galeria. Se conservaron hover/foco, tooltip, controles, miniaturas y la distincion entre contenido visual de referencia y evidencia de campo. Se mejoro el tratamiento visual con sombras, brillo, escalado y miniaturas de imagen.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS
+
+## Fase 73 - Contenido de restauración coralina basado en material proporcionado
+
+Se sustituyeron los registros, cifras, especies, fechas, noticias y ubicaciones ficticias de la interfaz por la información proporcionada sobre Isla Tortuga y el Golfo de Nicoya: ciclo de vida del coral, selección y recolección responsable, guarderías marinas, estructuras, limpieza, mantenimiento, monitoreo y colaboración. El contenido quedó centralizado en `src/services/projectData.js`; `db.json` conserva únicamente el esquema del proyecto con observaciones y evidencias vacías. Se retiró la ruta de detalle de corales sin registros verificables y el acceso privado ahora requiere variables de entorno, sin credenciales inventadas.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS (sin errores; permanece la advertencia de bundle grande cuando corresponde)
+
+## Fase 72 - Flujo de composición componentes → páginas → rutas → App → main → index.html
+
+Se reorganizó la arquitectura de entrada sin cambiar las URLs públicas o privadas. Los componentes compartidos ahora viven en `src/components`, las vistas antes embebidas en `App.jsx` se trasladaron a `src/pages`, la definición de React Router quedó en `src/routes/AppRoutes.jsx`, `src/app/App.jsx` compone el proveedor de autenticación con las rutas, y `src/main.jsx` permanece como punto de montaje hacia `index.html`. Se conservaron los datos demo, las guardas privadas y el funcionamiento sin servicios externos.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 71 - Carpeta de servicios demo
+
+Se creó `src/services/demoData.js` para centralizar los datos demostrativos compartidos por las rutas públicas y privadas. Se mantuvo explícita la distinción entre datos demo y datos verificados.
+
+## Fase 70 - Organización de carpetas y entrada de React Router
+
+Se separó el punto de entrada `src/main.jsx` de la aplicación y su configuración de React Router en `src/app/App.jsx`. Las vistas existentes se agruparon en `src/pages/public` y `src/pages/private`, actualizando imports de assets, estilos y pruebas sin cambiar las URLs públicas o privadas.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 69 - Encabezado sin sombreado separador
+
+Se retiró el degradado del encabezado de Mapa y Galería para evitar una franja oscura debajo del título. La escena marina continua permanece visible sin modificar el contenido.
+
+## Fase 68 - Encabezado de Mapa sin imagen independiente
+
+Se eliminó explícitamente la imagen coralina propia del encabezado de Mapa para que la escena continua de la portada y Proyecto sea visible detrás del título. Se conservó el contenido y la interacción del mapa.
+
+## Fase 67 - Fondo continuo en apartados interactivos
+
+Se alineó el encabezado de Mapa y Galería con la escena marina continua de la página principal y Proyecto. Se retiró la imagen submarina independiente del encabezado sin modificar el contenido ni las interacciones de esos apartados.
+
+## Fase 66 - Scroll interno sin cambiar la URL
+
+Se reemplazó el enlace con hash de `Seguir explorando` por un botón que desplaza suavemente hacia `#seguimiento` dentro de la misma portada, sin redireccionar ni modificar la URL del navegador.
+
+## Fase 65 - Recorte de capas atmosféricas sin scroll adicional
+
+Se cambió la portada a `overflow: clip` para recortar sus capas atmosféricas que sobresalían del contenido y extendían el documento. Esto mantiene un único scroll normal y elimina el espacio posterior al footer.
+
+## Fase 64 - Footer con altura directa y estable
+
+Se aplicó directamente al elemento footer una altura fija de 76px, fondo marino, límites máximo y mínimo, y recorte interno. Esto elimina cualquier posibilidad de que el footer se estire y genere el bloque oscuro sobrante.
+
+## Fase 63 - Flujo final de portada corregido
+
+Se normalizó el flujo de la home para usar un único scroll del documento, se eliminó cualquier altura implícita del contenedor público y se fijó el footer a 76px con recorte interno. Ya no queda espacio oscuro adicional después del límite.
+
+## Fase 62 - Footer marino compacto
+
+Se reemplazó el bloque oscuro posterior de la portada por un footer compacto de 76px que usa la misma imagen marina como fondo. La información del footer permanece visible sobre la escena, sin espacio oscuro adicional.
+
+## Fase 61 - Flujo normal del documento y cierre del footer
+
+Se eliminaron las alturas mínimas de viewport que dejaban una superficie oscura extensa después del contenido. Las rutas públicas ahora siguen un flujo normal de documento y terminan en un footer compacto, sin espacio adicional posterior.
+
+## Fase 60 - Footer compacto
+
+Se redujo la altura visual del footer mediante un padding vertical compacto y una altura mínima explícita de cero. Se conservaron sus textos y enlaces.
+
+## Fase 59 - Eliminación del espacio blanco exterior
+
+Se igualó el fondo de `body` y `#root` al fondo de las rutas públicas para que no aparezca una superficie blanca después del footer ni detrás del límite de la portada.
+
+## Fase 58 - Eliminación del doble scroll y fondo exterior
+
+Se reemplazó el recorte horizontal del contenedor público por `overflow-x: clip` para evitar que el navegador cree una segunda barra vertical. En la portada, el footer ahora usa el mismo fondo final oscuro para evitar que aparezca una franja azul externa.
+
+## Fase 57 - Corrección del fondo duplicado al final de la portada
+
+Se eliminó la imagen de fondo global que se repetía detrás del footer de la portada. El contenedor público de la home ahora mantiene un fondo sólido fuera de la escena principal, evitando el efecto de una segunda página detrás.
+
+## Fase 56 - Scroll vertical recuperado en la portada
+
+Se eliminó el `overflow: hidden` del contenedor general de la portada, que podía limitar el desplazamiento después de usar `Seguir explorando`. Los elementos internos conservan sus propios recortes visuales y la página vuelve a usar el scroll vertical normal.
+
+## Fase 55 - Retiro de numeración en principios
+
+Se eliminaron los rótulos numéricos `01`, `02` y `03` de las tarjetas de principios de `Proyecto`, sin modificar sus títulos ni textos.
+
+## Fase 54 - Hero sin sombreado bajo el título
+
+Se retiró la capa de degradado del hero de las rutas públicas para que el fondo marino continúe directamente bajo el título, sin una banda oscura ni separación visual.
+
+## Fase 53 - Fondo marino unificado en apartados públicos
+
+Se unificó el fondo de las rutas públicas con la misma escena marina continua de la página principal. El cambio aplica a Proyecto, Mapa, Galería, Noticias, acceso y detalles, conservando sus contenidos y bloques internos.
+
+## Fase 52 - Fondo marino para Proyecto
+
+La ruta `Proyecto` ahora utiliza como fondo la misma escena marina continua de la página principal, con una capa de contraste más ligera en el hero. El cambio está limitado al fondo de esa ruta.
+
+## Fase 51 - Fondo del apartado alineado con la página principal
+
+Se alineó únicamente el fondo del apartado principal con la imagen continua utilizada por la página principal. No se modificaron otros elementos visuales ni funcionales.
+
+## Fase 50 - Fondo marino aplicado directamente al apartado principal
+
+Se aplicó el fondo submarino directamente sobre el contenedor visible del hero para evitar que la capa global de la portada lo ocultara. El ajuste se limita al fondo del apartado.
+
+## Fase 49 - Fondo marino del hero
+
+Se cambió únicamente la imagen de fondo del hero por una escena submarina con arrecife y rayos de luz. No se modificaron la estructura, el contenido ni los estilos del resto del apartado.
+
+## Fase 48 - Fondo marino visible en el hero
+
+Se reforzó el fondo del apartado principal para mostrar directamente la escena marina de Isla Tortuga detrás del contenido. Se mantuvo una imagen continua, sin franja separadora, con color y brillo ligeramente ajustados para conservar la lectura del título.
+
+## Fase 47 - Hero sin sombreado separador
+
+Se eliminó la capa de degradado oscuro del hero de la portada. El título principal queda directamente sobre la escena marina, sin una franja o sombreado visual que parezca separar el contenido.
+
 ## Fase 46 - Actualización consolidada del prototipo
 
 Se consolidaron en el repositorio los ajustes recientes de portada, dashboard, observaciones, temas claro/oscuro, navegación lateral y pruebas asociadas. La aplicación mantiene datos demostrativos, rutas funcionales y verificación automática de la eliminación de burbujas decorativas.
