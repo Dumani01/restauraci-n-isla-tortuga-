@@ -19,7 +19,7 @@
 .public-filter { display: flex; flex-wrap: wrap; gap: 7px; padding: 18px 0 4px; }
 .public-filter button { background: transparent; border: 1px solid rgba(230, 243, 239, .2); border-radius: 999px; color: rgba(230, 243, 239, .66); cursor: pointer; font-size: .68rem; padding: 7px 10px; }
 .public-filter button:hover, .public-filter button.is-active { background: #e5f0e9; border-color: #e5f0e9; color: #061e27; }
-.public-list::after { border-left: 2px solid #84cdbd; color: rgba(230, 243, 239, .55); content: 'Trazabilidad: dato demo · validación pendiente · sin evidencia adjunta'; display: block; font-size: .68rem; line-height: 1.5; margin-top: 22px; padding-left: 12px; }
+.public-list::after { border-left: 2px solid #84cdbd; color: rgba(230, 243, 239, .55); content: 'Información general del proyecto · sin coordenadas sensibles'; display: block; font-size: .68rem; line-height: 1.5; margin-top: 22px; padding-left: 12px; }
 .public-record.is-selected { background: rgba(230, 243, 239, .07); }
 .interactive-gallery { background: #071c23; display: grid; grid-template-columns: minmax(0, 1fr) 260px; min-height: 640px; padding: 2px; }
 .interactive-gallery__hero { min-height: 640px; overflow: hidden; position: relative; }
@@ -40,3 +40,89 @@
 @keyframes gallery-breathe { to { transform: scale(1.045); } }
 @keyframes interactive-caustics { to { background-position: 150px 90px; } }
 @media (prefers-reduced-motion: reduce) { .public-map__reef, .interactive-hero::after, .interactive-gallery__hero img, .interactive-map::before { animation: none; transition: none; } }
+
+/* El encabezado de los apartados interactivos continúa la misma escena marina
+   de la portada y Proyecto, en lugar de iniciar una imagen independiente. */
+.interactive-page .interactive-hero,
+.interactive-page .interactive-hero--gallery {
+  background-color: transparent;
+  background-image: none;
+}
+
+/* Carrusel de las seis etapas: modelos visuales CSS, sin inventar especies ni
+   convertirlos en evidencia de campo. Cada modelo responde al hover y al foco. */
+.interactive-gallery { grid-template-columns: minmax(0, 1fr) 286px; }
+.interactive-gallery__hero { background: radial-gradient(circle at 42% 34%, rgba(72, 185, 187, .24), transparent 28%), linear-gradient(145deg, rgba(8, 64, 76, .82), rgba(2, 24, 35, .98)); display: grid; grid-template-columns: minmax(260px, .95fr) minmax(270px, .8fr); min-height: 680px; }
+.lifecycle-stage-visual { align-items: center; bottom: auto; display: flex; justify-content: center; left: auto; max-width: none; min-height: 520px; overflow: hidden; perspective: 900px; position: relative; }
+.lifecycle-stage-visual::before { background: repeating-radial-gradient(ellipse at center, transparent 0 48px, rgba(176, 241, 226, .1) 50px 51px, transparent 53px 90px); content: ''; inset: -25%; opacity: .5; position: absolute; transform: rotate(-12deg); }
+.lifecycle-stage-visual::after { background: radial-gradient(ellipse, rgba(89, 224, 197, .28), transparent 63%); content: ''; height: 270px; left: 50%; position: absolute; top: 48%; transform: translate(-50%, -50%); width: 350px; }
+.lifecycle-stage-visual__number { color: rgba(230, 243, 239, .48); font-family: var(--vh-serif); font-size: clamp(7rem, 18vw, 13rem); line-height: 1; position: absolute; right: 9%; top: 8%; z-index: 0; }
+.lifecycle-stage-visual__waterline { border-top: 1px solid rgba(175, 242, 222, .24); bottom: 22%; left: 12%; position: absolute; right: 12%; transform: rotate(-4deg); }
+.lifecycle-model { background: transparent; border: 0; cursor: pointer; height: 300px; position: relative; transform: translateZ(0); transition: filter .3s ease, transform .3s ease; width: 330px; z-index: 2; }
+.lifecycle-model:hover, .lifecycle-model:focus-visible { filter: drop-shadow(0 0 24px rgba(255, 196, 135, .72)); transform: translate3d(0, -8px, 0) scale(1.04); }
+.lifecycle-model:focus-visible { outline: 2px solid #f2a081; outline-offset: 8px; }
+.lifecycle-model__image { height: 100%; left: 50%; object-fit: contain; position: absolute; top: 50%; transform: translate(-50%, -50%); transition: transform .3s ease, filter .3s ease; width: 100%; }
+.lifecycle-model:hover .lifecycle-model__image, .lifecycle-model:focus-visible .lifecycle-model__image { filter: saturate(1.12) brightness(1.08); transform: translate(-50%, -50%) scale(1.045); }
+.lifecycle-model__object, .lifecycle-model__object::before, .lifecycle-model__object::after { display: block; position: absolute; }
+.lifecycle-model__object { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.lifecycle-model__halo { border: 1px solid rgba(196, 249, 231, .48); border-radius: 50%; height: 210px; left: 50%; opacity: .32; position: absolute; top: 50%; transform: translate(-50%, -50%) rotateX(64deg); width: 320px; }
+.lifecycle-stage-tooltip { backdrop-filter: blur(10px); background: rgba(3, 27, 36, .94); border: 1px solid rgba(242, 160, 129, .42); border-left: 2px solid #f2a081; border-radius: 4px; bottom: auto; color: #f4fbf8; display: grid; gap: 5px; left: 50%; max-width: min(260px, calc(100vw - 40px)); min-width: 170px; opacity: 0; padding: 10px 13px; pointer-events: none; position: absolute; text-align: left; top: 56%; transform: translate(-50%, 8px); transition: opacity .2s ease, transform .2s ease; white-space: normal; z-index: 6; }
+.lifecycle-stage-tooltip strong { color: #fff; font-family: var(--vh-serif); font-size: 1.02rem; font-weight: 400; line-height: 1.15; text-shadow: none; }
+.lifecycle-stage-tooltip small { color: rgba(230, 243, 239, .68); font-size: .62rem; line-height: 1.35; max-width: 230px; white-space: normal; }
+.lifecycle-model:hover .lifecycle-stage-tooltip, .lifecycle-model:focus-visible .lifecycle-stage-tooltip { opacity: 1; transform: translate(-50%, 0); }
+
+.lifecycle-model--gametos .lifecycle-model__object { background: radial-gradient(circle at 34% 30%, #ffe7c2 0 5%, #d8874c 33%, #7f3f39 78%); border-radius: 50%; box-shadow: inset -18px -20px 30px rgba(47, 18, 28, .35), 16px 20px 24px rgba(0, 0, 0, .3); height: 118px; width: 118px; }
+.lifecycle-model--gametos .lifecycle-model__object::before { border: 3px solid #bcebdc; border-left-color: transparent; border-radius: 50%; height: 36px; left: -115px; top: 5px; transform: rotate(-22deg); width: 95px; }
+.lifecycle-model--gametos .lifecycle-model__object::after { border: 2px solid #bcebdc; border-bottom-color: transparent; border-radius: 50%; height: 26px; right: -88px; top: 48px; transform: rotate(34deg); width: 76px; }
+.lifecycle-model--embrion .lifecycle-model__object { background: radial-gradient(circle at 35% 27%, #fff1d1 0 4%, transparent 5%), radial-gradient(circle at 62% 30%, #d99159 0 18%, transparent 19%), radial-gradient(circle at 34% 62%, #e2a56f 0 18%, transparent 19%), radial-gradient(circle at 67% 67%, #b96d4f 0 19%, transparent 20%), rgba(246, 193, 143, .4); border: 2px solid rgba(221, 246, 235, .78); border-radius: 50%; box-shadow: inset -17px -13px 20px rgba(20, 39, 50, .27), 18px 20px 30px rgba(0, 0, 0, .25); height: 154px; width: 154px; }
+.lifecycle-model--embrion .lifecycle-model__object::before { border: 1px solid rgba(198, 239, 229, .7); border-radius: 50%; height: 184px; left: -17px; top: -17px; width: 184px; }
+.lifecycle-model--planula .lifecycle-model__object { background: linear-gradient(160deg, #ffe1bd, #bb744f 68%, #70404a); border-radius: 56% 44% 49% 51%; box-shadow: inset -15px -13px 20px rgba(59, 30, 42, .3), 19px 20px 26px rgba(0, 0, 0, .28); height: 70px; transform: translate(-50%, -50%) rotate(-12deg); width: 220px; }
+.lifecycle-model--planula .lifecycle-model__object::before { background: repeating-linear-gradient(92deg, transparent 0 13px, rgba(201, 245, 231, .75) 14px 16px, transparent 17px 25px); content: ''; height: 34px; left: 4px; top: 18px; transform: rotate(2deg); width: 215px; }
+.lifecycle-model--planula .lifecycle-model__object::after { background: rgba(255, 228, 194, .9); border-radius: 50%; height: 13px; right: 14px; top: 28px; width: 13px; }
+.lifecycle-model--asentamiento .lifecycle-model__object { background: linear-gradient(145deg, #9f7661, #3e4d45 65%, #162e34); border-radius: 48% 52% 24% 25%; bottom: 38px; box-shadow: inset 20px 10px 22px rgba(242, 193, 126, .18), 14px 20px 24px rgba(0, 0, 0, .3); height: 74px; transform: translateX(-50%) rotate(-4deg); width: 238px; }
+.lifecycle-model--asentamiento .lifecycle-model__object::before { background: linear-gradient(145deg, #ffe0ba, #b56f53); border-radius: 55% 45% 60% 40%; box-shadow: inset -9px -7px 11px rgba(74, 37, 41, .24); content: ''; height: 56px; left: 66px; position: absolute; top: -38px; transform: rotate(-13deg); width: 143px; }
+.lifecycle-model--asentamiento .lifecycle-model__object::after { background: rgba(191, 237, 214, .7); border-radius: 50%; box-shadow: 24px 7px rgba(191, 237, 214, .5), 52px 0 rgba(191, 237, 214, .42); content: ''; height: 4px; left: 94px; position: absolute; top: -49px; width: 4px; }
+.lifecycle-model--juvenil .lifecycle-model__object { background: radial-gradient(ellipse at 40% 22%, #ffe4b9 0 13%, #cb9964 14% 30%, transparent 31%), radial-gradient(ellipse at 65% 24%, #f4d29c 0 13%, #bb7855 14% 31%, transparent 32%), linear-gradient(145deg, #9a7960, #314a45 65%); border-radius: 44% 56% 25% 22%; box-shadow: inset 14px 7px 20px rgba(247, 199, 133, .22), 14px 21px 25px rgba(0, 0, 0, .32); height: 112px; width: 250px; }
+.lifecycle-model--juvenil .lifecycle-model__object::before { background: radial-gradient(ellipse, #ffe4b9 0 18%, #b36f51 19% 34%, transparent 35%) 0 0/44px 38px; content: ''; height: 75px; left: 69px; position: absolute; top: -32px; width: 110px; }
+.lifecycle-model--adulto .lifecycle-model__object { background: radial-gradient(ellipse at 50% 5%, #ffe0a2 0 9%, #d99556 10% 24%, transparent 25%), linear-gradient(90deg, transparent 0 44%, #d28c51 45% 55%, transparent 56%), #a9614c; border-radius: 46% 54% 26% 28%; box-shadow: inset 18px 8px 24px rgba(255, 203, 132, .24), 18px 22px 25px rgba(0, 0, 0, .32); height: 112px; width: 270px; }
+.lifecycle-model--adulto .lifecycle-model__object::before { background: repeating-linear-gradient(78deg, transparent 0 20px, #d89455 21px 29px, transparent 30px 44px); border-radius: 50%; content: ''; height: 180px; left: 14px; position: absolute; top: -96px; transform: rotate(-8deg); width: 250px; }
+.lifecycle-model--adulto .lifecycle-model__object::after { background: radial-gradient(circle, #ffe4aa 0 13%, #bf754e 14% 34%, transparent 35%) 0 0/38px 30px; content: ''; height: 95px; left: 40px; position: absolute; top: -39px; width: 190px; }
+
+.interactive-gallery__copy { align-self: end; bottom: auto; left: auto; max-width: none; padding: 40px 38px 52px 0; position: relative; z-index: 3; }
+.interactive-gallery__copy h2 { text-wrap: balance; }
+.interactive-gallery__copy > p:last-of-type { margin-bottom: 0; }
+.lifecycle-demo-note { color: rgba(230, 243, 239, .5); display: block; font-size: .66rem; line-height: 1.5; margin-top: 24px; max-width: 280px; }
+.lifecycle-controls { display: flex; gap: 8px; margin-top: 22px; }
+.lifecycle-controls button { align-items: center; background: rgba(230, 243, 239, .08); border: 1px solid rgba(230, 243, 239, .28); border-radius: 50%; color: #e5f0e9; cursor: pointer; display: inline-flex; height: 38px; justify-content: center; transition: background .2s ease, transform .2s ease; width: 38px; }
+.lifecycle-controls button:hover { background: #f2a081; color: #061e27; transform: translateY(-2px); }
+.lifecycle-controls button:focus-visible { outline: 2px solid #f2a081; outline-offset: 4px; }
+.interactive-gallery__rail button { align-items: center; grid-template-columns: 64px 1fr; min-height: 110px; }
+.interactive-gallery__rail button > span:last-child { padding: 12px; }
+.lifecycle-thumb { align-items: center; background: radial-gradient(circle, rgba(255, 205, 151, .8), rgba(126, 69, 59, .9)); display: flex; height: 100%; justify-content: center; min-height: 110px; overflow: hidden; position: relative; }
+.lifecycle-thumb i { background: rgba(255, 233, 194, .88); border-radius: 50%; box-shadow: inset -5px -5px 8px rgba(65, 32, 35, .28); display: block; height: 37px; position: relative; width: 37px; }
+.lifecycle-thumb img { height: 100%; object-fit: contain; position: absolute; width: 100%; }
+.lifecycle-thumb--embrion i { border: 1px solid rgba(232, 248, 234, .8); box-shadow: inset 0 0 0 7px rgba(203, 137, 89, .4), inset 0 0 0 14px rgba(237, 180, 120, .5); }
+.lifecycle-thumb--planula i { border-radius: 50%; height: 17px; transform: rotate(-12deg); width: 50px; }
+.lifecycle-thumb--asentamiento { background: linear-gradient(155deg, #668276, #253e42); }
+.lifecycle-thumb--asentamiento i { border-radius: 48% 52% 30% 30%; height: 22px; transform: translateY(-7px) rotate(-10deg); width: 44px; }
+.lifecycle-thumb--juvenil i, .lifecycle-thumb--adulto i { background: radial-gradient(circle at 35% 25%, #ffe3ae 0 18%, #bc7954 19% 42%, transparent 43%), #3e5b4e; border-radius: 45% 55% 25% 25%; height: 34px; width: 50px; }
+.lifecycle-thumb--adulto i { background: radial-gradient(circle, #ffe0a2 0 12%, #d08b55 13% 23%, transparent 24%) 0 0/18px 16px, #987052; height: 38px; width: 54px; }
+.interactive-gallery__rail button:focus-visible { outline-offset: -4px; }
+
+@media (max-width: 820px) {
+  .interactive-gallery__hero { grid-template-columns: 1fr; }
+  .lifecycle-stage-visual { min-height: 430px; }
+  .interactive-gallery__copy { align-self: auto; padding: 0 28px 34px; }
+  .interactive-gallery__rail button { grid-template-columns: 1fr; min-height: 150px; }
+  .lifecycle-thumb { min-height: 88px; }
+}
+@media (max-width: 600px) {
+  .lifecycle-stage-visual { min-height: 360px; }
+  .lifecycle-model { transform: translateZ(0) scale(.82); }
+  .lifecycle-model:hover, .lifecycle-model:focus-visible { transform: translate3d(0, -8px, 0) scale(.88); }
+  .interactive-gallery__rail button { grid-template-columns: 78px 1fr; min-height: 92px; }
+  .lifecycle-thumb { min-height: 92px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lifecycle-model, .lifecycle-stage-tooltip, .lifecycle-controls button { transition: none; }
+}

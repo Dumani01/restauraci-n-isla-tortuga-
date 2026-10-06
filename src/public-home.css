@@ -6,7 +6,7 @@
   --vh-serif: 'Iowan Old Style', 'Baskerville Old Face', 'Palatino Linotype', Georgia, serif;
   background: var(--vh-ink);
   color: #f4fbf8;
-  overflow: hidden;
+  overflow: clip;
   position: relative;
 }
 
@@ -19,7 +19,7 @@
 .velorah-home > .vh-cta,
 .velorah-home .vh-water-atmosphere { background: transparent !important; }
 
-.velorah-home::before { background-image: linear-gradient(180deg, rgba(3, 24, 34, .1), rgba(2, 22, 36, .22)), var(--vh-underwater-image); background-position: center top; background-repeat: no-repeat; background-size: 100% 100%; content: ''; inset: 0; opacity: .98; pointer-events: none; position: absolute; z-index: 0; }
+.velorah-home::before { background-image: linear-gradient(180deg, rgba(3, 24, 34, .1), rgba(2, 22, 36, .22)), var(--vh-underwater-image); background-position: center top; background-repeat: no-repeat; background-size: cover; content: ''; inset: 0; opacity: .98; pointer-events: none; position: absolute; z-index: 0; }
 
 .velorah-home::after { animation: vh-water-light 18s ease-in-out infinite alternate; background: linear-gradient(108deg, transparent 0 16%, rgba(178, 244, 225, .12) 22%, transparent 31% 45%, rgba(126, 224, 211, .09) 53%, transparent 62%), radial-gradient(ellipse at 30% 24%, rgba(181, 247, 225, .18), transparent 36%), radial-gradient(ellipse at 74% 68%, rgba(30, 150, 164, .18), transparent 42%); background-repeat: no-repeat; background-size: 145% 100%, 100% 100%, 100% 100%; background-position: 0 0, 0 0, 0 0; content: ''; inset: 0; mix-blend-mode: screen; opacity: calc(var(--vh-scroll, 0) * .78); pointer-events: none; position: fixed; z-index: 6; }
 
@@ -74,6 +74,7 @@
 
 .vh-hero {
   align-items: center;
+  background: var(--vh-underwater-image) center top / 100% auto no-repeat;
   display: flex;
   isolation: isolate;
   min-height: min(780px, calc(100svh - 70px));
@@ -85,16 +86,20 @@
 
 .vh-hero__image,
 .vh-visual__wash {
-  background-image: linear-gradient(90deg, rgba(3, 27, 36, .42) 0%, rgba(5, 56, 69, .14) 48%, rgba(10, 91, 96, .08) 100%);
-  background-position: center;
-  background-size: cover;
+  background-image: var(--vh-underwater-image);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   inset: 0;
   position: absolute;
   transition: filter .4s ease, background-position .4s ease;
   z-index: -1;
 }
 
-.vh-hero__image { filter: saturate(.9) brightness(.82); }
+.vh-hero__image {
+  background-image: none;
+  filter: saturate(.9) brightness(.82);
+}
 
 .vh-hero__content {
   animation: vh-rise .8s ease-out both;
@@ -194,7 +199,7 @@
   text-transform: uppercase;
 }
 
-.vh-scroll { bottom: 182px; left: max(7vw, 24px); }
+.vh-scroll { background: none; border: 0; bottom: 182px; cursor: pointer; left: max(7vw, 24px); }
 .vh-index { right: max(7vw, 24px); }
 
 .vh-statement {
@@ -372,6 +377,16 @@
   .vh-cta { padding: 92px 24px 100px; }
 }
 
+@media (min-width: 761px) and (max-width: 1023px) {
+  .vh-feature,
+  .vh-reef { grid-template-columns: 1fr; }
+  .vh-feature { padding-bottom: 76px; padding-top: 76px; }
+  .vh-feature__copy { min-height: 390px; padding-right: 0; }
+  .vh-feature__visual { min-height: 300px; }
+  .vh-reef { padding-bottom: 104px; padding-top: 86px; }
+  .vh-reef__intro { max-width: 640px; }
+}
+
 @media (max-width: 420px) {
   .vh-hero h1 { font-size: 2.8rem; }
   .vh-actions { align-items: stretch; flex-direction: column; max-width: 280px; }
@@ -398,4 +413,33 @@
   .vh-reveal { opacity: 1; transform: none; transition: none; }
   .vh-button { transition: none; }
   .vh-back-top { transition: none; }
+}
+
+/* El ciclo de vida de la portada usa los mismos modelos 3D interactivos de
+   referencia, integrados dentro de la escena marina y no como una ruta aparte. */
+.vh-lifecycle-scene { min-height: 560px; }
+.vh-lifecycle-scene .lifecycle-stage-visual { bottom: auto; height: 420px; left: auto; min-height: 420px; position: relative; right: auto; top: auto; width: 100%; }
+.vh-lifecycle-scene .lifecycle-stage-visual__number { font-size: clamp(6rem, 13vw, 10rem); right: 6%; top: 1%; }
+.vh-lifecycle-scene .lifecycle-model { height: 270px; width: 300px; }
+.vh-lifecycle-scene .lifecycle-model__halo { height: 180px; width: 275px; }
+.vh-lifecycle-scene .vh-coral-card { bottom: 86px; left: 18px; max-width: 235px; }
+.vh-lifecycle-controls { bottom: 14px; display: flex; gap: 6px; position: absolute; right: 16px; z-index: 5; }
+.vh-lifecycle-controls button { align-items: center; background: rgba(6, 30, 39, .52); border: 1px solid rgba(230, 243, 239, .38); border-radius: 50%; color: #e5f0e9; cursor: pointer; display: inline-flex; height: 32px; justify-content: center; width: 32px; }
+.vh-lifecycle-controls button:hover { background: #f2a081; color: #061e27; }
+.vh-lifecycle-controls button:focus-visible, .vh-lifecycle-rail button:focus-visible { outline: 2px solid #f2a081; outline-offset: 3px; }
+.vh-lifecycle-rail { bottom: 12px; display: flex; gap: 5px; left: 16px; max-width: none; overflow-x: auto; padding-bottom: 3px; padding-right: 78px; position: absolute; right: 0; scrollbar-width: thin; z-index: 4; }
+.vh-lifecycle-rail button { background: rgba(6, 30, 39, .58); border: 1px solid rgba(230, 243, 239, .2); border-radius: 4px; color: rgba(230, 243, 239, .7); cursor: pointer; display: grid; flex: 0 0 clamp(84px, 10vw, 112px); gap: 3px; min-width: 0; padding: 7px 8px; text-align: left; }
+.vh-lifecycle-rail button:hover, .vh-lifecycle-rail button.is-active { background: rgba(13, 70, 81, .9); border-color: #f2a081; color: #fff; }
+.vh-lifecycle-rail span { color: #f2a081; font-size: .58rem; }
+.vh-lifecycle-rail small { font-size: .59rem; line-height: 1.15; overflow-wrap: anywhere; white-space: normal; }
+.vh-lifecycle-scene .vh-reef__caption { bottom: auto; max-width: 225px; right: 16px; text-align: right; top: 18px; }
+@media (max-width: 600px) {
+  .vh-lifecycle-scene { min-height: 550px; }
+  .vh-lifecycle-scene .lifecycle-stage-visual { height: 370px; min-height: 370px; }
+  .vh-lifecycle-scene .lifecycle-model { transform: translateZ(0) scale(.82); }
+  .vh-lifecycle-scene .lifecycle-model:hover, .vh-lifecycle-scene .lifecycle-model:focus-visible { transform: translate3d(0, -8px, 0) scale(.88); }
+  .vh-lifecycle-scene .vh-coral-card { bottom: 94px; left: 10px; max-width: 205px; }
+  .vh-lifecycle-rail { bottom: 12px; left: 10px; padding-right: 62px; right: 0; }
+  .vh-lifecycle-controls { right: 8px; }
+  .vh-lifecycle-scene .vh-reef__caption { display: none; }
 }
