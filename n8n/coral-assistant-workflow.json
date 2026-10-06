@@ -1,0 +1,92 @@
+{
+  "name": "Coral Assistant - Restauración Coralina",
+  "nodes": [
+    {
+      "parameters": { "httpMethod": "POST", "path": "coral-assistant", "responseMode": "responseNode", "options": {} },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-900, 0],
+      "webhookId": "coral-assistant"
+    },
+    {
+      "parameters": { "jsCode": "const input = $input.first().json.body ?? $input.first().json;\nconst allowedLanguages = ['es', 'en', 'fr', 'de', 'pt'];\nconst allowedRoles = ['USER', 'MODERATOR', 'ADMIN'];\nconst message = typeof input.message === 'string' ? input.message.trim() : '';\nconst language = allowedLanguages.includes(input.language) ? input.language : 'es';\nconst role = allowedRoles.includes(input.role) ? input.role : 'USER';\nconst valid = Boolean(message) && message.length <= 2000;\nconst requestId = input.requestId || `n8n-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;\nreturn [{ json: { valid, requestId, message, language, role, context: input.context && typeof input.context === 'object' ? { page: typeof input.context.page === 'string' ? input.context.page.slice(0, 80) : undefined, restorationZoneId: typeof input.context.restorationZoneId === 'string' ? input.context.restorationZoneId.slice(0, 120) : undefined } : {}, error: valid ? '' : 'INVALID_INPUT' } }];" },
+      "id": "validate-input",
+      "name": "Validate Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-680, 0]
+    },
+    {
+      "parameters": { "conditions": { "boolean": [{ "value1": "={{$json.valid}}", "operation": "isTrue" }] } },
+      "id": "valid-input",
+      "name": "Valid input?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [-460, 0]
+    },
+    {
+      "parameters": { "jsCode": "const data = $input.first().json;\nconst context = JSON.stringify(data.context || {});\nconst system = `Eres el asistente virtual educativo del proyecto Restauración Coralina de Isla Tortuga, Costa Rica. Responde siempre en el idioma solicitado (${data.language}). Usa únicamente el contexto público entregado. Diferencia hechos de recomendaciones, no inventes información, indica cuando falta contexto, promueve turismo responsable y no des instrucciones que puedan dañar arrecifes o fauna marina. No diagnostiques enfermedades, no recomiendes intervenciones biológicas y no concedas permisos. Sé claro y conciso.`;\nreturn [{ json: { ...data, system, contextText: context } }];" },
+      "id": "build-prompt",
+      "name": "Build Controlled Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-220, -120]
+    },
+    {
+      "parameters": { "method": "POST", "url": "={{$env.AI_PROVIDER_URL || 'https://api.deepseek.com/chat/completions'}}", "sendHeaders": true, "headerParameters": { "parameters": [{ "name": "Authorization", "value": "={{'Bearer ' + $env.AI_API_KEY}}" }, { "name": "Content-Type", "value": "application/json" }] }, "sendBody": true, "specifyBody": "json", "jsonBody": "={{ JSON.stringify({ model: $env.AI_MODEL || 'deepseek-chat', temperature: 0.2, messages: [{ role: 'system', content: $json.system }, { role: 'user', content: 'Idioma: ' + $json.language + '\\nContexto público: ' + $json.contextText + '\\nConsulta: ' + $json.message }] }) }}", "options": { "timeout": 30000 } },
+      "id": "ai-provider",
+      "name": "AI Provider",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [20, -120]
+    },
+    {
+      "parameters": { "jsCode": "const provider = $input.first().json;\nconst answer = provider.choices?.[0]?.message?.content;\nif (typeof answer !== 'string' || !answer.trim()) return [{ json: { success: false, answer: '', requestId: `n8n-${Date.now()}`, error: 'INVALID_RESPONSE' } }];\nreturn [{ json: { success: true, answer: answer.trim(), requestId: `n8n-${Date.now()}`, sources: [] } }];" },
+      "id": "normalize-output",
+      "name": "Normalize Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [260, -120]
+    },
+    {
+      "parameters": { "respondWith": "json", "responseBody": "={{ JSON.stringify($json) }}", "options": {} },
+      "id": "respond-success",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [500, -120]
+    },
+    {
+      "parameters": { "jsCode": "return [{ json: { success: false, answer: '', requestId: $json.requestId, error: 'INVALID_INPUT' } }];" },
+      "id": "invalid-response",
+      "name": "Invalid Input Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-220, 140]
+    },
+    {
+      "parameters": { "respondWith": "json", "responseBody": "={{ JSON.stringify($json) }}", "options": {} },
+      "id": "respond-invalid",
+      "name": "Respond Invalid Input",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [20, 140]
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [[{ "node": "Validate Input", "type": "main", "index": 0 }]] },
+    "Validate Input": { "main": [[{ "node": "Valid input?", "type": "main", "index": 0 }]] },
+    "Valid input?": { "main": [[{ "node": "Build Controlled Prompt", "type": "main", "index": 0 }], [{ "node": "Invalid Input Response", "type": "main", "index": 0 }]] },
+    "Build Controlled Prompt": { "main": [[{ "node": "AI Provider", "type": "main", "index": 0 }]] },
+    "AI Provider": { "main": [[{ "node": "Normalize Output", "type": "main", "index": 0 }]] },
+    "Normalize Output": { "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]] },
+    "Invalid Input Response": { "main": [[{ "node": "Respond Invalid Input", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "coral-assistant-v1",
+  "meta": { "templateCredsSetupCompleted": false },
+  "tags": []
+}
