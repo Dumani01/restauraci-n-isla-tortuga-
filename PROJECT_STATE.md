@@ -1,5 +1,73 @@
 # PROJECT STATE
 
+## Fase 8 - Integración IA mediante n8n
+
+Se preparó la infraestructura de IA sin crear todavía un chatbot visual. `src/services/aiService.js` valida y limita solicitudes, normaliza el payload, agrega `requestId`, usa únicamente `VITE_N8N_AI_WEBHOOK_URL`, aplica timeout de 30 segundos y normaliza respuestas/errores. Se documentó el contrato en `docs/AI_PAYLOAD_CONTRACT.md` y se agregó `.env.example` sin secretos.
+
+Se exportó `n8n/coral-assistant-workflow.json` con Webhook POST, validación de entrada, normalización de idioma/rol, contexto público controlado, prompt de sistema seguro, proveedor configurable mediante variables de n8n, normalización de salida y respuesta estable. No se envían contraseñas ni datos privados; la IA no concede permisos, diagnostica enfermedades ni recomienda intervenciones biológicas.
+
+## Verification
+
+- `npm run test`: PASS (9 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- Workflow JSON: válido mediante parse local
+- Escaneo de secretos en `src/`, `public/` y `db.json`: sin credenciales encontradas
+- `npm run lint`: N/A, no existe script `lint` en `package.json`
+- Ejecución real del webhook: pendiente de configurar/importar el workflow en una instancia n8n con credenciales del proveedor.
+
+
+## Fase 7 - API meteorológica y clima
+
+Se integró Open-Meteo mediante `src/services/weatherService.js`, reutilizando las coordenadas generales centralizadas de Isla Tortuga desde `mapService.js`. El componente `WeatherCard` muestra clima actual, sensación térmica, humedad, viento, precipitación, condición meteorológica y pronóstico compacto de cinco días. Incluye estados de carga, error con reintento y caché en `sessionStorage` durante 20 minutos. Los códigos WMO se convierten a etiquetas e iconos comprensibles mediante i18n y el narrador puede leer el contenido textual sin iniciar voz automáticamente.
+
+El widget se integró una sola vez en la página de Mapa, separado de Leaflet. No se agregaron claves privadas, alertas, geolocalización, IA, n8n ni recomendaciones oficiales de seguridad marítima.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB, incrementada por Leaflet)
+- `npm run lint`: N/A, no existe script `lint` en `package.json`
+- Verificación en vivo de Open-Meteo: pendiente de ejecutar en navegador con red disponible.
+
+
+## Fase 6 - Mapa interactivo con Leaflet
+
+Se reemplazó el mapa visual simulado por un mapa real con Leaflet, React Leaflet y OpenStreetMap. La vista carga puntos desde `db.json` mediante `src/services/mapService.js`, valida coordenadas sin romper el mapa y mantiene un centro generalizado de Isla Tortuga centralizado. Se agregaron marcadores diferenciados por tipo, popups, leyenda accesible, filtro sin recarga, estados de carga/error/vacío y una advertencia explícita de que los puntos son demo o de referencia.
+
+La integración conserva i18n y el narrador puede leer la información textual de la leyenda, filtros y popups sin narrar movimientos del mapa. No se agregaron métricas de campo, corales enfermos ni coordenadas sensibles. El CRUD por roles queda pendiente porque el proyecto actual no tiene backend JSON Server ni roles `ADMIN`/`MODERATOR` configurados.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `npm run lint`: N/A, no existe script `lint` en `package.json`
+
+
+## Fase 5 - Voice / Narrador accesible
+
+Se incorporó un narrador reutilizable basado en la Web Speech API nativa (`speechSynthesis` y `SpeechSynthesisUtterance`). El control global permite activar o desactivar la narración, pausar, continuar, detener y ajustar velocidad y volumen. La lectura por hover usa un retardo de 420 ms y la lectura por foco de teclado funciona sobre títulos, párrafos, enlaces, botones, labels, controles de formulario, tarjetas y textos con `alt` significativo. Se agregó deduplicación, cancelación de lecturas anteriores, exclusión mediante `data-narrator-ignore`/`aria-hidden`, selección de voz por idioma i18n y fallback seguro cuando el navegador no soporta SpeechSynthesis.
+
+Las preferencias se guardan en `localStorage` como `narratorEnabled`, `narratorRate` y `narratorVolume`. El control está disponible en la navegación pública y en el panel privado. No se implementaron reconocimiento de voz, chatbot, IA, n8n, mapas externos ni backend.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS
+- `npm run lint`: N/A, no existe script `lint` en `package.json`
+- Verificación visual y de voces reales: pendiente de navegador/dispositivo con SpeechSynthesis disponible; las voces dependen del sistema operativo.
+
+
+## Fase 4 - Sistema multilenguaje i18n
+
+Se implementó internacionalización completa de la interfaz con `i18next` y `react-i18next`. La aplicación ahora ofrece español, inglés, francés, alemán y portugués mediante un selector accesible en la navegación pública. El idioma se detecta desde `localStorage` o el navegador, se conserva en `preferredLanguage` y actualiza dinámicamente `html[lang]`. Se migraron la navegación, portada, proyecto, mapa, galería, noticias, acceso, dashboard, observaciones y textos del ciclo de vida coral. El contenido divulgativo del proyecto permanece separado de la UI y no se traducen datos creados por usuarios mediante IA.
+
+## Verification
+
+- `npm run test`: PASS (7 tests)
+- `npm run build`: PASS
+- `npm run lint`: N/A, no existe script `lint` en `package.json`
+
+
 ## Fase 81 - Fondo proporcional al cambiar pestañas
 
 Se corrigio el estiramiento visual del fondo submarino de la portada al cambiar la pestaña “Como”. El pseudo-elemento global de la portada ahora usa `background-size: cover` en lugar de `100% 100%`, conservando la proporcion de la imagen aunque cambie la altura del contenido.
