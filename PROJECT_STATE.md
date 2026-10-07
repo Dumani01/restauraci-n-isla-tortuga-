@@ -1,5 +1,43 @@
 # PROJECT STATE
 
+## Fase 11 - Fuente única de información en db.json
+
+Se trasladó al `db.json` la información de dominio del proyecto: ubicación, descripción, actividades, motivo de restauración, colaboración y etapas del ciclo coralino. `projectData.js` ya no contiene copias de esos textos y las páginas públicas (`PublicHome`, `ProjectPage`, `NewsPage`, `LoginPage`, `InteractivePublicPages`) y el dashboard consumen `projectInfo` desde `databaseService.js`. Las traducciones de etiquetas y textos propios de la interfaz permanecen en i18n; el clima continúa siendo información externa en tiempo real y el mapa usa los puntos demo del mismo `db.json`.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 10 - Servicios conectados con db.json
+
+Se creó `src/services/databaseService.js` como punto único de lectura de `db.json`. Expone el proyecto, ciclo de vida, observaciones, evidencias, usuarios y puntos del mapa mediante copias de sus colecciones. `mapService.js` dejó de importar el JSON directamente y `projectData.js` ahora toma la ubicación, actividades, colaboración y etapas desde la base demo, conservando respaldos de interfaz cuando un campo no existe. No se inventaron registros de campo ni se añadió persistencia de escritura en el navegador.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 9 - Chatbot de IA accesible
+
+Se incorporó un chatbot global para visitantes y usuarios autenticados mediante `src/components/chatbot/ChatbotWidget.jsx` y `src/hooks/useChatbot.jsx`. La interfaz conserva el historial durante la sesión en `sessionStorage`, envía únicamente el contexto mínimo de la ruta actual al servicio existente `aiService`, limita el historial local y ofrece estados de carga, error, reintento, sugerencias y limpieza de conversación. El widget no llama directamente a proveedores de IA y continúa funcionando con un mensaje de bienvenida cuando n8n no está configurado.
+
+La interfaz está traducida en español, inglés, francés, alemán y portugués. Incluye botón flotante, panel responsive, foco inicial, cierre con Escape, Enter para enviar, Shift+Enter para salto de línea, roles ARIA, salida de texto segura sin HTML interpretado y botón manual `Escuchar` por respuesta usando el narrador existente. No hay narración automática, reconocimiento de voz, acciones administrativas ni diagnóstico biológico.
+
+## Verification
+
+- `npm run test`: PASS (9 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- Respuestas reales de IA: pendientes de configurar/importar el workflow n8n y su webhook mediante `VITE_N8N_AI_WEBHOOK_URL`
+
+Se habilitó n8n local mediante `npx n8n@2.42.3` porque Docker no está disponible. La instancia responde en `http://localhost:5678`; falta crear la cuenta propietaria inicial, importar/activar el workflow y configurar la credencial del proveedor.
+
+Se revisó y corrigió directamente el workflow existente `Restauracion Coralina - Isla Tortuga - AI Assistant` (ID `s3rMetkRiSw1NA6F`), sin crear otro flujo. Se eliminó una clave que estaba colocada incorrectamente en el campo URL del nodo DeepSeek, se estableció `https://api.deepseek.com/chat/completions`, se normalizó el modelo a `deepseek-chat` y se limitó CORS a `http://localhost:5173`. El frontend quedó apuntando mediante `.env.local` a `http://localhost:5678/webhook/coral-assistant`. La credencial Header Auth y la activación final quedan para que el propietario introduzca su API key en n8n.
+
+La integración quedó preparada para n8n local con `n8n/docker-compose.yml`, `n8n/.env.example` y `n8n/README.md`. El frontend usa como webhook local `http://localhost:5678/webhook/coral-assistant`; las credenciales del proveedor se mantienen fuera de React. El workflow conserva el `requestId` del frontend en las respuestas exitosas y de error.
+
+- Docker/n8n local: no ejecutable en este entorno porque Docker Desktop y la CLI de n8n no están instalados.
+
 ## Fase 8 - Integración IA mediante n8n
 
 Se preparó la infraestructura de IA sin crear todavía un chatbot visual. `src/services/aiService.js` valida y limita solicitudes, normaliza el payload, agrega `requestId`, usa únicamente `VITE_N8N_AI_WEBHOOK_URL`, aplica timeout de 30 segundos y normaliza respuestas/errores. Se documentó el contrato en `docs/AI_PAYLOAD_CONTRACT.md` y se agregó `.env.example` sin secretos.
