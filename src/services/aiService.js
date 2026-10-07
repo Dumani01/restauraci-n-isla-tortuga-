@@ -26,7 +26,7 @@ export async function askAssistant(payload, options = {}) {
   const requestId = getRequestId(); const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), options.timeout ?? AI_TIMEOUT_MS); if (options.signal) { if (options.signal.aborted) controller.abort(); else options.signal.addEventListener('abort', () => controller.abort(), { once: true }); }
   try {
     const response = await fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Request-Id': requestId }, body: JSON.stringify({ ...validation.payload, requestId }), signal: controller.signal });
-    if (!response.ok) { if (response.status === 429) return { success: false, answer: '', requestId, error: 'RATE_LIMIT' }; return { success: false, answer: '', requestId, error: 'AI_SERVICE_UNAVAILABLE' }; }
+    if (!response.ok) { if (response.status === 404) return { success: false, answer: '', requestId, error: 'N8N_UNAVAILABLE' }; if (response.status === 429) return { success: false, answer: '', requestId, error: 'RATE_LIMIT' }; return { success: false, answer: '', requestId, error: 'AI_SERVICE_UNAVAILABLE' }; }
     return normalizeResponse(await response.json(), requestId);
   } catch (error) { return { success: false, answer: '', requestId, error: error?.name === 'AbortError' ? 'AI_TIMEOUT' : 'N8N_UNAVAILABLE' }; } finally { clearTimeout(timeout); }
 }
