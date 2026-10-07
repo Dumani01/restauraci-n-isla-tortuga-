@@ -43,7 +43,7 @@
       "position": [20, -120]
     },
     {
-      "parameters": { "jsCode": "const provider = $input.first().json;\nconst answer = provider.choices?.[0]?.message?.content;\nif (typeof answer !== 'string' || !answer.trim()) return [{ json: { success: false, answer: '', requestId: `n8n-${Date.now()}`, error: 'INVALID_RESPONSE' } }];\nreturn [{ json: { success: true, answer: answer.trim(), requestId: `n8n-${Date.now()}`, sources: [] } }];" },
+      "parameters": { "jsCode": "const provider = $input.first().json;\nconst source = $('Build Controlled Prompt').first().json;\nconst answer = provider.choices?.[0]?.message?.content;\nif (typeof answer !== 'string' || !answer.trim()) return [{ json: { success: false, answer: '', requestId: source.requestId, error: 'INVALID_RESPONSE' } }];\nreturn [{ json: { success: true, answer: answer.trim(), requestId: source.requestId, sources: [] } }];" },
       "id": "normalize-output",
       "name": "Normalize Output",
       "type": "n8n-nodes-base.code",
