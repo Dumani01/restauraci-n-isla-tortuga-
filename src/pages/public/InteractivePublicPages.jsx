@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { RestorationMap } from '../../components/map/RestorationMap.jsx';
 import { WeatherCard } from '../../components/weather/WeatherCard.jsx';
 import { lifecycleAssets } from '../../services/lifecycleAssets.js';
-import { lifecycleStages } from '../../services/projectData.js';
+import { lifecycleStages, projectInfo } from '../../services/projectData.js';
 import '../../interactive-public-pages.css';
 
 export function InteractiveMapPage() {
-  const { t } = useTranslation(); const content = t('content', { returnObjects: true });
+  const { t } = useTranslation(); const content = projectInfo;
   return <main className="public-page interactive-page"><section className="interactive-hero"><div><p className="vh-kicker"><Waves size={15} /> {t('map.where')}</p><h1>{t('map.title')}<br /><em>{t('map.titleEmphasis')}</em></h1><p>{content.locationDescription}</p></div></section><section className="weather-section"><WeatherCard /></section><section className="public-content public-content--map interactive-map-layout"><RestorationMap /><div className="public-list"><div className="public-list__heading"><div><p className="vh-kicker">{t('map.restoration')}</p><h2>{t('map.what')}</h2></div><span>{t('map.process')}</span></div>{content.howWeWork.map((item, index) => <article className="public-record" key={item}><span className="public-record__code">0{index + 1}</span><span className="public-record__details"><b>{item}</b><small>{t('map.work')}</small></span></article>)}<Link className="vh-text-link" to="/proyecto">{t('map.complete')} <ArrowRight size={16} /></Link></div></section></main>;
 }
 

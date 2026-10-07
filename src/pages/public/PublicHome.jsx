@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import '../../i18n/index.js';
 import descentBackground from '../../assets/isla-tortuga-long-scroll.png';
 import { lifecycleStages } from '../../services/projectData.js';
+import { projectInfo } from '../../services/projectData.js';
 import { lifecycleAssets } from '../../services/lifecycleAssets.js';
 import '../../public-home.css';
 import '../../interactive-public-pages.css';
@@ -14,7 +15,7 @@ export function PublicHome() {
   const [activeId, setActiveId] = useState('location');
   const [activeStageId, setActiveStageId] = useState(lifecycleStages[0].id);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const content = t('content', { returnObjects: true });
+  const content = projectInfo;
   const stories = [{ id: 'location', label: t('home.tabLocation'), heading: content.location, description: content.locationDescription, marker: '01' }, { id: 'process', label: t('home.tabProcess'), heading: t('home.processHeading'), description: content.howWeWork.join(' '), marker: '02' }, { id: 'collaboration', label: t('home.tabPeople'), heading: t('project.collaborationTitle'), description: content.collaboration, marker: '03' }];
   const activeStory = stories.find((story) => story.id === activeId) ?? stories[0];
   const activeStage = lifecycleStages.find((stage) => stage.id === activeStageId) ?? lifecycleStages[0];
