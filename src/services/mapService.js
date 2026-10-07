@@ -1,4 +1,4 @@
-import database from '../../db.json';
+import { getMapPointRecords } from './databaseService.js';
 
 export const DEFAULT_MAP_CENTER = { lat: 9.755, lng: -84.865 };
 export const MAP_POINT_TYPES = ['RESTORATION_ZONE', 'HEALTHY_CORAL', 'SICK_CORAL', 'MONITORING', 'TOURISM', 'ACTIVITY'];
@@ -8,9 +8,9 @@ function isValidPoint(point) {
 }
 
 export async function getMapPoints() {
-  return (database.mapPoints || []).filter(isValidPoint).map((point) => ({ ...point, latitude: Number(point.latitude), longitude: Number(point.longitude) }));
+  return getMapPointRecords().filter(isValidPoint).map((point) => ({ ...point, latitude: Number(point.latitude), longitude: Number(point.longitude) }));
 }
 
 export function getMapDataWarnings() {
-  return (database.mapPoints || []).filter((point) => !isValidPoint(point)).map((point) => point?.id || 'unknown');
+  return getMapPointRecords().filter((point) => !isValidPoint(point)).map((point) => point?.id || 'unknown');
 }
