@@ -81,6 +81,28 @@
     "unavailable": "Der Vorleser ist in diesem Browser nicht verfügbar.",
     "reading": "Wird vorgelesen"
   },
+  "chat": {
+    "assistant": "Korallen-Assistent",
+    "label": "Referenzhilfe",
+    "title": "Restauración Carolina",
+    "open": "Assistent öffnen",
+    "close": "Assistent schließen",
+    "conversation": "Unterhaltung mit dem Assistenten",
+    "placeholder": "Frage schreiben…",
+    "send": "Senden",
+    "clear": "Unterhaltung löschen",
+    "confirmClear": "Verlauf dieser Sitzung löschen?",
+    "confirm": "Löschen",
+    "cancel": "Abbrechen",
+    "welcome": "Hallo. Ich kann das Projekt anhand der verfügbaren Referenzinformationen erklären.",
+    "loading": "Antwort wird vorbereitet…",
+    "error": "Der Dienst ist vorübergehend nicht verfügbar.",
+    "retry": "Erneut versuchen",
+    "listen": "Antwort vorlesen",
+    "suggestionsLabel": "Vorgeschlagene Fragen",
+    "suggestions": ["Was ist Korallenrestauration?", "Was kann ich auf der Karte sehen?", "Wie verwende ich den Vorleser?"],
+    "errors": { "INVALID_INPUT": "Schreibe eine Frage, bevor du sie sendest.", "N8N_UNAVAILABLE": "Der Assistent ist nicht konfiguriert.", "AI_TIMEOUT": "Die Antwort hat zu lange gedauert.", "RATE_LIMIT": "Bitte warte kurz und versuche es erneut.", "AI_SERVICE_UNAVAILABLE": "Der Assistent ist vorübergehend nicht verfügbar.", "INVALID_RESPONSE": "Die empfangene Antwort ist ungültig.", "UNKNOWN_ERROR": "Ein Fehler ist aufgetreten." }
+  },
   "lifecycle": {
     "gametos": {
       "name": "Gameten",

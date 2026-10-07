@@ -228,6 +228,28 @@
     "unavailable": "The narrator is not available in this browser.",
     "reading": "Reading"
   },
+  "chat": {
+    "assistant": "Assistant",
+    "label": "Isla Tortuga Assistant",
+    "title": "Coral Restoration",
+    "open": "Open assistant",
+    "close": "Close assistant",
+    "conversation": "Assistant conversation",
+    "placeholder": "Write your question…",
+    "send": "Send message",
+    "listen": "Listen to response",
+    "clear": "Clear conversation",
+    "confirmClear": "Clear this conversation?",
+    "confirm": "Clear",
+    "cancel": "Cancel",
+    "welcome": "Hello. I am the Isla Tortuga Coral Restoration project assistant. Ask me about restoration, marine conservation, project areas, responsible tourism, and the content available on this page.",
+    "loading": "The assistant is writing…",
+    "error": "We could not get an answer.",
+    "retry": "Retry",
+    "suggestionsLabel": "Suggested questions",
+    "suggestions": ["What is coral restoration?", "What are the coral life-cycle stages?", "What should I avoid touching during a visit?", "What is the weather like?"],
+    "errors": { "N8N_UNAVAILABLE": "The assistant is not available right now.", "AI_TIMEOUT": "The response took too long. Please try again.", "AI_SERVICE_UNAVAILABLE": "The assistant service is unavailable.", "INVALID_INPUT": "Please review your question.", "RATE_LIMIT": "There are many requests right now. Try again later.", "INVALID_RESPONSE": "The assistant returned an invalid response.", "UNKNOWN_ERROR": "An unexpected error occurred." }
+  },
   "weather": {
     "location": "Isla Tortuga",
     "current": "Current weather",

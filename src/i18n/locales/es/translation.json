@@ -228,6 +228,28 @@
     "unavailable": "El narrador no está disponible en este navegador.",
     "reading": "Leyendo"
   },
+  "chat": {
+    "assistant": "Asistente",
+    "label": "Asistente Isla Tortuga",
+    "title": "Restauración Coralina",
+    "open": "Abrir asistente",
+    "close": "Cerrar asistente",
+    "conversation": "Conversación con el asistente",
+    "placeholder": "Escribe tu pregunta…",
+    "send": "Enviar mensaje",
+    "listen": "Escuchar respuesta",
+    "clear": "Limpiar conversación",
+    "confirmClear": "¿Deseas limpiar esta conversación?",
+    "confirm": "Limpiar",
+    "cancel": "Cancelar",
+    "welcome": "Hola. Soy el asistente del proyecto de Restauración Coralina de Isla Tortuga. Puedes preguntarme sobre restauración, conservación marina, zonas del proyecto, turismo responsable y el contenido disponible en esta página.",
+    "loading": "El asistente está escribiendo…",
+    "error": "No fue posible obtener una respuesta.",
+    "retry": "Reintentar",
+    "suggestionsLabel": "Preguntas sugeridas",
+    "suggestions": ["¿Qué es la restauración coralina?", "¿Cuáles son las etapas del ciclo de vida del coral?", "¿Qué debo evitar tocar durante una visita?", "¿Cómo está el clima?"],
+    "errors": { "N8N_UNAVAILABLE": "El asistente no está disponible en este momento.", "AI_TIMEOUT": "La respuesta tardó demasiado. Inténtalo nuevamente.", "AI_SERVICE_UNAVAILABLE": "El servicio del asistente no está disponible.", "INVALID_INPUT": "Revisa el texto de tu consulta.", "RATE_LIMIT": "Hay muchas consultas en este momento. Inténtalo más tarde.", "INVALID_RESPONSE": "El asistente devolvió una respuesta no válida.", "UNKNOWN_ERROR": "Ocurrió un error inesperado." }
+  },
   "weather": {
     "location": "Isla Tortuga",
     "current": "Clima actual",

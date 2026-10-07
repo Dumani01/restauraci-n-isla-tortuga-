@@ -81,6 +81,28 @@
     "unavailable": "O narrador não está disponível neste navegador.",
     "reading": "Lendo"
   },
+  "chat": {
+    "assistant": "Assistente de corais",
+    "label": "Ajuda de referência",
+    "title": "Restauración Carolina",
+    "open": "Abrir assistente",
+    "close": "Fechar assistente",
+    "conversation": "Conversa com o assistente",
+    "placeholder": "Escreva sua pergunta…",
+    "send": "Enviar",
+    "clear": "Limpar conversa",
+    "confirmClear": "Limpar o histórico desta sessão?",
+    "confirm": "Limpar",
+    "cancel": "Cancelar",
+    "welcome": "Olá. Posso explicar o projeto usando as informações de referência disponíveis.",
+    "loading": "Preparando uma resposta…",
+    "error": "O serviço está temporariamente indisponível.",
+    "retry": "Tentar novamente",
+    "listen": "Ouvir resposta",
+    "suggestionsLabel": "Perguntas sugeridas",
+    "suggestions": ["O que é restauração de corais?", "O que posso ver no mapa?", "Como uso o narrador?"],
+    "errors": { "INVALID_INPUT": "Escreva uma pergunta antes de enviar.", "N8N_UNAVAILABLE": "O assistente não está configurado.", "AI_TIMEOUT": "A resposta demorou demais.", "RATE_LIMIT": "Aguarde um momento antes de tentar novamente.", "AI_SERVICE_UNAVAILABLE": "O assistente está temporariamente indisponível.", "INVALID_RESPONSE": "A resposta recebida não é válida.", "UNKNOWN_ERROR": "Ocorreu um erro." }
+  },
   "lifecycle": {
     "gametos": {
       "name": "Gametos",

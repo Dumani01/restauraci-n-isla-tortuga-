@@ -81,6 +81,28 @@
     "unavailable": "Le narrateur n’est pas disponible dans ce navigateur.",
     "reading": "Lecture"
   },
+  "chat": {
+    "assistant": "Assistant corallien",
+    "label": "Aide de référence",
+    "title": "Restauración Carolina",
+    "open": "Ouvrir l’assistant",
+    "close": "Fermer l’assistant",
+    "conversation": "Conversation avec l’assistant",
+    "placeholder": "Écrivez votre question…",
+    "send": "Envoyer",
+    "clear": "Effacer la conversation",
+    "confirmClear": "Effacer l’historique de cette session ?",
+    "confirm": "Effacer",
+    "cancel": "Annuler",
+    "welcome": "Bonjour. Je peux expliquer le projet à partir des informations de référence disponibles.",
+    "loading": "Je prépare une réponse…",
+    "error": "Le service est temporairement indisponible.",
+    "retry": "Réessayer",
+    "listen": "Écouter la réponse",
+    "suggestionsLabel": "Questions suggérées",
+    "suggestions": ["Qu’est-ce que la restauration corallienne ?", "Que puis-je voir sur la carte ?", "Comment utiliser le narrateur ?"],
+    "errors": { "INVALID_INPUT": "Écrivez une question avant d’envoyer.", "N8N_UNAVAILABLE": "Le service d’assistance n’est pas configuré.", "AI_TIMEOUT": "La réponse a pris trop de temps.", "RATE_LIMIT": "Veuillez patienter avant de réessayer.", "AI_SERVICE_UNAVAILABLE": "L’assistant est temporairement indisponible.", "INVALID_RESPONSE": "La réponse reçue n’est pas valide.", "UNKNOWN_ERROR": "Une erreur est survenue." }
+  },
   "lifecycle": {
     "gametos": {
       "name": "Gamètes",
