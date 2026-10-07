@@ -1,0 +1,23 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: restauracion-carolina-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - N8N_SECURE_COOKIE=false
+      - WEBHOOK_URL=http://localhost:5678/
+      - N8N_CORS_ALLOW_ORIGIN=http://localhost:5173
+      - N8N_EDITOR_BASE_URL=http://localhost:5678
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:?Define N8N_ENCRYPTION_KEY en n8n/.env}
+      - AI_PROVIDER_URL=${AI_PROVIDER_URL:-https://api.deepseek.com/chat/completions}
+      - AI_MODEL=${AI_MODEL:-deepseek-chat}
+      - AI_API_KEY=${AI_API_KEY:?Define AI_API_KEY en n8n/.env}
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
