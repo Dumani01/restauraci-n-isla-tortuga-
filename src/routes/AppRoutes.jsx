@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/public/LoginPage.jsx';
 import { NewsPage } from '../pages/public/NewsPage.jsx';
 import { CoreDashboard } from '../pages/private/CoreDashboard.jsx';
 import { ObservationsPage } from '../pages/private/ObservationsPage.jsx';
+import { AdminUsersPage } from '../pages/private/AdminUsersPage.jsx';
 import { useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -46,6 +47,7 @@ export function AppRoutes() {
       <Route element={<PrivateLayout />}>
         <Route path="/dashboard" element={<CoreDashboard />} />
         <Route path="/observaciones" element={<ObservationsPage />} />
+        <Route path="/admin/usuarios" element={<AdminUsersPage />} />
       </Route>
     </Route>
   </Routes>
