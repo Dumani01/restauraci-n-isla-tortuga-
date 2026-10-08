@@ -1,21 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PageIntro } from '../../components/public/PageIntro.jsx';
 import { useAuth } from '../../components/auth/AuthProvider.jsx';
 import { getDemoUserRecords } from '../../services/databaseService.js';
-import { projectInfo } from '../../services/projectData.js';
+
+function readDemoUsers() {
+  try {
+    return { users: getDemoUserRecords(), error: '' };
+  } catch (error) {
+    return { users: [], error: error.message || 'USER_STORAGE_READ_FAILED' };
+  }
+}
 
 export function LoginPage() {
   const { t } = useTranslation();
-  const { user, login } = useAuth();
+  const { user, login, authError } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const content = projectInfo;
-  const demoUsers = getDemoUserRecords();
+  const [demoUsersResult] = useState(readDemoUsers);
+  const demoUsers = demoUsersResult.users;
+
+  useEffect(() => {
+    if (authError) setError(t(`auth.${authError}`, { defaultValue: t('login.error') }));
+  }, [authError, t]);
 
   const selectDemoUser = (demoUser) => {
     setEmail(demoUser.email);
@@ -26,7 +37,9 @@ export function LoginPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (login(email, password)) navigate('/dashboard');
-    else setError(t('login.error'));
+    else setError(authError
+      ? t(`auth.${authError}`, { defaultValue: t('login.error') })
+      : t('login.error'));
   };
 
   if (user) return <Navigate to="/dashboard" replace />;
@@ -38,8 +51,8 @@ export function LoginPage() {
     <section className="public-login-wrap">
       <div className="public-login-context">
         <p className="vh-kicker">{t('login.contextKicker')}</p>
-        <h2>{content.location}<br /><em>{t('login.care')}</em></h2>
-        <p>{content.locationDescription}</p>
+        <h2>{t('content.location')}<br /><em>{t('login.care')}</em></h2>
+        <p>{t('content.locationDescription')}</p>
       </div>
       <form className="public-login-form" onSubmit={handleSubmit}>
         <p className="vh-kicker">{t('login.private')}</p>
@@ -47,9 +60,10 @@ export function LoginPage() {
         <section className="public-login-demo" aria-labelledby="demo-access-title">
           <p className="public-login-demo__title" id="demo-access-title">{t('login.demoTitle')}</p>
           <p className="public-login-demo__notice">{t('login.demoNotice')}</p>
+          {demoUsersResult.error && <p className="public-login-error" role="alert">{t(`auth.${demoUsersResult.error}`, { defaultValue: t('login.error') })}</p>}
           {demoUsers.map((demoUser) => <article className="public-login-demo__card" key={demoUser.id}>
             <div>
-              <strong>{demoUser.profile}</strong>
+              <strong>{t(`login.demoRoles.${demoUser.role}`, { defaultValue: demoUser.profile })}</strong>
               <span>{demoUser.email}</span>
               <code>{demoUser.password}</code>
             </div>

@@ -11,7 +11,7 @@
       "webhookId": "coral-assistant"
     },
     {
-      "parameters": { "jsCode": "const input = $input.first().json.body ?? $input.first().json;\nconst allowedLanguages = ['es', 'en', 'fr', 'de', 'pt'];\nconst allowedRoles = ['USER', 'MODERATOR', 'ADMIN'];\nconst message = typeof input.message === 'string' ? input.message.trim() : '';\nconst language = allowedLanguages.includes(input.language) ? input.language : 'es';\nconst role = allowedRoles.includes(input.role) ? input.role : 'USER';\nconst valid = Boolean(message) && message.length <= 2000;\nconst requestId = input.requestId || `n8n-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;\nreturn [{ json: { valid, requestId, message, language, role, context: input.context && typeof input.context === 'object' ? { page: typeof input.context.page === 'string' ? input.context.page.slice(0, 80) : undefined, restorationZoneId: typeof input.context.restorationZoneId === 'string' ? input.context.restorationZoneId.slice(0, 120) : undefined } : {}, error: valid ? '' : 'INVALID_INPUT' } }];" },
+      "parameters": { "jsCode": "const raw = $input.first().json.body ?? $input.first().json;\nconst input = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};\nconst allowedLanguages = ['es', 'en', 'fr', 'de', 'pt'];\nconst message = typeof input.message === 'string' ? input.message.trim() : '';\nconst language = allowedLanguages.includes(input.language) ? input.language : 'es';\nconst valid = Boolean(message) && message.length <= 2000;\nconst requestId = typeof input.requestId === 'string' && input.requestId.length <= 120 ? input.requestId : `n8n-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;\nconst rawContext = input.context && typeof input.context === 'object' && !Array.isArray(input.context) ? input.context : {};\nconst context = { page: typeof rawContext.page === 'string' ? rawContext.page.slice(0, 80) : undefined };\nreturn [{ json: { valid, requestId, message, language, context, error: valid ? '' : 'INVALID_INPUT' } }];" },
       "id": "validate-input",
       "name": "Validate Input",
       "type": "n8n-nodes-base.code",
@@ -40,10 +40,11 @@
       "name": "AI Provider",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [20, -120]
+      "position": [20, -120],
+      "onError": "continueRegularOutput"
     },
     {
-      "parameters": { "jsCode": "const provider = $input.first().json;\nconst source = $('Build Controlled Prompt').first().json;\nconst answer = provider.choices?.[0]?.message?.content;\nif (typeof answer !== 'string' || !answer.trim()) return [{ json: { success: false, answer: '', requestId: source.requestId, error: 'INVALID_RESPONSE' } }];\nreturn [{ json: { success: true, answer: answer.trim(), requestId: source.requestId, sources: [] } }];" },
+      "parameters": { "jsCode": "const provider = $input.first().json;\nconst source = $('Build Controlled Prompt').first().json;\nif (provider.error || Number(provider.statusCode || provider.status) >= 400) return [{ json: { success: false, answer: '', requestId: source.requestId, error: 'AI_SERVICE_UNAVAILABLE' } }];\nconst answer = provider.choices?.[0]?.message?.content;\nif (typeof answer !== 'string' || !answer.trim()) return [{ json: { success: false, answer: '', requestId: source.requestId, error: 'INVALID_RESPONSE' } }];\nreturn [{ json: { success: true, answer: answer.trim(), requestId: source.requestId, sources: [] } }];" },
       "id": "normalize-output",
       "name": "Normalize Output",
       "type": "n8n-nodes-base.code",

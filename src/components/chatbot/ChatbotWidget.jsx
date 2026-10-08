@@ -13,7 +13,7 @@ function ChatMessage({ message, onListen }) {
 }
 
 export function ChatbotWidget() {
-  const { t } = useTranslation(); const { pathname } = useLocation(); const { user } = useAuth(); const narrator = useNarrator(); const [open, setOpen] = useState(false); const [confirmClear, setConfirmClear] = useState(false); const launcherRef = useRef(null); const inputRef = useRef(null); const messagesRef = useRef(null); const { messages, input, setInput, isLoading, error, sendMessage, retryMessage, clearChat } = useChatbot({ pathname, user });
+  const { t } = useTranslation(); const { pathname } = useLocation(); const { user } = useAuth(); const narrator = useNarrator(); const [open, setOpen] = useState(false); const [confirmClear, setConfirmClear] = useState(false); const launcherRef = useRef(null); const inputRef = useRef(null); const messagesRef = useRef(null); const { messages, input, setInput, isLoading, error, sendMessage, retryMessage, clearChat } = useChatbot({ pathname, user, open });
   useEffect(() => { if (open) inputRef.current?.focus(); else launcherRef.current?.focus(); }, [open]);
   useEffect(() => { if (open && messagesRef.current) messagesRef.current.scrollTo?.({ top: messagesRef.current.scrollHeight, behavior: 'smooth' }); }, [messages, isLoading, open]);
   const submit = (event) => { event.preventDefault(); sendMessage(); };

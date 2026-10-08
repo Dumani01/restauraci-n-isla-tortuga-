@@ -8,13 +8,22 @@ import { getUserRecords, registerUserRecord } from '../../services/databaseServi
 
 const initialForm = { name: '', email: '', password: '', role: 'USER', profile: 'Colaborador', description: '' };
 
+function readUserRecords() {
+  try {
+    return { users: getUserRecords(), error: '' };
+  } catch (error) {
+    return { users: [], error: error.message || 'USER_STORAGE_READ_FAILED' };
+  }
+}
+
 export function AdminUsersPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { isDark, toggleTheme } = useTheme();
   const [form, setForm] = useState(initialForm);
-  const [users, setUsers] = useState(() => getUserRecords());
-  const [error, setError] = useState('');
+  const [initialRecords] = useState(readUserRecords);
+  const [users, setUsers] = useState(initialRecords.users);
+  const [error, setError] = useState(initialRecords.error);
   const [saved, setSaved] = useState(false);
 
   if (user?.role !== 'ADMIN') return <Navigate to="/dashboard" replace />;
@@ -28,16 +37,27 @@ export function AdminUsersPage() {
 
   const submit = (event) => {
     event.preventDefault();
-    const result = registerUserRecord(form);
-    if (!result.success) {
-      setError(t('private.emailExists', 'Ya existe un usuario con ese correo.'));
+    setSaved(false);
+    try {
+      const result = registerUserRecord(form);
+      if (!result.success) {
+        setError(t(`private.userErrors.${result.error}`, {
+          defaultValue: result.error === 'EMAIL_EXISTS'
+            ? t('private.emailExists', 'Ya existe un usuario con ese correo.')
+            : t('private.invalidUser', 'Completa los datos con un perfil válido.'),
+        }));
+        return;
+      }
+      setUsers(getUserRecords());
+      setForm(initialForm);
+      setError('');
+      setSaved(true);
+    } catch (storageError) {
+      setError(t(`private.userErrors.${storageError.message}`, {
+        defaultValue: t('private.userStorageError', 'No fue posible leer o guardar los usuarios en este navegador.'),
+      }));
       setSaved(false);
-      return;
     }
-    setUsers(getUserRecords());
-    setForm(initialForm);
-    setError('');
-    setSaved(true);
   };
 
   return <section className={`admin-users-page${isDark ? ' admin-users-page--dark' : ''}`}>

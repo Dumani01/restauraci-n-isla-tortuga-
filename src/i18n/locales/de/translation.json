@@ -31,8 +31,9 @@
     "fieldTracking": "Feldbeobachtung",
     "textSettings": "Texteinstellungen",
     "textSettingsShort": "Text",
-    "textSize": "TextgrÃ¶ÃŸe",
-    "resetText": "ZurÃ¼cksetzen"
+    "textSize": "Textgröße",
+    "resetText": "Zurücksetzen",
+    "loading": "Seite wird geladen…"
   },
   "languageSelector": {
     "label": "Sprache",
@@ -59,7 +60,21 @@
     "videoTitle": "Mehr über das Projekt erfahren",
     "illustrativeReef": "Illustratives Korallenriff",
     "highlight": "{{name}} hervorheben",
-    "model": "Interaktives Modell von {{name}}"
+    "model": "Interaktives Modell von {{name}}",
+    "surface": "Meeresoberfläche",
+    "underwater": "Unterwasserbereich",
+    "heroKicker": "Isla Tortuga · Golfo de Nicoya",
+    "intro": "Den Lebenszyklus der Korallen kennenlernen und ihre Erholung durch Pflege, Beobachtung und Zusammenarbeit begleiten.",
+    "statementTitle": "Genau hinsehen.",
+    "statementEmphasis": "Sorgfältig dokumentieren.",
+    "featureTitle": "Ein Riff.",
+    "featureEmphasis": "Viele Menschen.",
+    "reefTitle": "Lebenszyklus der Korallen",
+    "reefEmphasis": "Schritt für Schritt.",
+    "reefIntro": "Der Zyklus umfasst Gameten, Embryo, Larve, Ansiedlung am Substrat, junge Koralle und erwachsene Koralle.",
+    "ctaTitle": "Restaurierung beginnt",
+    "ctaEmphasis": "mit Wissen.",
+    "ctaText": "Lernen Sie den Ort, den Ablauf und den Lebenszyklus der Korallen kennen."
   },
   "gallery": {
     "stage": "Phase {{current}} von {{total}}",
@@ -70,7 +85,17 @@
     "photosIntro": "Für die Galerie bereitgestellte Bilder. Sie werden nicht als verifizierte Nachweise von Arten, Daten oder Orten dargestellt.",
     "photosCount": "{{count}} Bilder",
     "photoAlt": "Galeriefoto {{number}}",
-    "photoNumber": "Bild {{number}}"
+    "photoNumber": "Bild {{number}}",
+    "openImage": "Bild {{number}} öffnen",
+    "closeImage": "Bild schließen",
+    "previousImage": "Vorheriges Bild",
+    "nextImage": "Nächstes Bild",
+    "imagePosition": "Bild {{current}} von {{total}}",
+    "kicker": "Lebenszyklus der Korallen",
+    "title": "Von den Gameten",
+    "titleEmphasis": "bis zur erwachsenen Koralle.",
+    "intro": "Korallen durchlaufen mehrere Entwicklungsphasen, bevor sie eine erwachsene Kolonie bilden. Entdecken Sie die Modelle und ihre Informationen.",
+    "image": "Interaktive Abbildung von {{name}}"
   },
   "coralRegistry": {
     "title": "Korallenregister",
@@ -116,7 +141,24 @@
     "private": "Privater Zugang",
     "demoTitle": "Demo-Zugänge",
     "demoNotice": "Diese Zugangsdaten dienen nur zum Testen der Anwendungsprofile.",
-    "demoUse": "Profil nutzen"
+    "demoUse": "Profil nutzen",
+    "demoRoles": {
+      "ADMIN": "Administrator",
+      "MODERATOR": "Koordination",
+      "USER": "Mitarbeit"
+    },
+    "demoNames": {
+      "ADMIN": "Demo-Verwaltung",
+      "MODERATOR": "Demo-Koordination",
+      "USER": "Demo-Besuch"
+    },
+    "eyebrow": "Zugang · Arbeitsbereich",
+    "title": "Ein Bereich für",
+    "titleEmphasis": "die Einträge.",
+    "intro": "Im privaten Bereich können Restaurierungsaktivitäten erfasst und Projektinformationen organisiert werden.",
+    "contextKicker": "Korallenrestaurierung",
+    "care": "mit Sorgfalt.",
+    "error": "Zugang nicht eingerichtet oder Anmeldedaten ungültig"
   },
   "narrator": {
     "label": "Vorleser",
@@ -135,7 +177,7 @@
   "chat": {
     "assistant": "Korallen-Assistent",
     "label": "Referenzhilfe",
-    "title": "Restauración Carolina",
+    "title": "Restauración Coralina",
     "open": "Assistent öffnen",
     "close": "Assistent schließen",
     "conversation": "Unterhaltung mit dem Assistenten",
@@ -151,8 +193,20 @@
     "retry": "Erneut versuchen",
     "listen": "Antwort vorlesen",
     "suggestionsLabel": "Vorgeschlagene Fragen",
-    "suggestions": ["Was ist Korallenrestauration?", "Was kann ich auf der Karte sehen?", "Wie verwende ich den Vorleser?"],
-    "errors": { "INVALID_INPUT": "Schreibe eine Frage, bevor du sie sendest.", "N8N_UNAVAILABLE": "Der Assistent ist nicht konfiguriert.", "AI_TIMEOUT": "Die Antwort hat zu lange gedauert.", "RATE_LIMIT": "Bitte warte kurz und versuche es erneut.", "AI_SERVICE_UNAVAILABLE": "Der Assistent ist vorübergehend nicht verfügbar.", "INVALID_RESPONSE": "Die empfangene Antwort ist ungültig.", "UNKNOWN_ERROR": "Ein Fehler ist aufgetreten." }
+    "suggestions": [
+      "Was ist Korallenrestauration?",
+      "Was kann ich auf der Karte sehen?",
+      "Wie verwende ich den Vorleser?"
+    ],
+    "errors": {
+      "INVALID_INPUT": "Schreibe eine Frage, bevor du sie sendest.",
+      "N8N_UNAVAILABLE": "Der Assistent ist nicht konfiguriert.",
+      "AI_TIMEOUT": "Die Antwort hat zu lange gedauert.",
+      "RATE_LIMIT": "Bitte warte kurz und versuche es erneut.",
+      "AI_SERVICE_UNAVAILABLE": "Der Assistent ist vorübergehend nicht verfügbar.",
+      "INVALID_RESPONSE": "Die empfangene Antwort ist ungültig.",
+      "UNKNOWN_ERROR": "Ein Fehler ist aufgetreten."
+    }
   },
   "lifecycle": {
     "gametos": {
@@ -179,5 +233,231 @@
       "name": "Erwachsene Koralle",
       "description": "Eine entwickelte Kolonie, die den Lebenszyklus fortsetzen kann."
     }
+  },
+  "footer": "Informationen zur Korallenrestaurierung · Isla Tortuga",
+  "project": {
+    "eyebrow": "Korallenrestaurierung · Restauración Coralina",
+    "title": "Das Riff schützen, um",
+    "titleEmphasis": "das Ökosystem wiederherzustellen.",
+    "intro": "Eine gemeinsame Arbeit, um die Korallen von Isla Tortuga und dem Golf von Nicoya kennenzulernen, zu schützen und wiederherzustellen.",
+    "where": "Wo arbeiten wir?",
+    "how": "Wie arbeiten wir?",
+    "why": "Warum restaurieren?",
+    "collaborationTitle": "Eine gemeinsame Aufgabe"
+  },
+  "map": {
+    "where": "Wo arbeiten wir?",
+    "title": "Isla Tortuga",
+    "titleEmphasis": "Golfo de Nicoya.",
+    "mapLabel": "Allgemein dargestellter Arbeitsbereich ohne sensible Koordinaten",
+    "area": "Arbeitsbereich",
+    "noCoordinates": "Keine sensiblen Koordinaten",
+    "restoration": "Korallenrestaurierung",
+    "what": "Was wird getan?",
+    "process": "Ablauf",
+    "work": "Restaurierungsarbeit",
+    "complete": "Den gesamten Ablauf ansehen",
+    "legend": "Legende",
+    "filter": "Punkte filtern",
+    "filters": "Kartenfilter",
+    "status": "Status",
+    "loading": "Karte wird geladen…",
+    "error": "Kartendaten konnten nicht geladen werden.",
+    "empty": "Keine Orte registriert.",
+    "ariaLabel": "Interaktive Karte von Isla Tortuga und Referenzgebieten",
+    "demoNotice": "Die angezeigten Orte sind Demo- oder Referenzdaten und keine Felddaten.",
+    "pointsCount": "{{count}} sichtbare Punkte",
+    "types": {
+      "restorationZone": "Restaurierungszone",
+      "healthyCoral": "Gesunde Koralle",
+      "sickCoral": "Als krank erfasste Koralle",
+      "monitoring": "Beobachtung",
+      "tourism": "Touristischer Referenzpunkt",
+      "activity": "Aktivität"
+    },
+    "statusOptions": {
+      "DEMO": "Demo",
+      "REFERENCE": "Referenz"
+    },
+    "records": {
+      "demo-restoration-zone": {
+        "name": "Demo-Restaurierungszone",
+        "description": "Allgemeiner Demonstrationsstandort; keine verifizierte Feldkoordinate."
+      },
+      "demo-monitoring": {
+        "name": "Demo-Beobachtungspunkt",
+        "description": "Visueller Demonstrationspunkt zur Beobachtung; muss vom Team bestätigt werden."
+      },
+      "demo-activity": {
+        "name": "Demo-Wartungsaktivität",
+        "description": "Visuelle Referenz für eine Projektaktivität; kein Felddatensatz."
+      },
+      "demo-tourism": {
+        "name": "Touristische Referenzstelle",
+        "description": "Allgemeine Referenz für das Gebiet; enthält keine sensiblen Koordinaten."
+      }
+    },
+    "filterOptions": {
+      "ALL": "Alle",
+      "RESTORATION_ZONE": "Zonen",
+      "HEALTHY_CORAL": "Gesunde Korallen",
+      "SICK_CORAL": "Als krank erfasste Korallen",
+      "MONITORING": "Beobachtung",
+      "TOURISM": "Tourismus",
+      "ACTIVITY": "Aktivitäten"
+    }
+  },
+  "news": {
+    "eyebrow": "Korallenrestaurierung · Informationen",
+    "title": "Verstehen, um",
+    "titleEmphasis": "besser zu schützen.",
+    "intro": "Die Erholung eines Riffs verbindet Wissen, Beobachtung und Zusammenarbeit.",
+    "collective": "Gemeinsame Arbeit",
+    "featureTitle": "Riffrestaurierung braucht Zusammenarbeit",
+    "importance": "Bedeutung der Riffe",
+    "ecosystemTitle": "Ein Ökosystem, das Leben schützt"
+  },
+  "private": {
+    "session": "Aktive Sitzung",
+    "adminDashboard": "Verwaltungsübersicht",
+    "moderatorDashboard": "Koordinationsübersicht",
+    "userDashboard": "Mitarbeitendenbereich",
+    "adminArea": "Projektverwaltung",
+    "moderatorArea": "Projektbeobachtung",
+    "userArea": "Projektinformationen",
+    "userManagement": "Benutzerverwaltung",
+    "adminModule": "Verwaltungsmodul",
+    "registerUser": "Benutzer registrieren",
+    "registerUserIntro": "Erstellen Sie Demo-Zugänge, um die Profile zu testen. Diese Konten werden nur in diesem Browser gespeichert.",
+    "registeredUsers": "Registrierte Benutzer",
+    "observationsCount": "Beobachtungen",
+    "demoProfiles": "Demo-Profile",
+    "referencePoints": "Referenzpunkte",
+    "pendingValidation": "Ausstehende Prüfung",
+    "availableProfiles": "Zum Testen verfügbar",
+    "userSaved": "Benutzer wurde registriert.",
+    "emailExists": "Ein Benutzer mit dieser E-Mail-Adresse ist bereits vorhanden.",
+    "saveUser": "Benutzer speichern",
+    "userName": "Name",
+    "profile": "Profil",
+    "userList": "Benutzer",
+    "workSteps": "Arbeitsschritte",
+    "monitoringPanel": "Beobachtung und Einträge",
+    "moderatorIntro": "Prüfen Sie die erfasste Arbeit und ergänzen Sie vom Team bestätigte Informationen.",
+    "dashboard": "Übersicht",
+    "observations": "Beobachtungen",
+    "openMenu": "Menü von Restauración Coralina ein- oder ausblenden",
+    "projectInfo": "Projektinformationen",
+    "area": "Restaurierungsgebiet",
+    "place": "Ort",
+    "work": "Arbeit",
+    "focus": "Schwerpunkt",
+    "participation": "Beteiligung",
+    "restoration": "Korallenrestaurierung",
+    "careMonitoring": "Pflege und Beobachtung",
+    "community": "Gemeinschaft und Institutionen",
+    "processTitle": "Restaurierungsablauf",
+    "processDescription": "Vom Projekt beschriebene Arbeitsschritte",
+    "lifecycle": "Lebenszyklus",
+    "lifecycleDescription": "Von den Gameten bis zur erwachsenen Koralle",
+    "stage": "Phase",
+    "description": "Beschreibung",
+    "exploreComplete": "Den gesamten Zyklus erkunden",
+    "why": "Warum restaurieren?",
+    "reefImportance": "Bedeutung des Riffs",
+    "location": "Ort",
+    "principle": "Grundsatz",
+    "collaborative": "Gemeinsame Arbeit",
+    "recordWork": "Arbeitsprotokoll",
+    "registerActivity": "Aktivität erfassen",
+    "formIntro": "Tragen Sie in dieses Formular nur Informationen ein, die vom Projektteam bestätigt wurden.",
+    "fragment": "Fragment, Koralle oder Struktur",
+    "date": "Datum",
+    "activity": "Aktivität",
+    "responsible": "Verantwortlich",
+    "notes": "Notizen und verfügbare Nachweise",
+    "selectCollection": "Auswahl und verantwortungsvolle Entnahme",
+    "nursery": "Einsetzen in eine Korallengärtnerei",
+    "maintenance": "Reinigung und Pflege",
+    "monitoring": "Beobachtung",
+    "saved": "Eintrag lokal gespeichert. Die Bestätigung durch das zuständige Team steht noch aus.",
+    "observationTitle": "Beobachtungsregister",
+    "observationFormTitle": "Beobachtung erfassen",
+    "observationEditTitle": "Beobachtung bearbeiten",
+    "observationCreate": "Beobachtung speichern",
+    "observationUpdate": "Änderungen speichern",
+    "observationDelete": "Beobachtung löschen",
+    "observationCancel": "Abbrechen",
+    "observationEdit": "Bearbeiten",
+    "observationDeleteConfirm": "Diese Beobachtung löschen? Dieser Vorgang kann nicht rückgängig gemacht werden.",
+    "observationSaved": "Beobachtung in diesem Browser gespeichert.",
+    "observationListTitle": "Gespeicherte Beobachtungen",
+    "observationEmpty": "In diesem Browser sind noch keine Beobachtungen gespeichert.",
+    "observationDemoNotice": "Einträge werden nur in diesem Browser gespeichert und müssen noch vom Team validiert werden. Es handelt sich um Demodaten, nicht um verifizierte Feldbeobachtungen.",
+    "observationDemoBadge": "Demo · Validierung ausstehend",
+    "observationStorageError": "Die Beobachtung konnte nicht gelesen oder gespeichert werden. Prüfen Sie den Speicher dieses Browsers und versuchen Sie es erneut.",
+    "observationErrors": {
+      "INVALID_INPUT": "Füllen Sie die Pflichtfelder der Beobachtung aus.",
+      "INVALID_ACTIVITY": "Wählen Sie eine gültige Aktivität.",
+      "OBSERVATION_STORAGE_UNAVAILABLE": "Der Speicher dieses Browsers ist zum Speichern von Beobachtungen nicht verfügbar.",
+      "OBSERVATION_STORAGE_READ_FAILED": "Gespeicherte Beobachtungen konnten nicht gelesen werden. Vorhandene Daten wurden nicht verändert.",
+      "OBSERVATION_STORAGE_WRITE_FAILED": "Die Beobachtung konnte nicht gespeichert werden. Prüfen Sie den verfügbaren Speicherplatz und versuchen Sie es erneut.",
+      "UNKNOWN_ERROR": "Beim Verarbeiten der Beobachtung ist ein unerwarteter Fehler aufgetreten."
+    }
+  },
+  "weather": {
+    "location": "Isla Tortuga",
+    "current": "Aktuelles Wetter",
+    "temperature": "Temperatur",
+    "feelsLike": "Gefühlt",
+    "humidity": "Luftfeuchtigkeit",
+    "wind": "Wind",
+    "precipitation": "Niederschlag",
+    "forecast": "Vorhersage",
+    "rainShort": "Regen",
+    "loading": "Wetter wird geladen…",
+    "error": "Wetterdaten sind derzeit nicht verfügbar.",
+    "retry": "Erneut versuchen",
+    "visitTitle": "Bedingungen für einen Besuch",
+    "visitInfo": "Unverbindliche Information, keine offizielle Empfehlung zur maritimen Sicherheit.",
+    "conditions": {
+      "clear": "Klar",
+      "mainlyClear": "Überwiegend klar",
+      "partlyCloudy": "Teilweise bewölkt",
+      "overcast": "Bedeckt",
+      "fog": "Nebel",
+      "drizzle": "Nieselregen",
+      "rain": "Regen",
+      "showers": "Regenschauer",
+      "snow": "Schnee",
+      "thunderstorm": "Gewitter",
+      "unknown": "Wetterlage nicht verfügbar"
+    }
+  },
+  "content": {
+    "location": "Isla Tortuga · Golfo de Nicoya",
+    "locationDescription": "In diesem Gebiet werden Korallen gesammelt, angesiedelt, beobachtet und gepflegt, um ihre Entwicklung zu untersuchen und zur Erholung der Riffe beizutragen.",
+    "howWeWork": [
+      "Verantwortungsvolle Auswahl und Entnahme von Korallenfragmenten.",
+      "Vorbereitung und Einsetzen der Fragmente in Korallengärtnereien und Strukturen, die ihr Wachstum fördern sollen.",
+      "Reinigung, Pflege und Beobachtung der Korallen sowie der Wasserbedingungen."
+    ],
+    "whyRestore": "Riffe bieten vielen Meeresarten Lebensraum und Schutz, helfen die Küsten zu schützen und sind Teil des Lebens von Gemeinschaften, die vom Meer abhängig sind.",
+    "collaboration": "Die Wiederherstellung eines Riffs braucht Wissen und Zusammenarbeit. Forschende, Institutionen und Gemeinschaften kümmern sich gemeinsam um die Korallen, lernen von ihnen und beleben betroffene Gebiete."
+  },
+  "auth": {
+    "INVALID_SESSION": "Die gespeicherte Sitzung ist ungültig oder kann nicht mehr überprüft werden. Bitte melden Sie sich erneut an.",
+    "UNKNOWN_SESSION": "Die Sitzung konnte nicht überprüft werden. Bitte melden Sie sich erneut an.",
+    "storageUnavailable": "Der lokale Speicher dieses Browsers ist nicht verfügbar; die Sitzung konnte nicht gestartet oder beendet werden.",
+    "AUTH_STORAGE_UNAVAILABLE": "Der lokale Speicher dieses Browsers ist nicht verfügbar; die Sitzung konnte nicht gestartet oder beendet werden.",
+    "USER_STORAGE_UNAVAILABLE": "Der lokale Speicher dieses Browsers ist zum Lesen der Benutzer nicht verfügbar.",
+    "USER_STORAGE_READ_FAILED": "Gespeicherte Benutzer konnten nicht gelesen werden. Vorhandene Daten wurden nicht verändert.",
+    "USER_STORAGE_INVALID": "Gespeicherte Benutzer haben ein ungültiges Format und wurden vor dem Überschreiben geschützt.",
+    "USER_STORAGE_WRITE_FAILED": "Der Benutzer konnte nicht im lokalen Speicher dieses Browsers gespeichert werden."
+  },
+  "errors": {
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundText": "Die gesuchte Seite wurde nicht gefunden. Der Link ist möglicherweise veraltet oder die Adresse falsch.",
+    "backHome": "Zur Startseite"
   }
 }

@@ -32,8 +32,9 @@
     "fieldTracking": "Seguimiento de campo",
     "textSettings": "Ajustes de texto",
     "textSettingsShort": "Texto",
-    "textSize": "TamaÃ±o del texto",
-    "resetText": "Restablecer"
+    "textSize": "Tamaño del texto",
+    "resetText": "Restablecer",
+    "loading": "Cargando página…"
   },
   "languageSelector": {
     "label": "Idioma",
@@ -108,8 +109,45 @@
     "ariaLabel": "Mapa interactivo de Isla Tortuga y zonas de referencia",
     "demoNotice": "Las ubicaciones mostradas son datos demo o de referencia; no son evidencia de campo.",
     "pointsCount": "{{count}} puntos visibles",
-    "types": { "restorationZone": "Zona de restauración", "healthyCoral": "Coral saludable", "sickCoral": "Coral enfermo", "monitoring": "Seguimiento", "tourism": "Punto turístico", "activity": "Actividad" },
-    "filterOptions": { "ALL": "Todos", "RESTORATION_ZONE": "Zonas", "HEALTHY_CORAL": "Corales saludables", "SICK_CORAL": "Corales enfermos", "MONITORING": "Seguimiento", "TOURISM": "Turismo", "ACTIVITY": "Actividades" }
+    "types": {
+      "restorationZone": "Zona de restauración",
+      "healthyCoral": "Coral saludable",
+      "sickCoral": "Coral enfermo",
+      "monitoring": "Seguimiento",
+      "tourism": "Punto turístico",
+      "activity": "Actividad"
+    },
+    "statusOptions": {
+      "DEMO": "Demo",
+      "REFERENCE": "Referencia"
+    },
+    "records": {
+      "demo-restoration-zone": {
+        "name": "Zona demo de restauración",
+        "description": "Ubicación general de demostración; no representa una coordenada de campo verificada."
+      },
+      "demo-monitoring": {
+        "name": "Punto demo de seguimiento",
+        "description": "Punto visual de demostración para seguimiento; requiere confirmación del equipo."
+      },
+      "demo-activity": {
+        "name": "Actividad demo de mantenimiento",
+        "description": "Referencia visual de una actividad del proyecto; no es un registro de campo."
+      },
+      "demo-tourism": {
+        "name": "Punto turístico de referencia",
+        "description": "Referencia general para contexto del área; no contiene coordenadas sensibles."
+      }
+    },
+    "filterOptions": {
+      "ALL": "Todos",
+      "RESTORATION_ZONE": "Zonas",
+      "HEALTHY_CORAL": "Corales saludables",
+      "SICK_CORAL": "Corales enfermos",
+      "MONITORING": "Seguimiento",
+      "TOURISM": "Turismo",
+      "ACTIVITY": "Actividades"
+    }
   },
   "gallery": {
     "kicker": "Ciclo de vida del coral",
@@ -125,7 +163,12 @@
     "photosIntro": "Imágenes compartidas para la galería. No se presentan como registros verificados de especies, fechas o ubicaciones.",
     "photosCount": "{{count}} imágenes",
     "photoAlt": "Fotografía de la galería {{number}}",
-    "photoNumber": "Imagen {{number}}"
+    "photoNumber": "Imagen {{number}}",
+    "openImage": "Abrir imagen {{number}}",
+    "closeImage": "Cerrar imagen",
+    "previousImage": "Imagen anterior",
+    "nextImage": "Imagen siguiente",
+    "imagePosition": "Imagen {{current}} de {{total}}"
   },
   "news": {
     "eyebrow": "Restauración coralina · Información",
@@ -188,25 +231,35 @@
     "submit": "Entrar al seguimiento",
     "demoTitle": "Accesos demo",
     "demoNotice": "Estas credenciales son únicamente para probar los perfiles de la aplicación.",
-    "demoUse": "Usar perfil"
+    "demoUse": "Usar perfil",
+    "demoRoles": {
+      "ADMIN": "Administrador",
+      "MODERATOR": "Coordinador",
+      "USER": "Colaborador"
+    },
+    "demoNames": {
+      "ADMIN": "Administración demo",
+      "MODERATOR": "Coordinación demo",
+      "USER": "Visitante demo"
+    }
   },
   "private": {
     "session": "Sesión activa",
-    "adminDashboard": "Panel de administraciÃ³n",
+    "adminDashboard": "Panel de administración",
     "moderatorDashboard": "Panel de coordinación",
     "userDashboard": "Panel de colaborador",
-    "adminArea": "AdministraciÃ³n del proyecto",
+    "adminArea": "Administración del proyecto",
     "moderatorArea": "Seguimiento del proyecto",
     "userArea": "Información del proyecto",
-    "userManagement": "GestiÃ³n de usuarios",
-    "adminModule": "MÃ³dulo de administraciÃ³n",
+    "userManagement": "Gestión de usuarios",
+    "adminModule": "Módulo de administración",
     "registerUser": "Registrar usuario",
     "registerUserIntro": "Crea accesos demo para revisar los distintos perfiles del sistema. Estos registros se guardan localmente en este navegador.",
     "registeredUsers": "Usuarios registrados",
     "observationsCount": "Observaciones",
     "demoProfiles": "Perfiles demo",
     "referencePoints": "Puntos de referencia",
-    "pendingValidation": "Pendientes de revisiÃ³n",
+    "pendingValidation": "Pendientes de revisión",
     "availableProfiles": "Disponibles para probar",
     "userSaved": "Usuario registrado correctamente.",
     "emailExists": "Ya existe un usuario con ese correo.",
@@ -216,7 +269,7 @@
     "userList": "Usuarios",
     "workSteps": "Pasos de trabajo",
     "monitoringPanel": "Seguimiento y observaciones",
-    "moderatorIntro": "Revisa el trabajo registrado y aÃ±ade informaciÃ³n confirmada por el equipo.",
+    "moderatorIntro": "Revisa el trabajo registrado y añade información confirmada por el equipo.",
     "dashboard": "Dashboard",
     "observations": "Observaciones",
     "openMenu": "Mostrar u ocultar menú de Restauración Coralina",
@@ -253,7 +306,30 @@
     "nursery": "Colocación en guardería marina",
     "maintenance": "Limpieza y mantenimiento",
     "monitoring": "Monitoreo",
-    "saved": "Registro guardado localmente. Su validación queda pendiente del equipo responsable."
+    "saved": "Registro guardado localmente. Su validación queda pendiente del equipo responsable.",
+    "observationTitle": "Registro de observaciones",
+    "observationFormTitle": "Registrar una observación",
+    "observationEditTitle": "Editar observación",
+    "observationCreate": "Guardar observación",
+    "observationUpdate": "Guardar cambios",
+    "observationDelete": "Eliminar observación",
+    "observationCancel": "Cancelar",
+    "observationEdit": "Editar",
+    "observationDeleteConfirm": "¿Eliminar esta observación? Esta acción no se puede deshacer.",
+    "observationSaved": "Observación guardada en este navegador.",
+    "observationListTitle": "Observaciones guardadas",
+    "observationEmpty": "Aún no hay observaciones guardadas en este navegador.",
+    "observationDemoNotice": "Los registros se guardan solo en este navegador y quedan pendientes de validación por el equipo. Son datos demo, no observaciones de campo verificadas.",
+    "observationDemoBadge": "Demo · pendiente de validación",
+    "observationStorageError": "No se pudo leer o guardar la observación. Revisa el almacenamiento de este navegador e inténtalo de nuevo.",
+    "observationErrors": {
+      "INVALID_INPUT": "Completa los campos obligatorios de la observación.",
+      "INVALID_ACTIVITY": "Selecciona una actividad válida.",
+      "OBSERVATION_STORAGE_UNAVAILABLE": "El almacenamiento de este navegador no está disponible para guardar observaciones.",
+      "OBSERVATION_STORAGE_READ_FAILED": "No se pudieron leer las observaciones guardadas. Los datos existentes no se modificaron.",
+      "OBSERVATION_STORAGE_WRITE_FAILED": "No se pudo guardar la observación. Revisa el almacenamiento disponible e inténtalo de nuevo.",
+      "UNKNOWN_ERROR": "Ocurrió un error inesperado al procesar la observación."
+    }
   },
   "lifecycle": {
     "gametos": {
@@ -314,8 +390,21 @@
     "error": "No fue posible obtener una respuesta.",
     "retry": "Reintentar",
     "suggestionsLabel": "Preguntas sugeridas",
-    "suggestions": ["¿Qué es la restauración coralina?", "¿Cuáles son las etapas del ciclo de vida del coral?", "¿Qué debo evitar tocar durante una visita?", "¿Cómo está el clima?"],
-    "errors": { "N8N_UNAVAILABLE": "El asistente no está disponible en este momento.", "AI_TIMEOUT": "La respuesta tardó demasiado. Inténtalo nuevamente.", "AI_SERVICE_UNAVAILABLE": "El servicio del asistente no está disponible.", "INVALID_INPUT": "Revisa el texto de tu consulta.", "RATE_LIMIT": "Hay muchas consultas en este momento. Inténtalo más tarde.", "INVALID_RESPONSE": "El asistente devolvió una respuesta no válida.", "UNKNOWN_ERROR": "Ocurrió un error inesperado." }
+    "suggestions": [
+      "¿Qué es la restauración coralina?",
+      "¿Cuáles son las etapas del ciclo de vida del coral?",
+      "¿Qué debo evitar tocar durante una visita?",
+      "¿Cómo está el clima?"
+    ],
+    "errors": {
+      "N8N_UNAVAILABLE": "El asistente no está disponible en este momento.",
+      "AI_TIMEOUT": "La respuesta tardó demasiado. Inténtalo nuevamente.",
+      "AI_SERVICE_UNAVAILABLE": "El servicio del asistente no está disponible.",
+      "INVALID_INPUT": "Revisa el texto de tu consulta.",
+      "RATE_LIMIT": "Hay muchas consultas en este momento. Inténtalo más tarde.",
+      "INVALID_RESPONSE": "El asistente devolvió una respuesta no válida.",
+      "UNKNOWN_ERROR": "Ocurrió un error inesperado."
+    }
   },
   "weather": {
     "location": "Isla Tortuga",
@@ -332,7 +421,19 @@
     "retry": "Reintentar",
     "visitTitle": "Condiciones para visita",
     "visitInfo": "Información orientativa, no una recomendación oficial de seguridad marítima.",
-    "conditions": { "clear": "Despejado", "mainlyClear": "Mayormente despejado", "partlyCloudy": "Parcialmente nublado", "overcast": "Nublado", "fog": "Neblina", "drizzle": "Llovizna", "rain": "Lluvia", "showers": "Chubascos", "snow": "Nieve", "thunderstorm": "Tormenta", "unknown": "Condición no disponible" }
+    "conditions": {
+      "clear": "Despejado",
+      "mainlyClear": "Mayormente despejado",
+      "partlyCloudy": "Parcialmente nublado",
+      "overcast": "Nublado",
+      "fog": "Neblina",
+      "drizzle": "Llovizna",
+      "rain": "Lluvia",
+      "showers": "Chubascos",
+      "snow": "Nieve",
+      "thunderstorm": "Tormenta",
+      "unknown": "Condición no disponible"
+    }
   },
   "content": {
     "location": "Isla Tortuga · Golfo de Nicoya",
@@ -344,5 +445,21 @@
     ],
     "whyRestore": "Los arrecifes son hogar y refugio de muchas especies marinas, ayudan a proteger las costas y forman parte de la vida de las comunidades que dependen del mar.",
     "collaboration": "Recuperar un arrecife requiere conocimiento y colaboración. Investigadores, instituciones y comunidades trabajan juntos para cuidar los corales, aprender de ellos y devolver vida a las zonas afectadas."
-  }
+  },
+  "auth": {
+    "INVALID_SESSION": "La sesión guardada no es válida o ya no se puede verificar. Inicia sesión de nuevo.",
+    "UNKNOWN_SESSION": "No se pudo verificar la sesión. Inicia sesión de nuevo.",
+    "storageUnavailable": "El almacenamiento local del navegador no está disponible; no se pudo iniciar ni cerrar la sesión.",
+    "AUTH_STORAGE_UNAVAILABLE": "El almacenamiento local del navegador no está disponible; no se pudo iniciar ni cerrar la sesión.",
+    "USER_STORAGE_UNAVAILABLE": "El almacenamiento local del navegador no está disponible para leer los usuarios.",
+    "USER_STORAGE_READ_FAILED": "No se pudieron leer los usuarios guardados. Los datos existentes no se modificaron.",
+    "USER_STORAGE_INVALID": "Los usuarios guardados tienen un formato no válido y se protegieron sin sobrescribirlos.",
+    "USER_STORAGE_WRITE_FAILED": "No se pudo guardar el usuario en el almacenamiento local del navegador."
+  },
+  "errors": {
+    "notFoundTitle": "Página no encontrada",
+    "notFoundText": "No encontramos la página que buscas. Es posible que el enlace haya cambiado o que la dirección sea incorrecta.",
+    "backHome": "Volver al inicio"
+  },
+  "privateFix": {}
 }

@@ -1,5 +1,70 @@
 # PROJECT STATE
 
+## Fase 62 - Movimiento suave del ciclo coralino
+
+El recorrido horizontal del ciclo de vida ahora interpola la posición objetivo del scroll mediante requestAnimationFrame, evitando saltos entre actualizaciones y manteniendo la relación entre desplazamiento vertical, línea de progreso e hitos. También se suavizó la entrada de las imágenes de cada etapa y se conservó el soporte para movimiento reducido.
+
+## Verification
+
+- npm run test: PASS, 19 archivos y 68 pruebas.
+- npm run build: PASS; el bundle principal queda en 413.04 kB.
+
+## Fase 61 - Visor interno de imágenes de la galería
+
+La galería ahora abre cada fotografía dentro de la página mediante un visor accesible. Incluye cierre, navegación anterior/siguiente, soporte para Escape y flechas del teclado, bloqueo temporal del scroll de fondo y textos traducidos en español, inglés, francés, alemán y portugués.
+
+## Verification
+
+- `npm run test`: PASS, 19 archivos y 68 pruebas.
+- `npm run build`: PASS; el bundle principal queda en 413.04 kB y el video local conserva su asset de 34.74 MB.
+
+## Fase 60 - Video local junto a YouTube
+
+Se incorporó el video adjunto como reproducción local junto al video de YouTube en la portada. Ambos se muestran en una cuadrícula de dos columnas en pantallas amplias y se apilan en móvil, con controles de reproducción y etiquetas accesibles.
+
+## Verification
+
+- `npm run test`: PASS, 19 archivos y 67 pruebas.
+- `npm run build`: PASS; el video local se incluye como un asset de 34.74 MB.
+
+## Estabilización técnica de la aplicación demo
+
+Registro de la fase de auditoría y estabilización. No se creó un commit ni se modificó ninguna rama remota.
+
+### Base y causa raíz
+
+- Commit base: `e9ff0e88e96334446e66f25c5e277077055e9e4c`.
+- Las observaciones solo mostraban una confirmación, sin guardarse; las sesiones locales no se cotejaban suficientemente; el historial del asistente podía mezclarse entre perfiles; el webhook aceptaba un rol declarado por el cliente; y faltaban traducciones visibles, una ruta 404 y acciones accesibles para estados de error.
+- El control de acceso y el almacenamiento siguen siendo demostrativos y del lado del cliente: `localStorage` no es una autoridad de seguridad.
+
+### Correcciones aplicadas y archivos
+
+- `src/services/databaseService.js`, `src/pages/private/ObservationsPage.jsx`, `src/pages/private/CoreDashboard.jsx`: almacenamiento local reutilizable de observaciones, validación, identificadores, relectura antes de confirmar, consulta de registros y métricas derivadas; los datos se identifican como demo/no verificados y los errores de almacenamiento se muestran.
+- `src/components/auth/AuthProvider.jsx`, `src/pages/public/LoginPage.jsx`, `src/pages/private/AdminUsersPage.jsx`: rechazo de perfiles/roles no reconocidos y manejo visible de errores; se conservan los tres perfiles demo.
+- `src/services/aiService.js`, `src/hooks/useChatbot.jsx`, `src/components/chatbot/ChatbotWidget.jsx`, `n8n/coral-assistant-workflow.json`: contrato validado sin rol enviado por el navegador, control de errores y respuestas inválidas, historial separado por identidad e invalidación de solicitudes al limpiar o cambiar de identidad.
+- `src/i18n/locales/{es,en,fr,de,pt}/translation.json`, `src/i18n/index.js` y superficies públicas/privadas pertinentes: paridad estructural de claves, textos de proyecto traducidos y actualización de `document.documentElement.lang`.
+- `src/routes/AppRoutes.jsx`, `src/pages/public/NotFoundPage.jsx`, `src/pages/private/CoreDashboard.jsx`: ruta 404 accesible, carga diferida por ruta y controles que no aparentan acciones inexistentes.
+- `src/components/accessibility/TextSettings.jsx`, `src/styles.css` y CSS relacionado: preferencia persistente que escala texto sin aumentar las medidas rem de layout.
+- `README.md`, `n8n/README.md`: límites explícitos del modo demo y requisitos de infraestructura para producción.
+
+### Pruebas y verificación
+
+- `npm run test`: PASS, 19 archivos y 67 pruebas.
+- `npm run build`: PASS. El bundle principal quedó en 412.15 kB; no aparece advertencia por chunk superior a 500 kB.
+- `git diff --check`: PASS.
+- Prueba visual con escala de texto al 125 %: `html` permanece en 16 px, el cuerpo escala a 20 px; no hay overflow horizontal en portada, mapa, galería y dashboard a 375, 768 y 1280 px.
+- Se comprobó la paridad de claves de los cinco idiomas mediante prueba automática y el parseo del workflow n8n.
+- `npm ci` no pudo completar porque Windows devolvió `EPERM` al intentar retirar un binding nativo bloqueado por procesos Vite activos. `npm install` restauró las dependencias instaladas; `package.json` y `package-lock.json` permanecen sin cambios.
+- n8n y el proveedor externo no se ejecutaron como servicio integrado durante esta verificación; el workflow se validó estáticamente y el manejo de respuestas fallidas tiene pruebas frontend.
+
+### Limitaciones pendientes
+
+- Antes de producción se requiere identidad y autorización en el servidor, junto con persistencia de observaciones del lado servidor. Los perfiles, roles y observaciones locales son modificables por el usuario y no son evidencia verificada.
+- El webhook n8n requiere despliegue protegido mediante HTTPS y proxy/API gateway con autenticación, limitación de solicitudes y CORS configurado para los orígenes autorizados. Una clave de proveedor debe permanecer en el entorno seguro de n8n.
+- No se comprobó el flujo completo contra un n8n activo ni contra el proveedor IA.
+- No se encontró un diario separado; este archivo registra el resultado de la fase.
+- SHA final: no aplica; no se creó commit y `HEAD` sigue en el commit base.
+
 ## Fase 59 - Retiro del encabezado ilustrado de la galeria
 
 Se retiro el encabezado con el titulo "Del gameto al coral adulto" y su imagen de fondo de la pagina de galeria. La coleccion fotografica ahora comienza bajo la navegacion publica y conserva el fondo extendido que ya tenia la seccion de imagenes, sin cambiar las 55 fotos.
@@ -788,11 +853,11 @@ Se añadió un control de tema claro/oscuro en la barra superior del dashboard. 
 
 ## Fase 34 - Dashboard reconstruido con referencia CoreUI
 
-Se reconstruyó la vista privada del dashboard con una composición tipo CoreUI: barra superior, búsqueda, acciones, breadcrumb, cuatro widgets con mini-gráficos, panel temporal, selector Día/Mes/Año, descarga visual, tabla de observaciones y tarjeta de contexto. La paleta conserva azul profundo, turquesa y coral para mantener la identidad de Restauración Carolina; todos los datos siguen siendo demostrativos.
+Se reconstruyó la vista privada del dashboard con una composición tipo CoreUI: barra superior, búsqueda, acciones, breadcrumb, cuatro widgets con mini-gráficos, panel temporal, selector Día/Mes/Año, descarga visual, tabla de observaciones y tarjeta de contexto. La paleta conserva azul profundo, turquesa y coral para mantener la identidad de Restauración Coralina; todos los datos siguen siendo demostrativos.
 
 ## Fase 33 - Estética CoreUI adaptada al dashboard
 
-Se adaptó la composición del dashboard a la referencia CoreUI: fondo administrativo claro, tarjetas compactas, bordes y sombras sutiles, tipografía sans para el panel, sidebar estructurada y mejor densidad de información. Se conserva la paleta marina de Restauración Carolina y no se incorporan dependencias nuevas ni datos comerciales de la plantilla.
+Se adaptó la composición del dashboard a la referencia CoreUI: fondo administrativo claro, tarjetas compactas, bordes y sombras sutiles, tipografía sans para el panel, sidebar estructurada y mejor densidad de información. Se conserva la paleta marina de Restauración Coralina y no se incorporan dependencias nuevas ni datos comerciales de la plantilla.
 
 ## Fase 32 - Acceso de usuario con tarjeta visual
 
@@ -824,7 +889,7 @@ Se retiraron los rótulos “En una mirada”, “Un registro a la vez” y “S
 
 ## Fase 25 - Simplificación de etiquetas
 
-Se retiraron las etiquetas secundarias visibles del tramo inferior de la portada: “Restauración Carolina”, “Profundidad · vista demo” y los estados demo de la ficha de coral. La jerarquía queda más limpia y se conserva la información principal de cada sección.
+Se retiraron las etiquetas secundarias visibles del tramo inferior de la portada: “Restauración Coralina”, “Profundidad · vista demo” y los estados demo de la ficha de coral. La jerarquía queda más limpia y se conserva la información principal de cada sección.
 
 ## Fase 24 - Limpieza del visual submarino
 
@@ -1012,7 +1077,7 @@ Continuar el desarrollo del mapa y de la galería con datos y evidencia confirma
 
 ## Known Blockers
 
-- Los datos reales de campo, protocolos, responsables, permisos y coordenadas deben confirmarse con el equipo de Restauración Carolina.
+- Los datos reales de campo, protocolos, responsables, permisos y coordenadas deben confirmarse con el equipo de Restauración Coralina.
 - La integración n8n todavía no está conectada.
 
 ## Active Invariants

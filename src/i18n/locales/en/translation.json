@@ -33,7 +33,8 @@
     "textSettings": "Text settings",
     "textSettingsShort": "Text",
     "textSize": "Text size",
-    "resetText": "Reset"
+    "resetText": "Reset",
+    "loading": "Loading page…"
   },
   "languageSelector": {
     "label": "Language",
@@ -108,8 +109,45 @@
     "ariaLabel": "Interactive map of Isla Tortuga and reference areas",
     "demoNotice": "Locations shown are demo or reference data; they are not field evidence.",
     "pointsCount": "{{count}} visible points",
-    "types": { "restorationZone": "Restoration zone", "healthyCoral": "Healthy coral", "sickCoral": "Sick coral", "monitoring": "Monitoring", "tourism": "Tourist point", "activity": "Activity" },
-    "filterOptions": { "ALL": "All", "RESTORATION_ZONE": "Zones", "HEALTHY_CORAL": "Healthy coral", "SICK_CORAL": "Sick coral", "MONITORING": "Monitoring", "TOURISM": "Tourism", "ACTIVITY": "Activities" }
+    "types": {
+      "restorationZone": "Restoration zone",
+      "healthyCoral": "Healthy coral",
+      "sickCoral": "Sick coral",
+      "monitoring": "Monitoring",
+      "tourism": "Tourist point",
+      "activity": "Activity"
+    },
+    "statusOptions": {
+      "DEMO": "Demo",
+      "REFERENCE": "Reference"
+    },
+    "records": {
+      "demo-restoration-zone": {
+        "name": "Demo restoration zone",
+        "description": "General demonstration location; it is not a verified field coordinate."
+      },
+      "demo-monitoring": {
+        "name": "Demo monitoring point",
+        "description": "Visual demonstration point for monitoring; it requires team confirmation."
+      },
+      "demo-activity": {
+        "name": "Demo maintenance activity",
+        "description": "Visual reference for a project activity; it is not a field record."
+      },
+      "demo-tourism": {
+        "name": "Tourism reference point",
+        "description": "General area reference; it contains no sensitive coordinates."
+      }
+    },
+    "filterOptions": {
+      "ALL": "All",
+      "RESTORATION_ZONE": "Zones",
+      "HEALTHY_CORAL": "Healthy coral",
+      "SICK_CORAL": "Sick coral",
+      "MONITORING": "Monitoring",
+      "TOURISM": "Tourism",
+      "ACTIVITY": "Activities"
+    }
   },
   "gallery": {
     "kicker": "Coral life cycle",
@@ -125,7 +163,12 @@
     "photosIntro": "Images shared for the gallery. They are not presented as verified records of species, dates, or locations.",
     "photosCount": "{{count}} images",
     "photoAlt": "Gallery photograph {{number}}",
-    "photoNumber": "Image {{number}}"
+    "photoNumber": "Image {{number}}",
+    "openImage": "Open image {{number}}",
+    "closeImage": "Close image",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "imagePosition": "Image {{current}} of {{total}}"
   },
   "news": {
     "eyebrow": "Coral restoration · Information",
@@ -188,7 +231,17 @@
     "submit": "Enter tracking",
     "demoTitle": "Demo access",
     "demoNotice": "These credentials are only for testing the application profiles.",
-    "demoUse": "Use profile"
+    "demoUse": "Use profile",
+    "demoRoles": {
+      "ADMIN": "Administrator",
+      "MODERATOR": "Coordinator",
+      "USER": "Collaborator"
+    },
+    "demoNames": {
+      "ADMIN": "Demo administration",
+      "MODERATOR": "Demo coordination",
+      "USER": "Demo visitor"
+    }
   },
   "private": {
     "session": "Active session",
@@ -253,7 +306,30 @@
     "nursery": "Placement in marine nursery",
     "maintenance": "Cleaning and maintenance",
     "monitoring": "Monitoring",
-    "saved": "Record saved locally. Validation remains pending with the responsible team."
+    "saved": "Record saved locally. Validation remains pending with the responsible team.",
+    "observationTitle": "Observation records",
+    "observationFormTitle": "Record an observation",
+    "observationEditTitle": "Edit observation",
+    "observationCreate": "Save observation",
+    "observationUpdate": "Save changes",
+    "observationDelete": "Delete observation",
+    "observationCancel": "Cancel",
+    "observationEdit": "Edit",
+    "observationDeleteConfirm": "Delete this observation? This action cannot be undone.",
+    "observationSaved": "Observation saved in this browser.",
+    "observationListTitle": "Saved observations",
+    "observationEmpty": "There are no observations saved in this browser yet.",
+    "observationDemoNotice": "Records are stored only in this browser and remain pending team validation. They are demo data, not verified field observations.",
+    "observationDemoBadge": "Demo · pending validation",
+    "observationStorageError": "The observation could not be read or saved. Check this browser’s storage and try again.",
+    "observationErrors": {
+      "INVALID_INPUT": "Complete the required observation fields.",
+      "INVALID_ACTIVITY": "Choose a valid activity.",
+      "OBSERVATION_STORAGE_UNAVAILABLE": "This browser’s storage is unavailable for saving observations.",
+      "OBSERVATION_STORAGE_READ_FAILED": "Saved observations could not be read. Existing data was not changed.",
+      "OBSERVATION_STORAGE_WRITE_FAILED": "The observation could not be saved. Check available browser storage and try again.",
+      "UNKNOWN_ERROR": "An unexpected error occurred while processing the observation."
+    }
   },
   "lifecycle": {
     "gametos": {
@@ -314,8 +390,21 @@
     "error": "We could not get an answer.",
     "retry": "Retry",
     "suggestionsLabel": "Suggested questions",
-    "suggestions": ["What is coral restoration?", "What are the coral life-cycle stages?", "What should I avoid touching during a visit?", "What is the weather like?"],
-    "errors": { "N8N_UNAVAILABLE": "The assistant is not available right now.", "AI_TIMEOUT": "The response took too long. Please try again.", "AI_SERVICE_UNAVAILABLE": "The assistant service is unavailable.", "INVALID_INPUT": "Please review your question.", "RATE_LIMIT": "There are many requests right now. Try again later.", "INVALID_RESPONSE": "The assistant returned an invalid response.", "UNKNOWN_ERROR": "An unexpected error occurred." }
+    "suggestions": [
+      "What is coral restoration?",
+      "What are the coral life-cycle stages?",
+      "What should I avoid touching during a visit?",
+      "What is the weather like?"
+    ],
+    "errors": {
+      "N8N_UNAVAILABLE": "The assistant is not available right now.",
+      "AI_TIMEOUT": "The response took too long. Please try again.",
+      "AI_SERVICE_UNAVAILABLE": "The assistant service is unavailable.",
+      "INVALID_INPUT": "Please review your question.",
+      "RATE_LIMIT": "There are many requests right now. Try again later.",
+      "INVALID_RESPONSE": "The assistant returned an invalid response.",
+      "UNKNOWN_ERROR": "An unexpected error occurred."
+    }
   },
   "weather": {
     "location": "Isla Tortuga",
@@ -332,7 +421,19 @@
     "retry": "Retry",
     "visitTitle": "Visit conditions",
     "visitInfo": "Informational only, not an official maritime safety recommendation.",
-    "conditions": { "clear": "Clear", "mainlyClear": "Mainly clear", "partlyCloudy": "Partly cloudy", "overcast": "Overcast", "fog": "Fog", "drizzle": "Drizzle", "rain": "Rain", "showers": "Showers", "snow": "Snow", "thunderstorm": "Thunderstorm", "unknown": "Condition unavailable" }
+    "conditions": {
+      "clear": "Clear",
+      "mainlyClear": "Mainly clear",
+      "partlyCloudy": "Partly cloudy",
+      "overcast": "Overcast",
+      "fog": "Fog",
+      "drizzle": "Drizzle",
+      "rain": "Rain",
+      "showers": "Showers",
+      "snow": "Snow",
+      "thunderstorm": "Thunderstorm",
+      "unknown": "Condition unavailable"
+    }
   },
   "content": {
     "location": "Isla Tortuga · Gulf of Nicoya",
@@ -344,5 +445,20 @@
     ],
     "whyRestore": "Reefs provide homes and shelter for many marine species, help protect coastlines, and are part of the lives of communities that depend on the sea.",
     "collaboration": "Restoring a reef requires knowledge and collaboration. Researchers, institutions, and communities work together to care for corals, learn from them, and bring life back to affected areas."
+  },
+  "auth": {
+    "INVALID_SESSION": "The saved session is invalid or can no longer be verified. Please sign in again.",
+    "UNKNOWN_SESSION": "The session could not be verified. Please sign in again.",
+    "storageUnavailable": "This browser’s local storage is unavailable, so the session could not be started or ended.",
+    "AUTH_STORAGE_UNAVAILABLE": "This browser’s local storage is unavailable, so the session could not be started or ended.",
+    "USER_STORAGE_UNAVAILABLE": "This browser’s local storage is unavailable for reading users.",
+    "USER_STORAGE_READ_FAILED": "Saved users could not be read. Existing data was not changed.",
+    "USER_STORAGE_INVALID": "Saved users have an invalid format and were protected from being overwritten.",
+    "USER_STORAGE_WRITE_FAILED": "The user could not be saved to this browser’s local storage."
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundText": "We couldn’t find the page you’re looking for. The link may have changed or the address may be incorrect.",
+    "backHome": "Back to home"
   }
 }

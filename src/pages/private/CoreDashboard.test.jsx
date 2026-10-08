@@ -6,9 +6,16 @@ import { AuthProvider } from '../../components/auth/AuthProvider.jsx';
 import { ThemeProvider } from '../../components/theme/ThemeProvider.jsx';
 import { CoreDashboard } from './CoreDashboard.jsx';
 import { PrivateLayout } from '../../components/layout/PrivateLayout.jsx';
+import { registerObservationRecord } from '../../services/databaseService.js';
 
 function renderDashboard(role) {
-  localStorage.setItem('rc_user', JSON.stringify({ id: `demo-${role.toLowerCase()}`, name: 'Usuario demo', role, profile: role }));
+  const users = {
+    ADMIN: ['demo-admin', 'admin@restauracioncoralina.demo'],
+    MODERATOR: ['demo-moderator', 'coordinacion@restauracioncoralina.demo'],
+    USER: ['demo-user', 'visitante@restauracioncoralina.demo'],
+  };
+  const [id, email] = users[role];
+  localStorage.setItem('rc_user', JSON.stringify({ id, email, name: 'Usuario demo', role, profile: role, demo: true }));
   return render(<MemoryRouter><ThemeProvider><AuthProvider><Routes><Route element={<PrivateLayout />}><Route path="/" element={<CoreDashboard />} /></Route></Routes></AuthProvider></ThemeProvider></MemoryRouter>);
 }
 
@@ -23,6 +30,16 @@ describe('CoreDashboard', () => {
 
     expect(screen.getByRole('heading', { name: /panel de administraci/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /registrar usuario/i })).toHaveAttribute('href', '/admin/usuarios');
+  });
+
+  test('actualiza el indicador de observaciones desde los registros persistidos', () => {
+    registerObservationRecord({ date: '2026-10-08', activity: 'monitoring', responsible: 'Equipo', fragment: 'F-1', notes: '' });
+    renderDashboard('ADMIN');
+
+    const observationWidget = screen.getAllByText('Observaciones')
+      .map((element) => element.closest('.core-widget'))
+      .find(Boolean);
+    expect(observationWidget.querySelector('strong')).toHaveTextContent('1');
   });
 
   test('muestra el panel de coordinación sin acceso de administrador para MODERATOR', () => {

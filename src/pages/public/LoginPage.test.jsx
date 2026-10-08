@@ -21,6 +21,14 @@ describe('LoginPage', () => {
     expect(screen.getByText('DemoUser2026!')).toBeInTheDocument();
   });
 
+  test('muestra un error accesible cuando no puede leer las cuentas locales', () => {
+    localStorage.setItem('rc_registered_users', '{invalid');
+    renderLogin();
+
+    expect(screen.getByRole('alert')).toHaveTextContent(/no se pudieron leer los usuarios guardados/i);
+    expect(screen.getByRole('heading', { name: /iniciar sesión/i })).toBeInTheDocument();
+  });
+
   test('carga correo y contraseña al elegir un perfil demo', () => {
     renderLogin();
 

@@ -1,17 +1,25 @@
-import { Route, Routes } from 'react-router-dom';
+import { lazy, Suspense, useLayoutEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { PublicLayout } from '../components/layout/PublicLayout.jsx';
 import { PrivateLayout } from '../components/layout/PrivateLayout.jsx';
 import { PrivateRoute } from './PrivateRoute.jsx';
-import { PublicHome } from '../pages/public/PublicHome.jsx';
-import { InteractiveGallery, InteractiveMapPage } from '../pages/public/InteractivePublicPages.jsx';
-import { ProjectPage } from '../pages/public/ProjectPage.jsx';
-import { LoginPage } from '../pages/public/LoginPage.jsx';
-import { NewsPage } from '../pages/public/NewsPage.jsx';
-import { CoreDashboard } from '../pages/private/CoreDashboard.jsx';
-import { ObservationsPage } from '../pages/private/ObservationsPage.jsx';
-import { AdminUsersPage } from '../pages/private/AdminUsersPage.jsx';
-import { useLayoutEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+const PublicHome = lazy(() => import('../pages/public/PublicHome.jsx').then((module) => ({ default: module.PublicHome })));
+const InteractiveGallery = lazy(() => import('../pages/public/InteractivePublicPages.jsx').then((module) => ({ default: module.InteractiveGallery })));
+const InteractiveMapPage = lazy(() => import('../pages/public/InteractivePublicPages.jsx').then((module) => ({ default: module.InteractiveMapPage })));
+const ProjectPage = lazy(() => import('../pages/public/ProjectPage.jsx').then((module) => ({ default: module.ProjectPage })));
+const LoginPage = lazy(() => import('../pages/public/LoginPage.jsx').then((module) => ({ default: module.LoginPage })));
+const NewsPage = lazy(() => import('../pages/public/NewsPage.jsx').then((module) => ({ default: module.NewsPage })));
+const NotFoundPage = lazy(() => import('../pages/public/NotFoundPage.jsx').then((module) => ({ default: module.NotFoundPage })));
+const CoreDashboard = lazy(() => import('../pages/private/CoreDashboard.jsx').then((module) => ({ default: module.CoreDashboard })));
+const ObservationsPage = lazy(() => import('../pages/private/ObservationsPage.jsx').then((module) => ({ default: module.ObservationsPage })));
+const AdminUsersPage = lazy(() => import('../pages/private/AdminUsersPage.jsx').then((module) => ({ default: module.AdminUsersPage })));
+
+function RouteFallback() {
+  const { t } = useTranslation();
+  return <main className="route-loading" role="status">{t('common.loading')}</main>;
+}
 
 function RouteScrollManager() {
   const { pathname, search, hash } = useLocation();
@@ -34,6 +42,7 @@ export function AppRoutes() {
   return (
   <>
   <RouteScrollManager />
+  <Suspense fallback={<RouteFallback />}>
   <Routes>
     <Route element={<PublicLayout />}>
       <Route path="/" element={<PublicHome />} />
@@ -42,6 +51,7 @@ export function AppRoutes() {
       <Route path="/galeria" element={<InteractiveGallery />} />
       <Route path="/noticias" element={<NewsPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
     <Route element={<PrivateRoute />}>
       <Route element={<PrivateLayout />}>
@@ -51,6 +61,7 @@ export function AppRoutes() {
       </Route>
     </Route>
   </Routes>
+  </Suspense>
   </>
 );
 }

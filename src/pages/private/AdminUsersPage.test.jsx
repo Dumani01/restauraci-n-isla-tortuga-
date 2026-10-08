@@ -8,7 +8,10 @@ import { findUserByCredentials } from '../../services/databaseService.js';
 import { AdminUsersPage } from './AdminUsersPage.jsx';
 
 function renderAdminPage(role = 'ADMIN') {
-  localStorage.setItem('rc_user', JSON.stringify({ id: 'demo-admin', name: 'Administración demo', role, profile: 'Administrador' }));
+  const session = role === 'ADMIN'
+    ? { id: 'demo-admin', email: 'admin@restauracioncoralina.demo', name: 'Administración demo', role, profile: 'Administrador', demo: true }
+    : { id: 'demo-moderator', email: 'coordinacion@restauracioncoralina.demo', name: 'Coordinación demo', role, profile: 'Coordinador', demo: true };
+  localStorage.setItem('rc_user', JSON.stringify(session));
   return render(<MemoryRouter><ThemeProvider><AuthProvider><AdminUsersPage /></AuthProvider></ThemeProvider></MemoryRouter>);
 }
 

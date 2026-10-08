@@ -1,19 +1,39 @@
-import { ArrowRight, Camera, Waves } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowLeft, ArrowRight, Camera, Waves, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { RestorationMap } from '../../components/map/RestorationMap.jsx';
 import { WeatherCard } from '../../components/weather/WeatherCard.jsx';
 import { galleryPhotos as uploadedGalleryPhotos } from '../../services/galleryPhotos.js';
-import { projectInfo } from '../../services/projectData.js';
 import '../../interactive-public-pages.css';
 
 export function InteractiveMapPage() {
-  const { t } = useTranslation(); const content = projectInfo;
-  return <main className="public-page interactive-page"><section className="interactive-hero"><div><p className="vh-kicker"><Waves size={15} /> {t('map.where')}</p><h1>{t('map.title')}<br /><em>{t('map.titleEmphasis')}</em></h1><p>{content.locationDescription}</p></div></section><section className="weather-section"><WeatherCard /></section><section className="public-content public-content--map interactive-map-layout"><RestorationMap /><div className="public-list"><div className="public-list__heading"><div><p className="vh-kicker">{t('map.restoration')}</p><h2>{t('map.what')}</h2></div><span>{t('map.process')}</span></div>{content.howWeWork.map((item, index) => <article className="public-record" key={item}><span className="public-record__code">0{index + 1}</span><span className="public-record__details"><b>{item}</b><small>{t('map.work')}</small></span></article>)}<Link className="vh-text-link" to="/proyecto">{t('map.complete')} <ArrowRight size={16} /></Link></div></section></main>;
+  const { t } = useTranslation();
+  const activities = t('content.howWeWork', { returnObjects: true });
+  return <main className="public-page interactive-page"><section className="interactive-hero"><div><p className="vh-kicker"><Waves size={15} /> {t('map.where')}</p><h1>{t('map.title')}<br /><em>{t('map.titleEmphasis')}</em></h1><p>{t('content.locationDescription')}</p></div></section><section className="weather-section"><WeatherCard /></section><section className="public-content public-content--map interactive-map-layout"><RestorationMap /><div className="public-list"><div className="public-list__heading"><div><p className="vh-kicker">{t('map.restoration')}</p><h2>{t('map.what')}</h2></div><span>{t('map.process')}</span></div>{activities.map((item, index) => <article className="public-record" key={item}><span className="public-record__code">0{index + 1}</span><span className="public-record__details"><b>{item}</b><small>{t('map.work')}</small></span></article>)}<Link className="vh-text-link" to="/proyecto">{t('map.complete')} <ArrowRight size={16} /></Link></div></section></main>;
 }
 
 export function InteractiveGallery() {
   const { t } = useTranslation();
+  const [openIndex, setOpenIndex] = useState(null);
+  const activePhoto = openIndex === null ? null : uploadedGalleryPhotos[openIndex];
+
+  useEffect(() => {
+    if (openIndex === null) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setOpenIndex(null);
+      if (event.key === 'ArrowLeft') setOpenIndex((current) => (current === 0 ? uploadedGalleryPhotos.length - 1 : current - 1));
+      if (event.key === 'ArrowRight') setOpenIndex((current) => (current === uploadedGalleryPhotos.length - 1 ? 0 : current + 1));
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [openIndex]);
+
   return <main className="public-page interactive-page">
     <section className="coral-photo-gallery" aria-labelledby="coral-photo-gallery-title">
       <header className="coral-photo-gallery__heading">
@@ -26,13 +46,29 @@ export function InteractiveGallery() {
         {uploadedGalleryPhotos.map((photo, index) => {
           const number = String(index + 1).padStart(2, '0');
           return <figure key={photo.id}>
-            <a href={photo.src} target="_blank" rel="noreferrer">
+            <button className="coral-photo-gallery__trigger" type="button" aria-label={t('gallery.openImage', { number })} onClick={() => setOpenIndex(index)}>
               <img src={photo.src} alt={t('gallery.photoAlt', { number })} loading="lazy" decoding="async" />
-            </a>
+            </button>
             <figcaption>{t('gallery.photoNumber', { number })}</figcaption>
           </figure>;
         })}
       </div>
+      {activePhoto && <div className="coral-lightbox" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpenIndex(null); }}>
+        <div className="coral-lightbox__dialog" role="dialog" aria-modal="true" aria-labelledby="coral-lightbox-title">
+          <header className="coral-lightbox__header">
+            <p id="coral-lightbox-title">{t('gallery.photoAlt', { number: String(openIndex + 1).padStart(2, '0') })}</p>
+            <button className="coral-lightbox__close" type="button" aria-label={t('gallery.closeImage')} onClick={() => setOpenIndex(null)}><X size={20} /></button>
+          </header>
+          <div className="coral-lightbox__image-wrap">
+            <img src={activePhoto.src} alt={t('gallery.photoAlt', { number: String(openIndex + 1).padStart(2, '0') })} />
+          </div>
+          <footer className="coral-lightbox__footer">
+            <button type="button" aria-label={t('gallery.previousImage')} onClick={() => setOpenIndex((current) => (current === 0 ? uploadedGalleryPhotos.length - 1 : current - 1))}><ArrowLeft size={18} /></button>
+            <span>{t('gallery.imagePosition', { current: openIndex + 1, total: uploadedGalleryPhotos.length })}</span>
+            <button type="button" aria-label={t('gallery.nextImage')} onClick={() => setOpenIndex((current) => (current === uploadedGalleryPhotos.length - 1 ? 0 : current + 1))}><ArrowRight size={18} /></button>
+          </footer>
+        </div>
+      </div>}
     </section>
   </main>;
 }

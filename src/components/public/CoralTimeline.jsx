@@ -10,6 +10,9 @@ export function CoralTimeline() {
   const sectionRef = useRef(null);
   const eventsRef = useRef(null);
   const horizontalDistanceRef = useRef(0);
+  const targetProgressRef = useRef(0);
+  const smoothProgressRef = useRef(0);
+  const progressAnimationRef = useRef(0);
   const [progress, setProgress] = useState(0);
   const [horizontalDistance, setHorizontalDistance] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -40,22 +43,32 @@ export function CoralTimeline() {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return undefined;
-    let frame = 0;
+    const animateProgress = () => {
+      const current = smoothProgressRef.current;
+      const target = targetProgressRef.current;
+      const distance = target - current;
+      const next = Math.abs(distance) < 0.0005 ? target : current + distance * 0.16;
+      smoothProgressRef.current = next;
+      setProgress(next);
+      setActiveIndex(Math.min(lifecycleStages.length - 1, Math.round(next * (lifecycleStages.length - 1))));
+      if (next !== target) {
+        progressAnimationRef.current = requestAnimationFrame(animateProgress);
+      } else {
+        progressAnimationRef.current = 0;
+      }
+    };
     const update = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const rect = section.getBoundingClientRect();
-        const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
-        const nextProgress = clamp(-rect.top / travel);
-        setProgress(nextProgress);
-        setActiveIndex(Math.min(lifecycleStages.length - 1, Math.round(nextProgress * (lifecycleStages.length - 1))));
-      });
+      const rect = section.getBoundingClientRect();
+      const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
+      targetProgressRef.current = clamp(-rect.top / travel);
+      if (!progressAnimationRef.current) progressAnimationRef.current = requestAnimationFrame(animateProgress);
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     return () => {
-      cancelAnimationFrame(frame);
+      if (progressAnimationRef.current) cancelAnimationFrame(progressAnimationRef.current);
+      progressAnimationRef.current = 0;
       window.removeEventListener('scroll', update);
       window.removeEventListener('resize', update);
     };

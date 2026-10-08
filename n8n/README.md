@@ -1,11 +1,11 @@
 # Integración local de n8n
 
-La aplicación React ya consume el webhook `POST /webhook/coral-assistant` mediante `VITE_N8N_AI_WEBHOOK_URL`. El workflow `coral-assistant-workflow.json` valida el payload, construye un prompt controlado y devuelve la respuesta con el mismo `requestId` recibido.
+La aplicación React consume el webhook `POST /webhook/coral-assistant` mediante `VITE_N8N_AI_WEBHOOK_URL`. El workflow `coral-assistant-workflow.json` valida el mensaje, construye un prompt controlado y devuelve `success`, `answer`, `requestId` y, si aplica, `error`. El cliente no envía ni el workflow acepta un rol como autoridad.
 
 ## Arranque
 
 1. Instala Docker Desktop.
-2. Copia `n8n/.env.example` como `n8n/.env` y completa `N8N_ENCRYPTION_KEY` y `AI_API_KEY`. No subas ese archivo al repositorio.
+2. Copia `n8n/.env.example` como `n8n/.env` y completa `N8N_ENCRYPTION_KEY` y `AI_API_KEY` con valores propios. No subas ese archivo al repositorio.
 3. Desde la raíz ejecuta `docker compose --env-file n8n/.env -f n8n/docker-compose.yml up -d`.
 4. Abre `http://localhost:5678` y crea el usuario propietario de n8n.
 5. Importa `n8n/coral-assistant-workflow.json` desde el menú de workflows.
@@ -32,10 +32,11 @@ Con el workflow activo, prueba el endpoint con un payload de referencia:
 {
   "message": "¿Qué es la restauración coralina?",
   "language": "es",
-  "role": "USER",
   "context": { "page": "home" },
   "requestId": "manual-test-001"
 }
 ```
 
-La respuesta esperada contiene `success`, `answer`, `requestId` y `sources`. No se deben enviar contraseñas, observaciones privadas completas, claves ni coordenadas sensibles.
+Una respuesta correcta contiene `success`, `answer`, `requestId` y `sources`. Los errores controlados contienen `success: false`, `answer: ""`, `requestId` y un código `error`. No se deben enviar roles, contraseñas, observaciones privadas completas, claves ni coordenadas sensibles.
+
+El workflow no autentica llamadas entrantes ni limita su frecuencia. Configurar CORS en n8n limita el acceso desde navegadores, pero no protege el endpoint frente a clientes directos. Para producción, sitúa el webhook tras un proxy/API gateway con autenticación y rate limiting, habilita HTTPS y permite únicamente el origen web autorizado. La clave del proveedor solo se lee desde el entorno de n8n.

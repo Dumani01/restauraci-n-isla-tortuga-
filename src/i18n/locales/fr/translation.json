@@ -29,10 +29,11 @@
     "breadcrumb": "Fil d’Ariane",
     "demo": "Information de référence",
     "fieldTracking": "Suivi de terrain",
-    "textSettings": "ParamÃ¨tres du texte",
+    "textSettings": "Paramètres du texte",
     "textSettingsShort": "Texte",
     "textSize": "Taille du texte",
-    "resetText": "RÃ©initialiser"
+    "resetText": "Réinitialiser",
+    "loading": "Chargement de la page…"
   },
   "languageSelector": {
     "label": "Langue",
@@ -59,7 +60,21 @@
     "videoTitle": "En savoir plus sur le projet",
     "illustrativeReef": "Récif corallien illustratif",
     "highlight": "Mettre {{name}} en avant",
-    "model": "Modèle interactif de {{name}}"
+    "model": "Modèle interactif de {{name}}",
+    "surface": "Surface",
+    "underwater": "Sous l’eau",
+    "heroKicker": "Isla Tortuga · Golfo de Nicoya",
+    "intro": "Découvrir le cycle de vie des coraux et accompagner leur rétablissement grâce aux soins, au suivi et à la collaboration.",
+    "statementTitle": "Observer de près.",
+    "statementEmphasis": "Documenter avec soin.",
+    "featureTitle": "Un récif.",
+    "featureEmphasis": "De nombreuses personnes.",
+    "reefTitle": "Cycle de vie du corail",
+    "reefEmphasis": "étape par étape.",
+    "reefIntro": "Le cycle comprend les gamètes, l’embryon, la larve, la fixation au substrat, le corail juvénile et le corail adulte.",
+    "ctaTitle": "La restauration commence",
+    "ctaEmphasis": "par la connaissance.",
+    "ctaText": "Découvrez le lieu, le processus et le cycle de vie du corail."
   },
   "gallery": {
     "stage": "Étape {{current}} sur {{total}}",
@@ -70,7 +85,17 @@
     "photosIntro": "Images partagées pour la galerie. Elles ne sont pas présentées comme des observations vérifiées d’espèces, de dates ou de lieux.",
     "photosCount": "{{count}} images",
     "photoAlt": "Photo de galerie {{number}}",
-    "photoNumber": "Image {{number}}"
+    "photoNumber": "Image {{number}}",
+    "openImage": "Ouvrir l’image {{number}}",
+    "closeImage": "Fermer l’image",
+    "previousImage": "Image précédente",
+    "nextImage": "Image suivante",
+    "imagePosition": "Image {{current}} sur {{total}}",
+    "kicker": "Cycle de vie du corail",
+    "title": "Du gamète",
+    "titleEmphasis": "au corail adulte.",
+    "intro": "Le corail traverse plusieurs étapes avant de former une colonie adulte. Explorez chaque modèle pour découvrir son nom et des informations.",
+    "image": "Image interactive de {{name}}"
   },
   "coralRegistry": {
     "title": "Registre des coraux",
@@ -116,7 +141,24 @@
     "private": "Accès privé",
     "demoTitle": "Accès de démonstration",
     "demoNotice": "Ces identifiants servent uniquement à tester les profils de l’application.",
-    "demoUse": "Utiliser"
+    "demoUse": "Utiliser",
+    "demoRoles": {
+      "ADMIN": "Administrateur",
+      "MODERATOR": "Coordinateur",
+      "USER": "Collaborateur"
+    },
+    "demoNames": {
+      "ADMIN": "Administration de démonstration",
+      "MODERATOR": "Coordination de démonstration",
+      "USER": "Visiteur de démonstration"
+    },
+    "eyebrow": "Accès · Espace de travail",
+    "title": "Un espace pour",
+    "titleEmphasis": "les observations.",
+    "intro": "L’espace privé permet d’enregistrer les activités de restauration et d’organiser les informations du projet.",
+    "contextKicker": "Restauration corallienne",
+    "care": "avec soin.",
+    "error": "Accès non configuré ou identifiants incorrects"
   },
   "narrator": {
     "label": "Narrateur",
@@ -135,7 +177,7 @@
   "chat": {
     "assistant": "Assistant corallien",
     "label": "Aide de référence",
-    "title": "Restauración Carolina",
+    "title": "Restauración Coralina",
     "open": "Ouvrir l’assistant",
     "close": "Fermer l’assistant",
     "conversation": "Conversation avec l’assistant",
@@ -151,8 +193,20 @@
     "retry": "Réessayer",
     "listen": "Écouter la réponse",
     "suggestionsLabel": "Questions suggérées",
-    "suggestions": ["Qu’est-ce que la restauration corallienne ?", "Que puis-je voir sur la carte ?", "Comment utiliser le narrateur ?"],
-    "errors": { "INVALID_INPUT": "Écrivez une question avant d’envoyer.", "N8N_UNAVAILABLE": "Le service d’assistance n’est pas configuré.", "AI_TIMEOUT": "La réponse a pris trop de temps.", "RATE_LIMIT": "Veuillez patienter avant de réessayer.", "AI_SERVICE_UNAVAILABLE": "L’assistant est temporairement indisponible.", "INVALID_RESPONSE": "La réponse reçue n’est pas valide.", "UNKNOWN_ERROR": "Une erreur est survenue." }
+    "suggestions": [
+      "Qu’est-ce que la restauration corallienne ?",
+      "Que puis-je voir sur la carte ?",
+      "Comment utiliser le narrateur ?"
+    ],
+    "errors": {
+      "INVALID_INPUT": "Écrivez une question avant d’envoyer.",
+      "N8N_UNAVAILABLE": "Le service d’assistance n’est pas configuré.",
+      "AI_TIMEOUT": "La réponse a pris trop de temps.",
+      "RATE_LIMIT": "Veuillez patienter avant de réessayer.",
+      "AI_SERVICE_UNAVAILABLE": "L’assistant est temporairement indisponible.",
+      "INVALID_RESPONSE": "La réponse reçue n’est pas valide.",
+      "UNKNOWN_ERROR": "Une erreur est survenue."
+    }
   },
   "lifecycle": {
     "gametos": {
@@ -179,5 +233,231 @@
       "name": "Corail adulte",
       "description": "Colonie développée qui peut poursuivre le cycle de vie."
     }
+  },
+  "footer": "Informations sur la restauration corallienne · Isla Tortuga",
+  "project": {
+    "eyebrow": "Restauration corallienne · Restauración Coralina",
+    "title": "Prendre soin du récif pour",
+    "titleEmphasis": "restaurer l’écosystème.",
+    "intro": "Un effort collectif pour connaître, protéger et restaurer les coraux d’Isla Tortuga et du golfe de Nicoya.",
+    "where": "Où travaillons-nous ?",
+    "how": "Comment travaillons-nous ?",
+    "why": "Pourquoi restaurer ?",
+    "collaborationTitle": "Un effort collectif"
+  },
+  "map": {
+    "where": "Où travaillons-nous ?",
+    "title": "Isla Tortuga",
+    "titleEmphasis": "Golfo de Nicoya.",
+    "mapLabel": "Zone de travail indiquée de manière générale, sans coordonnées sensibles",
+    "area": "Zone de travail",
+    "noCoordinates": "Aucune coordonnée sensible",
+    "restoration": "Restauration corallienne",
+    "what": "Que fait-on ?",
+    "process": "Processus",
+    "work": "Travaux de restauration",
+    "complete": "Voir le processus complet",
+    "legend": "Légende",
+    "filter": "Filtrer les points",
+    "filters": "Filtres de la carte",
+    "status": "Statut",
+    "loading": "Chargement de la carte…",
+    "error": "Impossible de charger les données de la carte.",
+    "empty": "Aucun lieu enregistré.",
+    "ariaLabel": "Carte interactive d’Isla Tortuga et des zones de référence",
+    "demoNotice": "Les emplacements affichés sont des données de démonstration ou de référence, pas des preuves de terrain.",
+    "pointsCount": "{{count}} points visibles",
+    "types": {
+      "restorationZone": "Zone de restauration",
+      "healthyCoral": "Corail sain",
+      "sickCoral": "Corail signalé malade",
+      "monitoring": "Suivi",
+      "tourism": "Point touristique",
+      "activity": "Activité"
+    },
+    "statusOptions": {
+      "DEMO": "Démo",
+      "REFERENCE": "Référence"
+    },
+    "records": {
+      "demo-restoration-zone": {
+        "name": "Zone de restauration de démonstration",
+        "description": "Emplacement général de démonstration ; il ne s’agit pas d’une coordonnée de terrain vérifiée."
+      },
+      "demo-monitoring": {
+        "name": "Point de suivi de démonstration",
+        "description": "Point visuel de démonstration pour le suivi ; il nécessite une confirmation de l’équipe."
+      },
+      "demo-activity": {
+        "name": "Activité de maintenance de démonstration",
+        "description": "Référence visuelle à une activité du projet ; ce n’est pas une donnée de terrain."
+      },
+      "demo-tourism": {
+        "name": "Point de référence touristique",
+        "description": "Référence générale pour situer la zone ; aucune coordonnée sensible n’est incluse."
+      }
+    },
+    "filterOptions": {
+      "ALL": "Tous",
+      "RESTORATION_ZONE": "Zones",
+      "HEALTHY_CORAL": "Coraux sains",
+      "SICK_CORAL": "Coraux signalés malades",
+      "MONITORING": "Suivi",
+      "TOURISM": "Tourisme",
+      "ACTIVITY": "Activités"
+    }
+  },
+  "news": {
+    "eyebrow": "Restauration corallienne · Informations",
+    "title": "Comprendre pour",
+    "titleEmphasis": "mieux protéger.",
+    "intro": "La restauration d’un récif repose sur les connaissances, le suivi et la collaboration.",
+    "collective": "Effort collectif",
+    "featureTitle": "Restaurer un récif demande de la collaboration",
+    "importance": "Importance des récifs",
+    "ecosystemTitle": "Un écosystème qui protège la vie"
+  },
+  "private": {
+    "session": "Session active",
+    "adminDashboard": "Tableau de bord de l’administration",
+    "moderatorDashboard": "Tableau de suivi",
+    "userDashboard": "Espace collaborateur",
+    "adminArea": "Administration du projet",
+    "moderatorArea": "Suivi du projet",
+    "userArea": "Informations sur le projet",
+    "userManagement": "Gestion des utilisateurs",
+    "adminModule": "Module d’administration",
+    "registerUser": "Enregistrer un utilisateur",
+    "registerUserIntro": "Créez des accès de démonstration pour tester les profils. Ces comptes sont enregistrés uniquement dans ce navigateur.",
+    "registeredUsers": "Utilisateurs enregistrés",
+    "observationsCount": "Observations",
+    "demoProfiles": "Profils de démonstration",
+    "referencePoints": "Points de référence",
+    "pendingValidation": "En attente de validation",
+    "availableProfiles": "Disponibles pour les essais",
+    "userSaved": "Utilisateur enregistré.",
+    "emailExists": "Un utilisateur avec cette adresse e-mail existe déjà.",
+    "saveUser": "Enregistrer l’utilisateur",
+    "userName": "Nom",
+    "profile": "Profil",
+    "userList": "Utilisateurs",
+    "workSteps": "Étapes de travail",
+    "monitoringPanel": "Suivi et observations",
+    "moderatorIntro": "Consultez le travail enregistré et ajoutez les informations confirmées par l’équipe.",
+    "dashboard": "Tableau de bord",
+    "observations": "Observations",
+    "openMenu": "Afficher ou masquer le menu de Restauración Coralina",
+    "projectInfo": "Informations sur le projet",
+    "area": "Zone de restauration",
+    "place": "Lieu",
+    "work": "Travail",
+    "focus": "Objectif",
+    "participation": "Participation",
+    "restoration": "Restauration corallienne",
+    "careMonitoring": "Soins et suivi",
+    "community": "Communauté et institutions",
+    "processTitle": "Processus de restauration",
+    "processDescription": "Étapes de travail décrites par le projet",
+    "lifecycle": "Cycle de vie",
+    "lifecycleDescription": "Du gamète au corail adulte",
+    "stage": "Étape",
+    "description": "Description",
+    "exploreComplete": "Explorer le cycle complet",
+    "why": "Pourquoi restaurer ?",
+    "reefImportance": "Importance du récif",
+    "location": "Emplacement",
+    "principle": "Principe",
+    "collaborative": "Travail collectif",
+    "recordWork": "Journal de travail",
+    "registerActivity": "Enregistrer une activité",
+    "formIntro": "Remplissez ce formulaire uniquement avec des informations confirmées par l’équipe du projet.",
+    "fragment": "Fragment, corail ou structure",
+    "date": "Date",
+    "activity": "Activité",
+    "responsible": "Responsable",
+    "notes": "Notes et preuves disponibles",
+    "selectCollection": "Sélection et collecte",
+    "nursery": "Placement en nurserie marine",
+    "maintenance": "Nettoyage et entretien",
+    "monitoring": "Suivi",
+    "saved": "Observation enregistrée localement. Sa validation reste à la charge de l’équipe responsable.",
+    "observationTitle": "Registre des observations",
+    "observationFormTitle": "Enregistrer une observation",
+    "observationEditTitle": "Modifier l’observation",
+    "observationCreate": "Enregistrer l’observation",
+    "observationUpdate": "Enregistrer les modifications",
+    "observationDelete": "Supprimer l’observation",
+    "observationCancel": "Annuler",
+    "observationEdit": "Modifier",
+    "observationDeleteConfirm": "Supprimer cette observation ? Cette action est irréversible.",
+    "observationSaved": "Observation enregistrée dans ce navigateur.",
+    "observationListTitle": "Observations enregistrées",
+    "observationEmpty": "Aucune observation n’est encore enregistrée dans ce navigateur.",
+    "observationDemoNotice": "Les fiches sont conservées uniquement dans ce navigateur et restent en attente de validation par l’équipe. Ce sont des données de démonstration, pas des observations de terrain vérifiées.",
+    "observationDemoBadge": "Démo · en attente de validation",
+    "observationStorageError": "Impossible de lire ou d’enregistrer l’observation. Vérifiez le stockage de ce navigateur et réessayez.",
+    "observationErrors": {
+      "INVALID_INPUT": "Renseignez les champs obligatoires de l’observation.",
+      "INVALID_ACTIVITY": "Choisissez une activité valide.",
+      "OBSERVATION_STORAGE_UNAVAILABLE": "Le stockage de ce navigateur est indisponible pour enregistrer les observations.",
+      "OBSERVATION_STORAGE_READ_FAILED": "Impossible de lire les observations enregistrées. Les données existantes n’ont pas été modifiées.",
+      "OBSERVATION_STORAGE_WRITE_FAILED": "Impossible d’enregistrer l’observation. Vérifiez l’espace disponible et réessayez.",
+      "UNKNOWN_ERROR": "Une erreur inattendue est survenue lors du traitement de l’observation."
+    }
+  },
+  "weather": {
+    "location": "Isla Tortuga",
+    "current": "Météo actuelle",
+    "temperature": "Température",
+    "feelsLike": "Ressenti",
+    "humidity": "Humidité",
+    "wind": "Vent",
+    "precipitation": "Précipitations",
+    "forecast": "Prévisions",
+    "rainShort": "pluie",
+    "loading": "Chargement de la météo…",
+    "error": "Impossible d’obtenir la météo pour le moment.",
+    "retry": "Réessayer",
+    "visitTitle": "Conditions de visite",
+    "visitInfo": "Information indicative, pas une recommandation officielle de sécurité maritime.",
+    "conditions": {
+      "clear": "Dégagé",
+      "mainlyClear": "Généralement dégagé",
+      "partlyCloudy": "Partiellement nuageux",
+      "overcast": "Couvert",
+      "fog": "Brouillard",
+      "drizzle": "Bruine",
+      "rain": "Pluie",
+      "showers": "Averses",
+      "snow": "Neige",
+      "thunderstorm": "Orage",
+      "unknown": "Conditions indisponibles"
+    }
+  },
+  "content": {
+    "location": "Isla Tortuga · Golfo de Nicoya",
+    "locationDescription": "Dans cette zone, des activités de collecte, de transplantation, de suivi et d’entretien des coraux sont menées afin d’étudier leur développement et de contribuer au rétablissement des récifs.",
+    "howWeWork": [
+      "Sélection et collecte responsables de fragments de corail.",
+      "Préparation et placement des fragments dans des nurseries marines et des structures conçues pour favoriser leur croissance.",
+      "Nettoyage, entretien et suivi des coraux et des conditions de l’eau."
+    ],
+    "whyRestore": "Les récifs abritent de nombreuses espèces marines, contribuent à protéger les côtes et font partie de la vie des communautés qui dépendent de la mer.",
+    "collaboration": "Restaurer un récif demande des connaissances et de la collaboration. Les chercheurs, les institutions et les communautés travaillent ensemble pour protéger les coraux, mieux les connaître et redonner vie aux zones touchées."
+  },
+  "auth": {
+    "INVALID_SESSION": "La session enregistrée est invalide ou ne peut plus être vérifiée. Veuillez vous reconnecter.",
+    "UNKNOWN_SESSION": "Impossible de vérifier la session. Veuillez vous reconnecter.",
+    "storageUnavailable": "Le stockage local de ce navigateur est indisponible ; la session n’a pas pu être ouverte ou fermée.",
+    "AUTH_STORAGE_UNAVAILABLE": "Le stockage local de ce navigateur est indisponible ; la session n’a pas pu être ouverte ou fermée.",
+    "USER_STORAGE_UNAVAILABLE": "Le stockage local de ce navigateur est indisponible pour lire les utilisateurs.",
+    "USER_STORAGE_READ_FAILED": "Impossible de lire les utilisateurs enregistrés. Les données existantes n’ont pas été modifiées.",
+    "USER_STORAGE_INVALID": "Le format des utilisateurs enregistrés est invalide ; ils ont été protégés contre tout écrasement.",
+    "USER_STORAGE_WRITE_FAILED": "Impossible d’enregistrer l’utilisateur dans le stockage local de ce navigateur."
+  },
+  "errors": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundText": "La page recherchée est introuvable. Le lien a peut-être changé ou l’adresse est incorrecte.",
+    "backHome": "Retour à l’accueil"
   }
 }
