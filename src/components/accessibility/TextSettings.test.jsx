@@ -7,6 +7,8 @@ describe('TextSettings', () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.style.removeProperty('--rc-font-scale');
+    document.documentElement.style.removeProperty('font-size');
+    document.documentElement.style.removeProperty('zoom');
     document.documentElement.removeAttribute('data-text-scale');
   });
 
@@ -34,7 +36,8 @@ describe('TextSettings', () => {
 
     expect(screen.getByRole('status')).toHaveTextContent('125%');
     expect(document.documentElement.style.getPropertyValue('--rc-font-scale')).toBe('1.25');
-    expect(document.documentElement.style.getPropertyValue('zoom')).toBe('1.25');
+    expect(document.documentElement.style.fontSize).toBe('20px');
+    expect(document.documentElement.style.getPropertyValue('zoom')).toBe('');
     expect(localStorage.getItem('rc_text_scale')).toBe('1.25');
   });
 
@@ -47,6 +50,7 @@ describe('TextSettings', () => {
     fireEvent.click(screen.getByRole('button', { name: /restablecer/i }));
 
     expect(screen.getByRole('status')).toHaveTextContent('100%');
+    expect(document.documentElement.style.fontSize).toBe('16px');
     expect(localStorage.getItem('rc_text_scale')).toBe('1');
   });
 });

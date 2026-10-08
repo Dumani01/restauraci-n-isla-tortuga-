@@ -10,6 +10,7 @@ describe('ProjectPage', () => {
 
     expect(screen.getByRole('heading', { name: /isla tortuga/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /por qué restaurar/i })).toBeInTheDocument();
+    expect(screen.queryByText('Proyecto')).not.toBeInTheDocument();
   });
 
   test('presenta las tres áreas de trabajo del proyecto', () => {

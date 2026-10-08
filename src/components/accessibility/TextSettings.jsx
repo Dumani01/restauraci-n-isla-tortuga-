@@ -17,7 +17,7 @@ export function TextSettings() {
   useEffect(() => {
     const root = document.documentElement;
     root.style.setProperty('--rc-font-scale', String(scale));
-    root.style.setProperty('zoom', String(scale));
+    root.style.fontSize = `${16 * scale}px`;
     root.dataset.textScale = String(scale);
     localStorage.setItem('rc_text_scale', String(scale));
   }, [scale]);

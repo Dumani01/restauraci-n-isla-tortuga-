@@ -13,32 +13,25 @@
 
 .public-site > .public-header {
   align-items: center;
-  backdrop-filter: blur(16px);
-  background: linear-gradient(180deg, rgba(5, 39, 50, .97), rgba(5, 27, 35, .88));
-  border-bottom: 1px solid rgba(221, 243, 235, .12);
+  backdrop-filter: none;
+  background: transparent;
+  border-bottom: 0;
   color: #f4fbf8;
   display: flex;
   gap: 18px;
   justify-content: space-between;
   min-height: 76px;
   padding: 14px max(6vw, 24px);
-  position: sticky;
+  position: absolute;
+  left: 0;
+  right: 0;
   top: 0;
   z-index: 20;
 }
 
-.public-site > .public-header::before { background: linear-gradient(90deg, transparent, #8fe7d2 25%, #f2a081 70%, transparent); content: ''; height: 2px; left: 0; opacity: .8; position: absolute; right: 0; top: 0; }
+.public-site > .public-header::before { display: none; }
 
-.public-site:has(.velorah-home) > .public-header {
-  backdrop-filter: none;
-  background: transparent;
-  border-bottom-color: transparent;
-  left: 0;
-  padding-top: 22px;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
+.public-site > .public-header { padding-top: 22px; }
 .public-site:has(.velorah-home) > .public-header::before { display: none; }
 .public-site:has(.velorah-home) .public-nav a { color: rgba(241, 250, 246, .82); }
 .public-site:has(.velorah-home) .public-header .brand { color: #fff; }
@@ -329,10 +322,13 @@ body:has(.public-site) #root {
   margin: 0;
 }
 
-html:has(.public-site),
-body:has(.public-site) {
-  overflow-x: hidden;
+html:has(.public-site) {
+  overflow-x: clip;
   overflow-y: auto;
+}
+
+body:has(.public-site) {
+  overflow: visible;
 }
 
 body:has(.public-site) #root,

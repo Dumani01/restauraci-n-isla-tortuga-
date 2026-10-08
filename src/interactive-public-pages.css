@@ -121,7 +121,6 @@
 .interactive-gallery__copy { align-self: end; bottom: auto; left: auto; max-width: none; padding: 40px 38px 52px 0; position: relative; z-index: 3; }
 .interactive-gallery__copy h2 { text-wrap: balance; }
 .interactive-gallery__copy > p:last-of-type { margin-bottom: 0; }
-.lifecycle-demo-note { color: rgba(230, 243, 239, .5); display: block; font-size: .66rem; line-height: 1.5; margin-top: 24px; max-width: 280px; }
 .lifecycle-controls { display: flex; gap: 8px; margin-top: 22px; }
 .lifecycle-controls button { align-items: center; background: rgba(230, 243, 239, .08); border: 1px solid rgba(230, 243, 239, .28); border-radius: 50%; color: #e5f0e9; cursor: pointer; display: inline-flex; height: 38px; justify-content: center; transition: background .2s ease, transform .2s ease; width: 38px; }
 .lifecycle-controls button:hover { background: #f2a081; color: #061e27; transform: translateY(-2px); }
@@ -157,30 +156,25 @@
   .lifecycle-model, .lifecycle-stage-tooltip, .lifecycle-controls button { transition: none; }
 }
 
-/* Galería fotográfica: imagen destacada y recuadros seleccionables. */
-.interactive-gallery--cards { background: linear-gradient(145deg, #082d38, #04171f); display: block; min-height: 0; padding: clamp(22px, 5vw, 70px) clamp(16px, 6vw, 82px) 76px; }
-.coral-gallery__featured { align-items: stretch; display: grid; gap: clamp(24px, 5vw, 70px); grid-template-columns: minmax(0, 1.15fr) minmax(260px, .65fr); margin: 0 auto; max-width: 1160px; }
-.coral-gallery__photo { aspect-ratio: 1.18 / 1; background: radial-gradient(circle at 50% 34%, rgba(95, 205, 187, .26), transparent 44%), #0b3b46; border: 1px solid rgba(192, 239, 222, .3); border-radius: 20px; box-shadow: 0 24px 60px rgba(0, 0, 0, .3); overflow: hidden; position: relative; }
-.coral-gallery__photo::after { background: linear-gradient(180deg, transparent 56%, rgba(2, 20, 27, .82)); content: ''; inset: 0; pointer-events: none; position: absolute; }
-.coral-gallery__photo img { height: 100%; object-fit: contain; padding: 7%; position: relative; width: 100%; z-index: 1; }
-.coral-gallery__counter, .coral-gallery__badge { color: #f3faf6; font-size: .7rem; letter-spacing: .11em; position: absolute; text-transform: uppercase; z-index: 2; }
-.coral-gallery__counter { left: 22px; top: 20px; }
-.coral-gallery__badge { background: rgba(3, 27, 36, .72); border: 1px solid rgba(230, 243, 239, .24); border-radius: 999px; bottom: 20px; left: 22px; padding: 8px 11px; }
-.coral-gallery__details { align-self: center; color: #edf8f2; max-width: 360px; }
-.coral-gallery__details h2 { color: #fff; font-family: var(--vh-serif); font-size: clamp(2.2rem, 5vw, 4.6rem); font-weight: 400; line-height: .98; margin: 8px 0 18px; text-wrap: balance; }
-.coral-gallery__details > p:not(.vh-kicker) { color: rgba(230, 243, 239, .75); font-size: .9rem; line-height: 1.7; margin: 0; }
-.coral-gallery__grid { display: grid; gap: 13px; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 34px auto 0; max-width: 1160px; }
-.coral-gallery-card { background: #0a2630; border: 1px solid rgba(230, 243, 239, .14); border-radius: 12px; color: #edf8f2; cursor: pointer; display: grid; gap: 9px; overflow: hidden; padding: 0 0 12px; text-align: left; transition: border-color .2s ease, background .2s ease, transform .2s ease; }
-.coral-gallery-card:hover, .coral-gallery-card.is-active { background: #104955; border-color: #a8d8ca; transform: translateY(-4px); }
-.coral-gallery-card:focus-visible { outline: 2px solid #f2a081; outline-offset: 4px; }
-.coral-gallery-card__image { aspect-ratio: 1 / 1; background: radial-gradient(circle at 50% 35%, rgba(184, 233, 211, .28), transparent 57%), #17404a; display: block; overflow: hidden; }
-.coral-gallery-card__image img { height: 100%; object-fit: contain; padding: 8%; width: 100%; }
-.coral-gallery-card__text { display: grid; gap: 4px; padding: 0 11px; }
-.coral-gallery-card__text small { color: #a8d8ca; font-size: .65rem; letter-spacing: .12em; }
-.coral-gallery-card__text strong { font-size: .75rem; font-weight: 600; line-height: 1.2; }
-@media (max-width: 900px) { .coral-gallery__featured { grid-template-columns: minmax(0, 1fr) minmax(220px, .7fr); }.coral-gallery__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 640px) { .interactive-gallery--cards { padding: 24px 16px 48px; }.coral-gallery__featured { grid-template-columns: 1fr; }.coral-gallery__photo { aspect-ratio: 1 / .88; }.coral-gallery__details { max-width: none; }.coral-gallery__details h2 { font-size: 2.8rem; }.coral-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }.coral-gallery-card__text strong { font-size: .7rem; } }
-@media (prefers-reduced-motion: reduce) { .coral-gallery-card { transition: none; } }
+.coral-photo-gallery {
+  background: linear-gradient(180deg, rgba(6, 30, 39, .58), rgba(6, 30, 39, .72)), url('./assets/isla-tortuga-long-scroll.png') center / 100% 100% no-repeat;
+  color: #edf8f2;
+  padding: clamp(138px, 18vh, 180px) clamp(16px, 6vw, 82px) clamp(38px, 6vw, 76px);
+}
+.coral-photo-gallery__heading { margin: 0 auto 28px; max-width: 1160px; }
+.coral-photo-gallery__heading h2 { color: #fff; font-family: var(--vh-serif); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; margin: 8px 0 10px; }
+.coral-photo-gallery__heading > p:not(.vh-kicker) { color: rgba(230, 243, 239, .76); font-size: .9rem; line-height: 1.7; margin: 0; max-width: 680px; }
+.coral-photo-gallery__heading > span { color: #a8d8ca; display: inline-block; font-size: .72rem; margin-top: 12px; }
+.coral-photo-gallery__grid { display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 auto; max-width: 1160px; }
+.coral-photo-gallery__grid figure { background: #0a2630; border: 1px solid rgba(230, 243, 239, .14); border-radius: 12px; margin: 0; min-width: 0; overflow: hidden; }
+.coral-photo-gallery__grid a { display: block; overflow: hidden; }
+.coral-photo-gallery__grid img { aspect-ratio: 4 / 3; background: #123843; display: block; object-fit: cover; transition: transform .3s ease; width: 100%; }
+.coral-photo-gallery__grid a:hover img, .coral-photo-gallery__grid a:focus-visible img { transform: scale(1.04); }
+.coral-photo-gallery__grid a:focus-visible { outline: 2px solid #f2a081; outline-offset: -3px; }
+.coral-photo-gallery__grid figcaption { color: rgba(230, 243, 239, .76); font-size: .72rem; padding: 10px 12px; }
+@media (max-width: 900px) { .coral-photo-gallery__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .coral-photo-gallery { padding: 138px 16px 48px; }.coral-photo-gallery__grid { gap: 9px; grid-template-columns: repeat(2, minmax(0, 1fr)); }.coral-photo-gallery__grid figcaption { font-size: .66rem; padding: 8px; } }
+@media (prefers-reduced-motion: reduce) { .coral-photo-gallery__grid img { transition: none; } }
 
 /* Línea del tiempo interactiva del ciclo coralino. */
 .coral-timeline { align-items: start; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 58px auto 0; max-width: 1160px; padding: 0 10px; position: relative; }

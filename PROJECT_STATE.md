@@ -1,5 +1,230 @@
 # PROJECT STATE
 
+## Fase 59 - Retiro del encabezado ilustrado de la galeria
+
+Se retiro el encabezado con el titulo "Del gameto al coral adulto" y su imagen de fondo de la pagina de galeria. La coleccion fotografica ahora comienza bajo la navegacion publica y conserva el fondo extendido que ya tenia la seccion de imagenes, sin cambiar las 55 fotos.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx`: PASS (3 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+- Vista local de `/galeria`: encabezado ilustrado y texto retirados; 55 fotos conservadas; contenido inicia debajo de la navegacion.
+
+## Fase 58 - Estiramiento del fondo de la galeria
+
+Se ajusto el fondo de la coleccion fotografica para que cubra y se estire a lo largo de toda la seccion, en vez de permanecer fijo al viewport. Se mantienen el fondo local, el sombreado de contraste y las 55 fotos.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx`: PASS (3 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+- Vista local: `background-size: 100% 100%` sobre los 3967 px de alto de la seccion fotografica; 55 fotos.
+
+## Fase 57 - Fondo azul uniforme en la galeria
+
+Se revirtio el cambio de fondo azul uniforme a solicitud del usuario. La seccion fotografica vuelve al fondo local del arrecife con sombreado suave, mientras el encabezado conserva el fondo compartido del sitio.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx`: PASS (3 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+- Vista local de `/galeria`: encabezado y sección fotográfica con fondo `#061e27` y sin imagen de fondo; 55 fotos conservadas.
+
+## Fase 56 - Fondo de la galeria fotografica
+
+Se integro la imagen local del arrecife como fondo sutil de la coleccion fotografica, con una capa oscura para mantener el contraste del texto y distinguir las tarjetas. En pantallas pequenas el fondo se desplaza con la pagina, evitando el comportamiento fijo poco fiable de algunos navegadores moviles.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx`: PASS (3 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+- Vista local de galeria: fondo del arrecife visible debajo de la capa oscura; 55 fotos conservadas.
+
+## Fase 55 - Retiro de la etiqueta decorativa en Proyecto
+
+Se elimino la palabra "Proyecto" que se mostraba como etiqueta decorativa sobre el encabezado de esta pagina. El titulo y el acceso de navegacion no cambian.
+
+## Verification
+
+- Prueba enfocada de `ProjectPage`: PASS
+
+## Fase 54 - Ajuste del scroll horizontal y espacio despues del footer
+
+Se corrigio el avance del recorrido coralino para usar el tramo horizontal medido como distancia de scroll vertical. La capa decorativa de agua ahora recorta su desbordamiento dentro de la portada, que extendia el area desplazable mas alla del pie. Tambien se dejo el desplazamiento vertical en el elemento raiz para evitar un segundo contenedor de scroll en `body`.
+
+## Verification
+
+- `npm run test`: PASS (41 tests en 15 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+- Vista local de escritorio (1365x768): recorrido horizontal de 505 px; ultimo hito alineado al margen final y footer al final del documento.
+- Vista local movil (390x844): recorrido horizontal de 1308 px; ultimo hito alineado al margen final y footer al final del documento.
+
+## Fase 53 - Registro local y conteo de corales por estado
+
+Se agrego al dashboard un registro editable de un coral por identificador, con estado ingresado manualmente (sano, enfermo o en tratamiento) y etapa (joven o adulto). Los cinco conteos se calculan desde los registros locales del navegador; cada coral muestra su estado actual y no un historial. No se agregaron datos de campo de ejemplo ni se realiza diagnostico o recomendacion biologica. Se aclara que estos datos no se sincronizan entre navegadores. El formulario valida identificadores repetidos, permite actualizar o eliminar y muestra errores de almacenamiento sin sobrescribir datos invalidos.
+
+En el mismo cambio, el sidebar contraido conserva navegacion y acciones como iconos centrados, con etiquetas accesibles, evitando que el texto se comprima o se recorte.
+
+## Verification
+
+- `npm run test`: PASS (41 tests en 15 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+- Pruebas enfocadas de registro, dashboard y servicio: PASS (10 tests)
+- Vista visual del sidebar contraido a 777x576: PASS; marca, navegación, controles de accesibilidad, tema y salida quedan como iconos centrados con etiquetas accesibles.
+
+## Fase 52 - Salida superior y contraste del tema claro
+
+Se movio el boton "Salir" a la parte superior de la barra lateral, debajo de la marca. Para el dashboard en tema claro se establecieron colores oscuros y contrastantes en la barra, navegacion, controles de accesibilidad, cambio de tema y salida; el tema oscuro mantiene su estilo. Se corrigio tambien el texto dañado del area del colaborador.
+
+## Verification
+
+- `npx vitest run src/pages/private/CoreDashboard.test.jsx`: PASS (4 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+
+## Fase 51 - Retiro del bloque de exploracion del dashboard
+
+Se elimino del dashboard de colaborador la tarjeta "Explorar el proyecto" y sus accesos directos al mapa, galeria y proyecto. Se conserva el bloque informativo de restauracion; las rutas publicas siguen disponibles desde la navegacion principal.
+
+## Verification
+
+- `npx vitest run src/pages/private/CoreDashboard.test.jsx`: PASS (3 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+
+## Fase 50 - Retiro del carrusel de etapas de la galeria
+
+Se elimino de `/galeria` el bloque destacado del ciclo de vida con el carrusel de seis etapas. Se conserva el encabezado y la galeria de 55 fotografias aportadas; tambien se retiraron las reglas CSS exclusivas del bloque eliminado.
+
+## Verification
+
+- `npm run test`: PASS (34 tests en 13 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+
+## Fase 49 - Reduccion del tramo de scroll hasta el footer
+
+Se acorto la duracion vertical del recorrido coralino de 360vh a 240vh en escritorio y de 400vh a 260vh en movil. El recorrido mantiene su secuencia horizontal, pero requiere menos desplazamiento antes de continuar al contenido final y al footer.
+
+## Verification
+
+- `npm run test`: PASS (33 tests en 13 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+- Verificacion visual movil: PASS (390x667; el recorrido ocupa 260vh).
+
+## Fase 48 - Limpieza visual del recorrido coralino
+
+Se quitaron los numeros decorativos que aparecian detras de la imagen del ciclo y se evito repetir la descripcion activa en el encabezado y la tarjeta de etapa. Las tarjetas del recorrido usan un fondo opaco y la imagen queda en una zona separada. Se reajusto la posicion de las tarjetas en movil para que no se crucen con el texto ampliado, con una composicion mas compacta en pantallas bajas.
+
+## Verification
+
+- `npm run test`: PASS (33 tests en 13 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS
+- Verificacion visual a 125%: PASS en 390x844, 390x667 y escritorio; encabezado y tarjeta sin solaparse, tarjeta opaca y sin imagen visible debajo.
+
+## Fase 47 - Escalado de texto sin zoom de pagina
+
+Se corrigio `TextSettings`: la escala ahora modifica el tamaño base de fuente del documento y no la propiedad CSS `zoom`, evitando ampliar imágenes, controles y toda la interfaz como una captura ampliada. Se actualizaron pruebas para comprobar la fuente escalada y que `zoom` no se aplique.
+
+## Verification
+
+- `npm run test`: PASS (33 tests en 13 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 46 - Retiro del acceso al mapa en el menu privado
+
+Se retiro el enlace "Mapa" de la barra lateral del area privada, como se muestra en la referencia. La ruta y el acceso al mapa desde la navegacion publica se mantienen disponibles.
+
+## Verification
+
+- `npm run test`: PASS (33 tests en 13 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 45 - Correccion de textos del panel privado
+
+Se corrigieron los caracteres dañados en la marca "Restauración Coralina" del layout privado y en el nombre del panel de coordinación en español.
+
+## Verification
+
+- `npm run test`: PASS (33 tests en 13 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 44 - Video do projeto na pagina inicial
+
+Se incorporo al final de la portada el video compartido, con reproductor adaptable, carga diferida, privacidad mejorada de YouTube y etiquetas localizadas. La galeria conserva su carrusel de ciclo de vida y las fotografias aportadas.
+
+## Verification
+
+- `npm run test`: PASS (33 tests en 13 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 43 - Incorporacion de fotografias a la galeria
+
+Se agregaron las 55 imagenes del ZIP compartido a `src/assets/galeria/` y se incorporaron a una cuadrilla responsive debajo del carrusel existente del ciclo coralino en `/galeria`. La lista se genera desde los assets para que futuras imagenes de la carpeta se incluyan automaticamente; las miniaturas cargan de forma diferida y abren el original. Los textos alternativos son neutrales y la interfaz aclara que las imagenes no son registros verificados de especies, fechas o ubicaciones.
+
+## Verification
+
+- Prueba del inventario: PASS (55 imagenes en orden)
+- Validacion de traducciones: PASS (es, en, fr, de, pt)
+- `npm run test`: PASS (33 tests en 13 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 42 - Integracion inicial del asistente con n8n
+
+Se documentaron la configuracion del webhook del chatbot, el uso exclusivo de credenciales de proveedor en n8n, los pasos para publicar el workflow y las precauciones de CORS y proteccion para produccion. La aplicacion ya tenia el servicio del chatbot y `.env.local` apunta a `http://localhost:5678/webhook/coral-assistant`; no se modificaron esos valores existentes.
+
+La prueba directa del webhook local devolvio HTTP 404. En el editor de n8n el workflow muestra la accion "Publish", por lo que la URL no esta activa en este momento. Para completar y verificar la conexion, falta seleccionar/configurar la credencial Header Auth de DeepSeek en n8n y publicar el workflow. No se solicito ni se almaceno ninguna clave.
+
+## Verification
+
+- Prueba directa `POST /webhook/coral-assistant`: HTTP 404 (workflow aun no publicado en la URL de produccion).
+- `npm run test`: PASS (32 tests en 12 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 41 - Recorrido horizontal controlado por scroll
+
+Se ajusto el ciclo para que los hitos avancen horizontalmente conforme el usuario hace scroll vertical, sin controles de flecha. La seccion permanece sticky durante todo el recorrido, actualiza imagen, nombre y descripcion de la etapa activa, y libera el scroll normal al terminar el ultimo hito.
+
+## Verification
+
+- `npm run test`: PASS (32 tests en 12 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 40 - Storyline scroll-driven del ciclo de vida
+
+Se rehizo el bloque `#corales` siguiendo la secuencia de referencia: imagen y titulo al inicio, linea temporal que crece con el scroll, seis hitos que aparecen progresivamente con informacion alternada arriba y abajo, y liberacion del `position: sticky` al terminar para continuar hacia el contenido inferior. La imagen activa, el nombre y la descripcion se mantienen sincronizados y el contraste funciona en tema oscuro.
+
+## Verification
+
+- `npm run test`: PASS (32 tests en 12 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 39 - Retiro del bloque informativo de tres pasos
+
+Se elimino de la portada el bloque visual con el titulo "Restaurar es cuidar todo un ecosistema" y las tres tarjetas numeradas de seleccion, guarderias marinas y cuidado continuo. Tambien se retiraron sus claves de traduccion sin uso; el resto de la narrativa publica permanece intacto.
+
+## Verification
+
+- `npm run test`: PASS (32 tests en 12 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 36 - Header publico unificado sobre el landing
+
+Se restauro el header en todas las rutas publicas y se igualo su composicion a la referencia del landing: fondo transparente, posicion absoluta sobre la imagen marina, marca y controles claros, sin barra oscura ni linea superior. El modo oscuro tambien conserva esta misma composicion transparente.
+
+## Verification
+
+- `npm run test`: PASS (32 tests en 12 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
 ## Fase 34 - Registro administrativo y dashboards por rol
 
 Se incorporo un modulo protegido de gestion de usuarios en `/admin/usuarios`, visible unicamente para cuentas `ADMIN`. El formulario permite registrar nombre, correo, contrasena, rol, perfil y descripcion; valida correos duplicados, no expone contrasenas en la interfaz y permite que los nuevos registros puedan iniciar sesion durante la demostracion.
@@ -44,7 +269,7 @@ Se centralizaron los tres accesos demo del proyecto en `db.json` con correo, con
 
 ## Fase 30 - Escala global del texto
 
-Se corrigió la aplicación del control de tamaño para que la preferencia afecte también textos definidos con `px`, `clamp()` y estilos internos. La escala seleccionada ahora se aplica al elemento `html` mediante `zoom` y `--rc-font-scale`, conservando la persistencia en `localStorage` y el restablecimiento al 100%.
+Se amplió inicialmente el texto mediante `zoom` y `--rc-font-scale`. En la Fase 47 se corrigió el uso de `zoom`: el control ahora escala el tamaño base de fuente sin ampliar toda la página.
 
 ## Verification
 

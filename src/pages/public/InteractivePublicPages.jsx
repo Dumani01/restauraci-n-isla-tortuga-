@@ -1,16 +1,10 @@
-import { useState } from 'react';
-import { ArrowLeft, ArrowRight, Camera, Waves } from 'lucide-react';
+import { ArrowRight, Camera, Waves } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { RestorationMap } from '../../components/map/RestorationMap.jsx';
 import { WeatherCard } from '../../components/weather/WeatherCard.jsx';
-import { lifecycleAssets } from '../../services/lifecycleAssets.js';
-import { lifecycleStages, projectInfo } from '../../services/projectData.js';
-import galleryIsland from '../../assets/isla-tortuga-hero.png';
-import galleryDescent from '../../assets/isla-tortuga-descent.png';
-import galleryDescentExtended from '../../assets/isla-tortuga-descent-extended.png';
-import galleryUnderwater from '../../assets/underwater-hero.png';
-import galleryLongScroll from '../../assets/isla-tortuga-long-scroll.png';
+import { galleryPhotos as uploadedGalleryPhotos } from '../../services/galleryPhotos.js';
+import { projectInfo } from '../../services/projectData.js';
 import '../../interactive-public-pages.css';
 
 export function InteractiveMapPage() {
@@ -20,12 +14,25 @@ export function InteractiveMapPage() {
 
 export function InteractiveGallery() {
   const { t } = useTranslation();
-  const [activeImage, setActiveImage] = useState(0);
-  const stage = lifecycleStages[activeImage] ?? lifecycleStages[0];
-  const name = t(`lifecycle.${stage.id}.name`);
-  const description = t(`lifecycle.${stage.id}.description`);
-  const changeStage = (nextIndex) => setActiveImage((nextIndex + lifecycleStages.length) % lifecycleStages.length);
-  const galleryPhotos = [galleryIsland, galleryDescent, galleryDescentExtended, galleryUnderwater, galleryLongScroll, galleryIsland];
-
-  return <main className="public-page interactive-page"><section className="interactive-hero interactive-hero--gallery"><div><p className="vh-kicker"><Camera size={15} /> {t('gallery.kicker')}</p><h1>{t('gallery.title')}<br /><em>{t('gallery.titleEmphasis')}</em></h1><p>{t('gallery.intro')}</p></div></section><section className="interactive-gallery interactive-gallery--cards" aria-label={t('gallery.carousel')}><div className="coral-gallery__featured"><div className="coral-gallery__photo"><img src={galleryPhotos[activeImage]} alt={name} decoding="async" width="1254" height="1254" /><span className="coral-gallery__counter">{String(activeImage + 1).padStart(2, '0')} / {String(lifecycleStages.length).padStart(2, '0')}</span><span className="coral-gallery__badge">{t('gallery.reference')}</span></div><div className="coral-gallery__details" id="lifecycle-stage-panel" role="tabpanel" aria-labelledby={`lifecycle-stage-${stage.id}`}><p className="vh-kicker"><Camera size={14} /> {t('gallery.stage', { current: activeImage + 1, total: lifecycleStages.length })}</p><h2 id="lifecycle-stage-title">{name}</h2><p>{description}</p><span className="lifecycle-demo-note">{t('gallery.reference')}</span><div className="lifecycle-controls"><button type="button" aria-label={t('common.previous')} onClick={() => changeStage(activeImage - 1)}><ArrowLeft size={16} /></button><button type="button" aria-label={t('common.next')} onClick={() => changeStage(activeImage + 1)}><ArrowRight size={16} /></button></div></div></div><div className="coral-gallery__grid" role="tablist" aria-label={t('home.selectStage')}>{lifecycleStages.map((item, index) => { const itemName = t(`lifecycle.${item.id}.name`); return <button className={`coral-gallery-card${activeImage === index ? ' is-active' : ''}`} key={item.id} id={`lifecycle-stage-${item.id}`} type="button" role="tab" aria-selected={activeImage === index} aria-controls="lifecycle-stage-panel" onClick={() => setActiveImage(index)}><span className="coral-gallery-card__image"><img src={galleryPhotos[index]} alt="" aria-hidden="true" loading="lazy" width="1254" height="1254" /></span><span className="coral-gallery-card__text"><small>{String(index + 1).padStart(2, '0')}</small><strong>{itemName}</strong></span></button>; })}</div></section></main>;
+  return <main className="public-page interactive-page">
+    <section className="coral-photo-gallery" aria-labelledby="coral-photo-gallery-title">
+      <header className="coral-photo-gallery__heading">
+        <p className="vh-kicker"><Camera size={14} /> {t('gallery.photosLabel')}</p>
+        <h2 id="coral-photo-gallery-title">{t('gallery.photosTitle')}</h2>
+        <p>{t('gallery.photosIntro')}</p>
+        <span>{t('gallery.photosCount', { count: uploadedGalleryPhotos.length })}</span>
+      </header>
+      <div className="coral-photo-gallery__grid">
+        {uploadedGalleryPhotos.map((photo, index) => {
+          const number = String(index + 1).padStart(2, '0');
+          return <figure key={photo.id}>
+            <a href={photo.src} target="_blank" rel="noreferrer">
+              <img src={photo.src} alt={t('gallery.photoAlt', { number })} loading="lazy" decoding="async" />
+            </a>
+            <figcaption>{t('gallery.photoNumber', { number })}</figcaption>
+          </figure>;
+        })}
+      </div>
+    </section>
+  </main>;
 }
