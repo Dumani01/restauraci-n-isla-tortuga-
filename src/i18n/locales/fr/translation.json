@@ -28,7 +28,11 @@
     "home": "Accueil",
     "breadcrumb": "Fil d’Ariane",
     "demo": "Information de référence",
-    "fieldTracking": "Suivi de terrain"
+    "fieldTracking": "Suivi de terrain",
+    "textSettings": "ParamÃ¨tres du texte",
+    "textSettingsShort": "Texte",
+    "textSize": "Taille du texte",
+    "resetText": "RÃ©initialiser"
   },
   "languageSelector": {
     "label": "Langue",
@@ -65,7 +69,10 @@
     "email": "Adresse e-mail",
     "password": "Mot de passe",
     "submit": "Accéder au suivi",
-    "private": "Accès privé"
+    "private": "Accès privé",
+    "demoTitle": "Accès de démonstration",
+    "demoNotice": "Ces identifiants servent uniquement à tester les profils de l’application.",
+    "demoUse": "Utiliser"
   },
   "narrator": {
     "label": "Narrateur",

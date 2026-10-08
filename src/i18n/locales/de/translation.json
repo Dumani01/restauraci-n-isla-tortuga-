@@ -28,7 +28,11 @@
     "home": "Startseite",
     "breadcrumb": "Brotkrümelnavigation",
     "demo": "Referenzinformation",
-    "fieldTracking": "Feldbeobachtung"
+    "fieldTracking": "Feldbeobachtung",
+    "textSettings": "Texteinstellungen",
+    "textSettingsShort": "Text",
+    "textSize": "TextgrÃ¶ÃŸe",
+    "resetText": "ZurÃ¼cksetzen"
   },
   "languageSelector": {
     "label": "Sprache",
@@ -65,7 +69,10 @@
     "email": "E-Mail",
     "password": "Passwort",
     "submit": "Tracking öffnen",
-    "private": "Privater Zugang"
+    "private": "Privater Zugang",
+    "demoTitle": "Demo-Zugänge",
+    "demoNotice": "Diese Zugangsdaten dienen nur zum Testen der Anwendungsprofile.",
+    "demoUse": "Profil nutzen"
   },
   "narrator": {
     "label": "Vorleser",

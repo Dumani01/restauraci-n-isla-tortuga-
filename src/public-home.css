@@ -19,7 +19,10 @@
 .velorah-home > .vh-cta,
 .velorah-home .vh-water-atmosphere { background: transparent !important; }
 
-.velorah-home::before { background-image: linear-gradient(180deg, rgba(3, 24, 34, .1), rgba(2, 22, 36, .22)), var(--vh-underwater-image); background-position: center top; background-repeat: no-repeat; background-size: cover; content: ''; inset: 0; opacity: .98; pointer-events: none; position: absolute; z-index: 0; }
+.velorah-home::before { background-image: var(--vh-underwater-image); background-position: center top; background-repeat: no-repeat; background-size: cover; content: ''; inset: 0; opacity: .98; pointer-events: none; position: absolute; z-index: 0; }
+
+.vh-theme-background-night { background-position: center top; background-repeat: no-repeat; background-size: cover; inset: 0; opacity: 0; pointer-events: none; position: absolute; transition: opacity .9s cubic-bezier(.22, 1, .36, 1); z-index: 1; }
+.vh-theme-background-night.is-active { opacity: .98; }
 
 .velorah-home::after { animation: vh-water-light 18s ease-in-out infinite alternate; background: linear-gradient(108deg, transparent 0 16%, rgba(178, 244, 225, .12) 22%, transparent 31% 45%, rgba(126, 224, 211, .09) 53%, transparent 62%), radial-gradient(ellipse at 30% 24%, rgba(181, 247, 225, .18), transparent 36%), radial-gradient(ellipse at 74% 68%, rgba(30, 150, 164, .18), transparent 42%); background-repeat: no-repeat; background-size: 145% 100%, 100% 100%, 100% 100%; background-position: 0 0, 0 0, 0 0; content: ''; inset: 0; mix-blend-mode: screen; opacity: calc(var(--vh-scroll, 0) * .78); pointer-events: none; position: fixed; z-index: 6; }
 
@@ -269,7 +272,7 @@
 
 .vh-visual__fish { color: #f2a081; position: absolute; right: 14%; top: 32%; transform: rotate(-8deg); }
 
-.vh-reef { background: transparent; display: grid; gap: clamp(36px, 7vw, 110px); grid-template-columns: minmax(250px, .72fr) minmax(0, 1.28fr); min-height: 670px; overflow: hidden; padding: 120px max(7vw, 24px) 140px; }
+.vh-reef { background: transparent; display: grid; gap: clamp(36px, 7vw, 110px); grid-template-columns: minmax(250px, .72fr) minmax(0, 1.28fr); min-height: 670px; overflow: hidden; padding: 120px max(7vw, 24px) 140px; scroll-margin-top: 24px; }
 .vh-reef::before { background: linear-gradient(180deg, rgba(149, 238, 222, .2), transparent 55%); content: ''; height: 75%; left: 30%; opacity: calc(.28 + var(--vh-scroll, 0) * .45); position: absolute; top: -18%; transform: skewX(-12deg); width: 22%; }
 .vh-reef__intro { align-self: center; position: relative; z-index: 1; }
 .vh-reef h2 { font-family: var(--vh-serif); font-size: clamp(2.7rem, 5vw, 5rem); font-weight: 400; line-height: .98; margin: 0; }
@@ -404,6 +407,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .vh-theme-background-night { transition: none; }
   .vh-hero__content,
   .vh-water-atmosphere::after,
   .vh-coral.is-active .vh-coral__image,
@@ -423,7 +427,10 @@
 .vh-lifecycle-scene .lifecycle-model { height: 270px; width: 300px; }
 .vh-lifecycle-scene .lifecycle-model__halo { height: 180px; width: 275px; }
 .vh-lifecycle-scene .vh-coral-card { bottom: 86px; left: 18px; max-width: 235px; }
-.vh-lifecycle-controls { bottom: 14px; display: flex; gap: 6px; position: absolute; right: 16px; z-index: 5; }
+.vh-lifecycle-scene .coral-timeline--home { bottom: 8px; left: 16px; margin: 0; max-width: none; padding: 0; position: absolute; right: 0; width: auto; z-index: 4; }
+.vh-lifecycle-scene .coral-timeline--home .coral-timeline__step { min-height: 76px; }
+.vh-lifecycle-scene .coral-timeline--home .coral-timeline__step strong { font-size: .62rem; }
+.vh-lifecycle-controls { bottom: 102px; display: flex; gap: 6px; position: absolute; right: 16px; z-index: 5; }
 .vh-lifecycle-controls button { align-items: center; background: rgba(6, 30, 39, .52); border: 1px solid rgba(230, 243, 239, .38); border-radius: 50%; color: #e5f0e9; cursor: pointer; display: inline-flex; height: 32px; justify-content: center; width: 32px; }
 .vh-lifecycle-controls button:hover { background: #f2a081; color: #061e27; }
 .vh-lifecycle-controls button:focus-visible, .vh-lifecycle-rail button:focus-visible { outline: 2px solid #f2a081; outline-offset: 3px; }
@@ -432,6 +439,10 @@
 .vh-lifecycle-rail button:hover, .vh-lifecycle-rail button.is-active { background: rgba(13, 70, 81, .9); border-color: #f2a081; color: #fff; }
 .vh-lifecycle-rail span { color: #f2a081; font-size: .58rem; }
 .vh-lifecycle-rail small { font-size: .59rem; line-height: 1.15; overflow-wrap: anywhere; white-space: normal; }
+.vh-lifecycle-rail__track, .vh-lifecycle-rail__progress { height: 2px; left: 8px; position: absolute; right: 78px; top: 1px; }
+.vh-lifecycle-rail__track { background: rgba(230, 243, 239, .28); }
+.vh-lifecycle-rail__progress { background: #f2a081; right: auto; width: calc((100% - 86px) * var(--stage-progress) / 100); }
+.vh-lifecycle-rail button { position: relative; z-index: 1; }
 .vh-lifecycle-scene .vh-reef__caption { bottom: auto; max-width: 225px; right: 16px; text-align: right; top: 18px; }
 @media (max-width: 600px) {
   .vh-lifecycle-scene { min-height: 550px; }
@@ -439,7 +450,106 @@
   .vh-lifecycle-scene .lifecycle-model { transform: translateZ(0) scale(.82); }
   .vh-lifecycle-scene .lifecycle-model:hover, .vh-lifecycle-scene .lifecycle-model:focus-visible { transform: translate3d(0, -8px, 0) scale(.88); }
   .vh-lifecycle-scene .vh-coral-card { bottom: 94px; left: 10px; max-width: 205px; }
+  .vh-lifecycle-scene .coral-timeline--home { left: 10px; right: 0; }
   .vh-lifecycle-rail { bottom: 12px; left: 10px; padding-right: 62px; right: 0; }
-  .vh-lifecycle-controls { right: 8px; }
+  .vh-lifecycle-controls { bottom: 102px; right: 8px; }
   .vh-lifecycle-scene .vh-reef__caption { display: none; }
+}
+
+/* Timeline narrativa del ciclo coralino inspirada en el componente adjunto,
+   adaptada al stack JavaScript/CSS existente del proyecto. */
+.coral-timeline-story { min-height: 185vh; position: relative; scroll-margin-top: 0; }
+.coral-timeline-story__sticky { display: grid; grid-template-columns: minmax(230px, .72fr) minmax(0, 1.28fr); grid-template-rows: 1fr auto; min-height: 100vh; padding: 100px max(7vw, 24px) 92px; position: sticky; top: 0; }
+.coral-timeline-story__intro { align-self: center; max-width: 410px; position: relative; z-index: 2; }
+.coral-timeline-story__intro h2 { color: #f1faf6; font-family: var(--vh-serif); font-size: clamp(2.8rem, 5vw, 5.5rem); font-weight: 400; line-height: .94; margin: 16px 0 24px; }
+.coral-timeline-story__intro h2 em { color: #8dd3c2; font-weight: 400; }
+.coral-timeline-story__intro > p:last-child { color: rgba(230, 243, 239, .76); line-height: 1.7; max-width: 390px; }
+.coral-timeline-story__stage { align-self: center; display: grid; gap: 24px; grid-template-columns: minmax(230px, .9fr) minmax(200px, .7fr); min-width: 0; position: relative; z-index: 2; }
+.coral-timeline-story__visual { align-items: center; aspect-ratio: 1; background: radial-gradient(circle, rgba(77, 204, 184, .2), transparent 63%); display: flex; justify-content: center; max-width: 430px; position: relative; }
+.coral-timeline-story__visual::before { border: 1px solid rgba(168, 216, 202, .24); border-radius: 50%; content: ''; height: 84%; position: absolute; transform: rotate(-22deg); width: 118%; }
+.coral-timeline-story__visual img { height: 75%; object-fit: contain; position: relative; transition: opacity .3s ease, transform .45s ease; width: 75%; z-index: 1; }
+.coral-timeline-story__visual span { background: radial-gradient(circle, rgba(242, 160, 129, .34), transparent 68%); border-radius: 50%; height: 52%; position: absolute; width: 52%; }
+.coral-timeline-story__copy { align-self: center; border-left: 2px solid #f2a081; color: #eef8f4; max-width: 310px; padding: 10px 0 10px 20px; }
+.coral-timeline-story__copy > span { color: #f2a081; font-size: .7rem; letter-spacing: .14em; }
+.coral-timeline-story__copy h3 { font-family: var(--vh-serif); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400; margin: 10px 0 9px; }
+.coral-timeline-story__copy p { color: rgba(230, 243, 239, .72); font-size: .84rem; line-height: 1.6; margin: 0; }
+.coral-timeline-story__controls { align-items: center; display: flex; gap: 7px; justify-content: flex-end; position: absolute; right: max(7vw, 24px); top: 50%; transform: translateY(-50%); z-index: 3; }
+.coral-timeline-story__controls button { align-items: center; background: rgba(6, 30, 39, .55); border: 1px solid rgba(230, 243, 239, .38); border-radius: 50%; color: #e5f0e9; cursor: pointer; display: inline-flex; height: 36px; justify-content: center; width: 36px; }
+.coral-timeline-story__controls button:hover { background: #f2a081; color: #061e27; }
+.coral-timeline-story__track { align-items: start; display: grid; grid-column: 1 / -1; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 0 auto; max-width: 920px; padding: 0 6px; position: relative; width: 100%; z-index: 3; }
+.coral-timeline-story__track-base, .coral-timeline-story__track-progress { height: 2px; left: 6px; position: absolute; right: 6px; top: 18px; }
+.coral-timeline-story__track-base { background: rgba(230, 243, 239, .28); }
+.coral-timeline-story__track-progress { background: #f2a081; left: 6px; right: auto; }
+.coral-timeline-story__track button { align-items: center; background: transparent; border: 0; color: rgba(230, 243, 239, .62); cursor: pointer; display: grid; gap: 9px; justify-items: center; padding: 0 4px; position: relative; text-align: center; z-index: 1; }
+.coral-timeline-story__track button:hover, .coral-timeline-story__track button.is-active { color: #fff; }
+.coral-timeline-story__track button > span { align-items: center; background: #0b3440; border: 2px solid rgba(230, 243, 239, .35); border-radius: 50%; display: flex; font-size: .6rem; height: 38px; justify-content: center; width: 38px; }
+.coral-timeline-story__track button.is-active > span { background: #f2a081; border-color: #f8c3ad; color: #082d38; box-shadow: 0 0 0 6px rgba(242, 160, 129, .14); }
+.coral-timeline-story__track strong { font-size: .66rem; line-height: 1.15; max-width: 115px; }
+@media (max-width: 760px) {
+  .coral-timeline-story { min-height: 190vh; }
+  .coral-timeline-story__sticky { display: flex; flex-direction: column; gap: 24px; justify-content: center; padding: 78px 24px 76px; }
+  .coral-timeline-story__intro { align-self: flex-start; max-width: 520px; }
+  .coral-timeline-story__intro h2 { font-size: clamp(2.7rem, 11vw, 4.3rem); }
+  .coral-timeline-story__stage { grid-template-columns: minmax(0, 1fr); width: 100%; }
+  .coral-timeline-story__visual { align-self: center; max-width: 360px; width: 100%; }
+  .coral-timeline-story__copy { max-width: 330px; }
+  .coral-timeline-story__controls { right: 24px; top: auto; transform: none; bottom: 124px; }
+  .coral-timeline-story__track { overflow-x: auto; padding-bottom: 6px; width: calc(100% + 10px); }
+  .coral-timeline-story__track button { min-width: 92px; }
+}
+@media (prefers-reduced-motion: reduce) { .coral-timeline-story__visual img, .coral-timeline-story__controls button { transition: none; } }
+
+/* Composición horizontal fijada, equivalente a la referencia adjunta. */
+.coral-reference-timeline { height: 220vh; overflow: clip; position: relative; }
+.coral-reference-timeline__sticky { height: 100svh; min-height: 540px; overflow: hidden; position: sticky; top: 0; width: 100%; }
+.coral-reference-timeline__slider { align-items: center; display: flex; gap: 5vw; height: 70vh; left: 0; min-width: 230vw; padding: 0 5vw; position: absolute; top: 15vh; transition: transform .12s linear; }
+.coral-reference-timeline__feature { align-items: center; background: radial-gradient(circle, rgba(242, 160, 129, .25), transparent 65%); display: flex; flex: 0 0 30vw; height: 30vw; justify-content: center; max-height: 520px; max-width: 520px; overflow: hidden; position: relative; }
+.coral-reference-timeline__feature::before { border: 1px solid rgba(169, 239, 223, .22); border-radius: 50%; content: ''; height: 92%; position: absolute; transform: rotate(-18deg); width: 118%; }
+.coral-reference-timeline__feature img { height: 85%; object-fit: contain; position: relative; transition: opacity .35s ease, transform .35s ease; width: 85%; z-index: 1; }
+.coral-reference-timeline__feature-label { background: rgba(3, 27, 36, .88); border-left: 2px solid #f2a081; bottom: 8%; color: #f4fbf8; font-family: var(--vh-serif); font-size: clamp(.85rem, 1.4vw, 1.3rem); left: 8%; padding: 10px 14px; position: absolute; z-index: 2; }
+.coral-reference-timeline__journey { flex: 0 0 190vw; height: 100%; position: relative; }
+.coral-reference-timeline__heading { left: 0; max-width: 29vw; position: absolute; top: 4%; z-index: 2; }
+.coral-reference-timeline__heading h2 { color: #f1faf6; font-family: var(--vh-serif); font-size: clamp(2.5rem, 5vw, 5.4rem); font-weight: 400; line-height: .94; margin: 14px 0 22px; }
+.coral-reference-timeline__heading h2 em { color: #8dd3c2; font-weight: 400; }
+.coral-reference-timeline__heading > p:last-child { color: rgba(230, 243, 239, .76); line-height: 1.65; max-width: 390px; }
+.coral-reference-timeline__axis { left: 0; position: absolute; right: 0; top: 51%; }
+.coral-reference-timeline__axis i, .coral-reference-timeline__axis b { display: block; height: 2px; left: 0; position: absolute; top: 0; }
+.coral-reference-timeline__axis i { background: rgba(230, 243, 239, .3); right: 0; }
+.coral-reference-timeline__axis b { background: #f2a081; transition: width .2s linear; }
+.coral-reference-timeline__events { height: 100%; position: relative; width: 100%; }
+.coral-reference-timeline__event { background: transparent; border: 0; color: rgba(230, 243, 239, .68); cursor: pointer; display: block; padding: 0 2.2vw; position: absolute; text-align: left; width: 24vw; z-index: 2; }
+.coral-reference-timeline__event:nth-child(1) { left: 30vw; }.coral-reference-timeline__event:nth-child(2) { left: 58vw; }.coral-reference-timeline__event:nth-child(3) { left: 86vw; }.coral-reference-timeline__event:nth-child(4) { left: 114vw; }.coral-reference-timeline__event:nth-child(5) { left: 142vw; }.coral-reference-timeline__event:nth-child(6) { left: 170vw; }
+.coral-reference-timeline__event.is-top { bottom: 51%; }.coral-reference-timeline__event.is-bottom { top: 51%; }
+.coral-reference-timeline__event::after { background: #f2a081; content: ''; height: 48%; left: 2.2vw; position: absolute; width: 1px; }.coral-reference-timeline__event.is-top::after { bottom: 0; }.coral-reference-timeline__event.is-bottom::after { top: 0; }
+.coral-reference-timeline__dot { align-items: center; background: #0b3440; border: 2px solid rgba(230, 243, 239, .38); border-radius: 50%; color: #a8d8ca; display: flex; font-size: .64rem; height: 32px; justify-content: center; position: relative; width: 32px; z-index: 1; }
+.coral-reference-timeline__event-copy { display: grid; gap: 7px; margin-top: 10px; max-width: 210px; }.is-bottom .coral-reference-timeline__event-copy { margin-top: 0; padding-top: 10px; }
+.coral-reference-timeline__event-copy strong { color: #f4fbf8; font-family: var(--vh-serif); font-size: 1.2rem; font-weight: 400; }.coral-reference-timeline__event-copy small { color: rgba(230, 243, 239, .7); font-size: .74rem; line-height: 1.4; }
+.coral-reference-timeline__event.is-active .coral-reference-timeline__dot { background: #f2a081; border-color: #ffd0bd; color: #082d38; box-shadow: 0 0 0 7px rgba(242, 160, 129, .14); transform: scale(1.12); }
+.coral-reference-timeline__period { bottom: 8%; color: rgba(230, 243, 239, .56); font-size: .78rem; left: 0; position: absolute; }.coral-reference-timeline__active-copy { bottom: 5%; color: rgba(230, 243, 239, .72); left: 17vw; max-width: 240px; position: absolute; }.coral-reference-timeline__active-copy strong { color: #f4fbf8; font-family: var(--vh-serif); font-size: 1.15rem; font-weight: 400; }.coral-reference-timeline__active-copy p { font-size: .7rem; line-height: 1.4; margin: 5px 0 0; }
+.coral-reference-timeline__controls { bottom: 8%; display: flex; gap: 7px; position: absolute; right: 5vw; z-index: 5; }.coral-reference-timeline__controls button { align-items: center; background: rgba(6, 30, 39, .6); border: 1px solid rgba(230, 243, 239, .4); border-radius: 50%; color: #e5f0e9; cursor: pointer; display: inline-flex; height: 36px; justify-content: center; width: 36px; }.coral-reference-timeline__controls button:hover { background: #f2a081; color: #061e27; }
+@media (max-width: 760px) {
+  .coral-reference-timeline { height: 360vh; }
+  .coral-reference-timeline__slider { gap: 10vw; height: 82vh; min-width: 800vw; padding: 0 7vw; top: 9vh; }
+  .coral-reference-timeline__feature { flex-basis: 85vw; height: 65vw; max-height: none; max-width: none; }
+  .coral-reference-timeline__journey { flex-basis: 700vw; }
+  .coral-reference-timeline__heading { max-width: 70vw; top: 0; }.coral-reference-timeline__heading h2 { font-size: 8.5vw; }
+  .coral-reference-timeline__event { width: 70vw; }.coral-reference-timeline__event:nth-child(1) { left: 30vw; }.coral-reference-timeline__event:nth-child(2) { left: 130vw; }.coral-reference-timeline__event:nth-child(3) { left: 230vw; }.coral-reference-timeline__event:nth-child(4) { left: 330vw; }.coral-reference-timeline__event:nth-child(5) { left: 430vw; }.coral-reference-timeline__event:nth-child(6) { left: 530vw; }
+  .coral-reference-timeline__event-copy strong { font-size: 1.1rem; }.coral-reference-timeline__controls { bottom: 7%; right: 7vw; }
+}
+@media (prefers-reduced-motion: reduce) { .coral-reference-timeline__slider, .coral-reference-timeline__feature img { transition: none; } }
+
+/* Ajuste de composición para igualar la referencia: título a la izquierda y
+   recorrido visual del ciclo concentrado en la mitad derecha. */
+.coral-timeline-story__sticky { grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr); grid-template-rows: 1fr auto; }
+.coral-timeline-story__intro { grid-column: 1; grid-row: 1; }
+.coral-timeline-story__stage { align-self: center; display: flex; flex-direction: column; gap: 0; grid-column: 2; grid-row: 1; min-height: 0; }
+.coral-timeline-story__visual { align-self: center; height: min(48vh, 430px); max-width: 620px; width: 100%; }
+.coral-timeline-story__visual img { height: 82%; width: 62%; }
+.coral-timeline-story__copy { align-self: flex-start; margin: -4px 0 0 7%; max-width: 290px; }
+.coral-timeline-story__controls { right: max(7vw, 24px); top: 56%; }
+.coral-timeline-story__track { grid-column: 2; grid-row: 2; margin-left: 0; max-width: none; }
+@media (max-width: 760px) {
+  .coral-timeline-story__sticky { display: flex; }
+  .coral-timeline-story__intro, .coral-timeline-story__stage, .coral-timeline-story__track { grid-column: auto; grid-row: auto; }
+  .coral-timeline-story__controls { bottom: 124px; top: auto; }
 }
