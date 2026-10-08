@@ -14,7 +14,38 @@
   "lifecycleStages": ["Gametos", "Embrión", "Larva (plánula)", "Asentamiento en sustrato", "Coral juvenil", "Coral adulto"],
   "observations": [],
   "evidence": [],
-  "users": [],
+  "users": [
+    {
+      "id": "demo-admin",
+      "name": "Administración demo",
+      "email": "admin@restauracioncoralina.demo",
+      "password": "DemoAdmin2026!",
+      "role": "ADMIN",
+      "profile": "Administrador",
+      "demo": true,
+      "description": "Perfil demo para revisar la administración del proyecto."
+    },
+    {
+      "id": "demo-moderator",
+      "name": "Coordinación demo",
+      "email": "coordinacion@restauracioncoralina.demo",
+      "password": "DemoCoord2026!",
+      "role": "MODERATOR",
+      "profile": "Coordinador",
+      "demo": true,
+      "description": "Perfil demo para revisar coordinación y seguimiento."
+    },
+    {
+      "id": "demo-user",
+      "name": "Visitante demo",
+      "email": "visitante@restauracioncoralina.demo",
+      "password": "DemoUser2026!",
+      "role": "USER",
+      "profile": "Colaborador",
+      "demo": true,
+      "description": "Perfil demo para revisar el acceso general."
+    }
+  ],
   "mapPoints": [
     { "id": "demo-restoration-zone", "name": "Zona demo de restauración", "latitude": 9.755, "longitude": -84.865, "type": "RESTORATION_ZONE", "status": "DEMO", "description": "Ubicación general de demostración; no representa una coordenada de campo verificada." },
     { "id": "demo-monitoring", "name": "Punto demo de seguimiento", "latitude": 9.748, "longitude": -84.872, "type": "MONITORING", "status": "DEMO", "description": "Punto visual de demostración para seguimiento; requiere confirmación del equipo." },

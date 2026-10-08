@@ -1,5 +1,222 @@
 # PROJECT STATE
 
+## Fase 34 - Registro administrativo y dashboards por rol
+
+Se incorporo un modulo protegido de gestion de usuarios en `/admin/usuarios`, visible unicamente para cuentas `ADMIN`. El formulario permite registrar nombre, correo, contrasena, rol, perfil y descripcion; valida correos duplicados, no expone contrasenas en la interfaz y permite que los nuevos registros puedan iniciar sesion durante la demostracion.
+
+El dashboard privado ahora presenta una vista diferenciada para cada rol: administracion con indicadores y acceso a usuarios, coordinacion con seguimiento de observaciones y etapas, y colaboracion con accesos de consulta al proyecto. Los perfiles demo existentes siguen centralizados en `db.json`; los registros creados desde el navegador se guardan localmente para no convertir el frontend en un escritor inseguro del archivo JSON.
+
+## Verification
+
+- `npm run test`: PASS (32 tests en 12 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS (solo advertencias de conversion LF/CRLF de Git)
+
+## Fase 33 - Tramo sticky hasta el último coral
+
+Se ajustó la sección `#corales` para que el recorrido quede fijado al viewport durante todo su tramo vertical. El desplazamiento ahora avanza progresivamente por las seis etapas y se libera al alcanzar la última; se corrigió el cálculo de navegación directa usando la posición absoluta de la sección y se reemplazó `overflow: hidden` por `overflow: clip` para no interferir con `position: sticky`.
+
+## Verification
+
+- `npm run test`: PASS (26 tests en 10 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS (solo advertencias de conversión LF/CRLF de Git)
+
+## Fase 32 - Lanzador de chatbot con pez animado
+
+Se reemplazó el botón flotante del asistente por un lanzador circular con icono de pez, burbujas, destellos, halo y ondas de agua. La animación contiene una secuencia de 20 movimientos visuales distintos —natación, giros, cambios de escala, ascensos, descensos, balanceos, impulsos y destellos— y se detiene cuando el chat está abierto. Se mantiene el nombre accesible, la apertura/cierre del panel y el soporte de `prefers-reduced-motion`.
+
+## Verification
+
+- `npm run test`: PASS (26 tests en 10 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS (solo advertencias de conversión LF/CRLF de Git)
+
+## Fase 31 - Usuarios demo centralizados en db.json
+
+Se centralizaron los tres accesos demo del proyecto en `db.json` con correo, contraseña, rol, perfil y descripción. `databaseService.js` expone la colección demo y la búsqueda de credenciales; `AuthProvider` autentica contra esos registros y persiste únicamente la identidad, el perfil y el rol en `localStorage`. El login muestra los accesos demo y permite cargar cada perfil directamente en el formulario. Las credenciales son datos de demostración públicos para desarrollo, no cuentas reales.
+
+## Verification
+
+- `npm run test`: PASS (24 tests en 9 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS (solo advertencias de conversión LF/CRLF de Git)
+
+## Fase 30 - Escala global del texto
+
+Se corrigió la aplicación del control de tamaño para que la preferencia afecte también textos definidos con `px`, `clamp()` y estilos internos. La escala seleccionada ahora se aplica al elemento `html` mediante `zoom` y `--rc-font-scale`, conservando la persistencia en `localStorage` y el restablecimiento al 100%.
+
+## Verification
+
+- `npm run test`: PASS (20 tests en 8 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS (solo advertencias de conversión LF/CRLF de Git)
+
+## Fase 29 - Ajustes de texto y cobertura de pruebas
+
+Se incorporó el control `TextSettings` en la navegación pública y el área privada. El panel permite ajustar el tamaño del texto entre 85% y 125%, muestra el porcentaje activo, ofrece restablecimiento, conserva la preferencia en `localStorage` y aplica la escala mediante `--rc-font-scale`. Se añadieron traducciones para los cinco idiomas disponibles.
+
+La cobertura de interfaz se amplió con pruebas de `TextSettings`, `PageIntro`, `ProjectPage` y `NewsPage`. El proyecto usa Vitest (`npm run test`); `npx jest` no corresponde a la configuración actual.
+
+## Verification
+
+- `npm run test`: PASS (20 tests en 8 archivos)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+- `git diff --check`: PASS (solo advertencias de conversión LF/CRLF de Git)
+
+## Fase 28 - Composición horizontal fiel a la referencia
+
+Se rehízo la línea del tiempo inferior con la estructura de la referencia adjunta: sección fijada durante el scroll, desplazamiento horizontal, tarjeta visual inicial, línea central, hitos alternados arriba/abajo, progreso, controles y selección por etapa. Se mantuvieron los datos e imágenes del ciclo coralino del proyecto.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 27 - Ajuste visual según referencia del timeline
+
+Se reajustó la composición de la línea del tiempo para acercarla a la referencia proporcionada: título grande a la izquierda, modelo de etapa en la zona superior derecha, ficha descriptiva debajo, controles independientes y recorrido horizontal concentrado en la parte inferior derecha.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 26 - Timeline narrativa del ciclo coralino
+
+Se integró el componente adjunto en el apartado inferior de la portada, adaptándolo a React JavaScript y CSS del proyecto en lugar de introducir TypeScript, Tailwind o GSAP. La sección ahora permanece fija durante el desplazamiento, actualiza la etapa activa según el progreso, muestra el asset y la descripción del ciclo desde los datos existentes, y mantiene controles, tabs accesibles y soporte para movimiento reducido.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 25 - Contraste de tarjetas al pasar el cursor
+
+Se corrigió el estado hover de las tarjetas de principios del proyecto: ahora usan un fondo marino oscuro y texto claro para conservar la legibilidad, evitando el fondo blanco con letras invisibles.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 24 - Ajuste del destino del botón de ciclo de vida
+
+Se corrigió el salto del botón para entrar 180 píxeles dentro de la sección `#corales`, evitando que la alineación con el inicio técnico de la sección deje un espacio vacío superior. El título y la línea del tiempo quedan visibles al llegar.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 23 - Posicionamiento del salto al ciclo de vida
+
+El botón “Ver el ciclo de vida” ahora usa un desplazamiento suave controlado hacia `#corales`, con margen superior para que el encabezado y la línea del tiempo queden visibles correctamente al llegar.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 22 - Botón de ciclo de vida con ancla interna
+
+El botón “Ver el ciclo de vida” de la portada ahora dirige suavemente al apartado `#corales`, donde se encuentra la línea del tiempo interactiva, en lugar de abrir la galería.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 21 - Reubicación de controles de la línea del tiempo
+
+Se reubicaron las flechas anterior/siguiente del ciclo de vida por encima de la línea del tiempo, evitando que cubran los nodos finales, etiquetas o contenido visual. Se mantuvo el ajuste responsive para móvil.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 20 - Línea del tiempo del ciclo de vida en portada
+
+El apartado del ciclo de vida mostrado en la portada ahora utiliza una línea del tiempo interactiva con nodos numerados, progreso visual, etapas seleccionables, modelos del ciclo, descripción activa y controles anterior/siguiente. La galería mantiene su formato de recuadros con fotografías marinas/isla de referencia.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 19 - Línea del tiempo en portada y galería fotográfica
+
+La línea del tiempo interactiva se aplicó al apartado del ciclo de vida de la portada, con progreso visual y etapas seleccionables. La galería pública conserva su formato anterior de imagen destacada y recuadros, pero ahora muestra fotografías marinas/isla existentes en lugar de los gráficos del ciclo coralino.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 18 - Línea del tiempo interactiva del ciclo coralino
+
+Se transformó la galería pública en una línea del tiempo interactiva: seis etapas conectadas, progreso visual, nodos seleccionables, imagen y descripción de la etapa activa, controles anterior/siguiente y versión vertical responsive para móvil. Se conservaron los datos demo y los assets existentes, con navegación accesible mediante tabs y teclado.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 17 - Transición suave del tema
+
+Se añadió un fundido de `0.9s` entre la imagen clara y la imagen nocturna en la portada. Ambas capas conservan sus dimensiones y el cambio respeta la preferencia de movimiento reducido.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 16 - Corrección del botón de tema
+
+Se corrigió la selección de imagen en la portada: el fondo ahora cambia directamente entre el asset claro y la imagen nocturna adjunta según el estado global del tema. También se mantuvo compatible el renderizado aislado usado por las pruebas.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 15 - Fondo nocturno como imagen real
+
+Se reemplazó el tratamiento nocturno basado en filtros CSS por el asset raster nocturno solicitado por el usuario (`exec-acb421a4-1b71-4a34-9d69-8f4874940caf.png`), integrado como `isla-tortuga-long-scroll-night.png`. El tema claro conserva `isla-tortuga-long-scroll.png` y el tema oscuro usa esta imagen; ambos archivos tienen exactamente `821x1916` píxeles y mantienen el mismo encuadre vertical.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 14 - Barras de desplazamiento ocultas
+
+Se ocultaron las barras de desplazamiento del documento y de los contenedores internos, incluyendo carruseles, tablas y el chat, manteniendo el desplazamiento con rueda, teclado y gestos táctiles.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 13 - Tema claro/oscuro global
+
+Se unificó el tema de toda la aplicación mediante `ThemeProvider`, con persistencia en el navegador y controles accesibles en navegación pública, área privada, dashboard y observaciones. El modo oscuro conserva exactamente la imagen marina existente (`isla-tortuga-long-scroll.png`) y la transforma visualmente en una escena nocturna mediante capas y filtros, sin reemplazarla ni añadir imágenes inventadas. Se reforzó la sincronización del atributo global en `html` y `body` y el contraste nocturno para que el cambio sea visible en todas las rutas.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
+## Fase 12 - Galería fotográfica con recuadros
+
+Se rediseñó la ruta pública `/galeria` como una galería visual con imagen destacada, contador, ficha de etapa, controles anterior/siguiente y seis recuadros de miniaturas seleccionables usando los assets existentes del ciclo coralino. Se conservaron estados accesibles de tabs, foco, diseño responsive para móvil y aviso de contenido de referencia; no se añadieron datos de campo ni fotografías inventadas.
+
+## Verification
+
+- `npm run test`: PASS (10 tests)
+- `npm run build`: PASS (advertencia existente de bundle > 500 kB)
+
 ## Fase 11 - Fuente única de información en db.json
 
 Se trasladó al `db.json` la información de dominio del proyecto: ubicación, descripción, actividades, motivo de restauración, colaboración y etapas del ciclo coralino. `projectData.js` ya no contiene copias de esos textos y las páginas públicas (`PublicHome`, `ProjectPage`, `NewsPage`, `LoginPage`, `InteractivePublicPages`) y el dashboard consumen `projectInfo` desde `databaseService.js`. Las traducciones de etiquetas y textos propios de la interfaz permanecen en i18n; el clima continúa siendo información externa en tiempo real y el mapa usa los puntos demo del mismo `db.json`.
