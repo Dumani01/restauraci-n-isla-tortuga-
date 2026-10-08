@@ -1,6 +1,19 @@
 .chatbot-widget { bottom: 24px; font-family: inherit; position: fixed; right: 24px; z-index: 40; }
-.chatbot-launcher { align-items: center; background: #0d5663; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; box-shadow: 0 10px 28px rgba(5, 35, 43, .28); color: #fff; cursor: pointer; display: inline-flex; font-size: .78rem; font-weight: 700; gap: 8px; min-height: 46px; padding: 0 16px; }
-.chatbot-launcher:hover { background: #0a4652; }
+.chatbot-launcher { align-items: center; background: radial-gradient(circle at 33% 27%, #9ce9d3 0 8%, #2f9aaa 32%, #0d5663 72%); border: 2px solid rgba(230, 255, 247, .78); border-radius: 50%; box-shadow: 0 10px 28px rgba(5, 35, 43, .28), 0 0 0 6px rgba(143, 216, 199, .1); color: #fff; cursor: pointer; display: inline-flex; height: 64px; justify-content: center; min-height: 64px; overflow: visible; padding: 0; position: relative; width: 64px; }
+.chatbot-launcher:hover { background: radial-gradient(circle at 33% 27%, #c5f7e7 0 8%, #49b8c4 32%, #0a4652 72%); box-shadow: 0 14px 34px rgba(5, 35, 43, .38), 0 0 0 9px rgba(143, 216, 199, .14); }
+.chatbot-launcher__label { height: 1px; margin: -1px; overflow: hidden; position: absolute; width: 1px; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+.fish-launcher { display: block; height: 42px; position: relative; width: 48px; }
+.fish-launcher__icon { animation: fish-adventure 16s ease-in-out infinite; color: #f4fff9; filter: drop-shadow(0 3px 5px rgba(0, 30, 38, .4)); left: 8px; position: absolute; top: 5px; transform-origin: 50% 50%; }
+.fish-launcher::before { animation: fish-halo-pulse 2.8s ease-in-out infinite; border: 1px solid rgba(226, 255, 246, .42); border-radius: 50%; content: ''; inset: 2px 0 2px 5px; position: absolute; }
+.fish-launcher::after { animation: fish-water-shimmer 3.4s ease-in-out infinite; border-bottom: 2px solid rgba(213, 255, 243, .68); border-radius: 50%; bottom: 0; content: ''; height: 8px; left: 3px; opacity: .7; position: absolute; transform: rotate(-9deg); width: 40px; }
+.fish-launcher__bubble { animation-timing-function: ease-in-out; background: rgba(225, 255, 247, .8); border: 1px solid rgba(255, 255, 255, .8); border-radius: 50%; height: 4px; position: absolute; width: 4px; }
+.fish-launcher__bubble--one { animation: fish-bubble-rise-one 3.1s linear infinite; left: 1px; top: 21px; }
+.fish-launcher__bubble--two { animation: fish-bubble-rise-two 3.7s linear .8s infinite; height: 3px; left: 39px; top: 30px; width: 3px; }
+.fish-launcher__bubble--three { animation: fish-bubble-rise-three 4.2s linear 1.6s infinite; height: 5px; left: 8px; top: 9px; width: 5px; }
+.fish-launcher__spark { animation: fish-spark-twinkle 1.8s ease-in-out infinite; background: #fff2b8; height: 2px; position: absolute; transform: rotate(45deg); width: 8px; }
+.fish-launcher__spark--one { right: 1px; top: 4px; }
+.fish-launcher__spark--two { animation-delay: .9s; bottom: 5px; left: 2px; transform: rotate(-25deg) scale(.7); }
+.chatbot-launcher.is-open .fish-launcher__icon { animation-play-state: paused; }
 .chatbot-launcher:focus-visible, .chatbot-panel button:focus-visible, .chatbot-panel textarea:focus-visible { outline: 2px solid #f2c879; outline-offset: 3px; }
 .chatbot-panel { background: #f5fbf9; border: 1px solid rgba(8, 60, 70, .25); border-radius: 16px; bottom: 62px; box-shadow: 0 18px 48px rgba(5, 35, 43, .3); color: #173943; display: flex; flex-direction: column; height: min(600px, calc(100vh - 120px)); overflow: hidden; position: absolute; right: 0; width: min(380px, calc(100vw - 32px)); }
 .chatbot-panel__header { align-items: center; background: #0d3b49; color: #fff; display: flex; justify-content: space-between; padding: 15px 16px; }
@@ -38,5 +51,35 @@
 .chat-confirm button { background: #fff; border-radius: 6px; color: #0d5663; font-size: .72rem; padding: 7px 10px; }
 .chat-confirm button:last-child { background: transparent; border: 1px solid rgba(255,255,255,.4); color: #fff; }
 @keyframes chatbot-spin { to { transform: rotate(360deg); } }
+
+/* Secuencia del pez: 20 movimientos distintos antes de volver a empezar. */
+@keyframes fish-adventure {
+  0%, 100% { filter: drop-shadow(0 3px 5px rgba(0, 30, 38, .4)); transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  5% { transform: translate3d(2px, -1px, 0) rotate(-5deg) scale(1.02); }
+  10% { transform: translate3d(-2px, 1px, 0) rotate(7deg) scaleX(.9); }
+  15% { transform: translate3d(1px, -4px, 0) rotate(-2deg) scale(1.04); }
+  20% { transform: translate3d(-1px, 4px, 0) rotate(3deg) scale(.97); }
+  25% { transform: translate3d(3px, 0, 0) rotate(12deg) scale(1.01); }
+  30% { transform: translate3d(-3px, 0, 0) rotate(-12deg) scale(1.01); }
+  35% { transform: translate3d(0, -2px, 0) rotate(0deg) scale(1.1, .92); }
+  40% { filter: drop-shadow(0 0 8px rgba(255, 239, 170, .9)); transform: translate3d(0, 0, 0) rotate(180deg) scale(1); }
+  45% { transform: translate3d(0, 0, 0) rotate(360deg) scale(1); }
+  50% { transform: translate3d(2px, -3px, 0) rotate(355deg) scale(.94, 1.08); }
+  55% { transform: translate3d(-2px, 2px, 0) rotate(370deg) scale(1.03); }
+  60% { transform: translate3d(4px, 0, 0) rotate(350deg) scale(1); }
+  65% { transform: translate3d(-4px, 0, 0) rotate(365deg) scaleX(.86); }
+  70% { filter: drop-shadow(0 3px 12px rgba(143, 216, 199, .95)); transform: translate3d(0, -1px, 0) rotate(360deg) scale(1.14); }
+  75% { transform: translate3d(0, 3px, 0) rotate(360deg) scale(.9); }
+  80% { transform: translate3d(3px, -2px, 0) rotate(368deg) scale(1.02); }
+  85% { transform: translate3d(-3px, 1px, 0) rotate(352deg) scale(1.02); }
+  90% { filter: drop-shadow(0 3px 5px rgba(0, 30, 38, .4)); transform: translate3d(1px, 0, 0) rotate(360deg) scale(1.06); }
+  95% { transform: translate3d(-1px, 0, 0) rotate(360deg) scale(1); }
+}
+@keyframes fish-halo-pulse { 0%, 100% { opacity: .35; transform: scale(.9); } 50% { opacity: .9; transform: scale(1.12); } }
+@keyframes fish-water-shimmer { 0%, 100% { opacity: .35; transform: translateX(-2px) rotate(-9deg) scaleX(.8); } 50% { opacity: 1; transform: translateX(3px) rotate(-2deg) scaleX(1.1); } }
+@keyframes fish-bubble-rise-one { 0% { opacity: 0; transform: translate(0, 8px) scale(.5); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(-4px, -25px) scale(1.4); } }
+@keyframes fish-bubble-rise-two { 0% { opacity: 0; transform: translate(0, 7px) scale(.4); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(4px, -22px) scale(1.3); } }
+@keyframes fish-bubble-rise-three { 0% { opacity: 0; transform: translate(0, 5px) scale(.5); } 35% { opacity: 1; } 100% { opacity: 0; transform: translate(5px, -20px) scale(1.25); } }
+@keyframes fish-spark-twinkle { 0%, 100% { opacity: .1; transform: rotate(45deg) scale(.5); } 50% { opacity: 1; transform: rotate(135deg) scale(1.15); } }
 @media (max-width: 600px) { .chatbot-widget { bottom: 16px; right: 16px; }.chatbot-panel { bottom: 58px; height: calc(100vh - 92px); right: -4px; width: calc(100vw - 24px); } }
-@media (prefers-reduced-motion: reduce) { .chat-status__spin { animation: none; } .chatbot-messages { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) { .chat-status__spin { animation: none; } .chatbot-messages { scroll-behavior: auto; } .fish-launcher__icon, .fish-launcher::before, .fish-launcher::after, .fish-launcher__bubble, .fish-launcher__spark { animation: none; } }

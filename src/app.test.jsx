@@ -6,7 +6,7 @@ test('la portada muestra la restauración y cambia la información del proceso',
   render(<MemoryRouter><PublicHome /></MemoryRouter>);
 
   expect(screen.getByRole('heading', { name: /restauración coralina/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /ver el ciclo de vida/i })).toHaveAttribute('href', '/galeria');
+  expect(screen.getByRole('link', { name: /ver el ciclo de vida/i })).toHaveAttribute('href', '#corales');
 
   fireEvent.click(screen.getByRole('tab', { name: 'Cómo' }));
 
