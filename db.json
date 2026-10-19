@@ -11,7 +11,14 @@
     "whyRestore": "Los arrecifes son hogar y refugio de muchas especies marinas, ayudan a proteger las costas y forman parte de la vida de las comunidades que dependen del mar.",
     "collaboration": "Recuperar un arrecife requiere conocimiento y colaboración. Investigadores, instituciones y comunidades trabajan juntos para cuidar los corales, aprender de ellos y devolver vida a las zonas afectadas."
   },
-  "lifecycleStages": ["Gametos", "Embrión", "Larva (plánula)", "Asentamiento en sustrato", "Coral juvenil", "Coral adulto"],
+  "lifecycleStages": [
+    "Gametos",
+    "Embrión",
+    "Larva (plánula)",
+    "Asentamiento en sustrato",
+    "Coral juvenil",
+    "Coral adulto"
+  ],
   "observations": [],
   "evidence": [],
   "users": [
@@ -47,9 +54,41 @@
     }
   ],
   "mapPoints": [
-    { "id": "demo-restoration-zone", "name": "Zona demo de restauración", "latitude": 9.755, "longitude": -84.865, "type": "RESTORATION_ZONE", "status": "DEMO", "description": "Ubicación general de demostración; no representa una coordenada de campo verificada." },
-    { "id": "demo-monitoring", "name": "Punto demo de seguimiento", "latitude": 9.748, "longitude": -84.872, "type": "MONITORING", "status": "DEMO", "description": "Punto visual de demostración para seguimiento; requiere confirmación del equipo." },
-    { "id": "demo-activity", "name": "Actividad demo de mantenimiento", "latitude": 9.761, "longitude": -84.858, "type": "ACTIVITY", "status": "DEMO", "description": "Referencia visual de una actividad del proyecto; no es un registro de campo." },
-    { "id": "demo-tourism", "name": "Punto turístico de referencia", "latitude": 9.766, "longitude": -84.878, "type": "TOURISM", "status": "REFERENCE", "description": "Referencia general para contexto del área; no contiene coordenadas sensibles." }
+    {
+      "id": "demo-restoration-zone",
+      "name": "Zona demo de restauración",
+      "latitude": 9.755,
+      "longitude": -84.865,
+      "type": "RESTORATION_ZONE",
+      "status": "DEMO",
+      "description": "Ubicación general de demostración; no representa una coordenada de campo verificada."
+    },
+    {
+      "id": "demo-monitoring",
+      "name": "Punto demo de seguimiento",
+      "latitude": 9.748,
+      "longitude": -84.872,
+      "type": "MONITORING",
+      "status": "DEMO",
+      "description": "Punto visual de demostración para seguimiento; requiere confirmación del equipo."
+    },
+    {
+      "id": "demo-activity",
+      "name": "Actividad demo de mantenimiento",
+      "latitude": 9.761,
+      "longitude": -84.858,
+      "type": "ACTIVITY",
+      "status": "DEMO",
+      "description": "Referencia visual de una actividad del proyecto; no es un registro de campo."
+    },
+    {
+      "id": "demo-tourism",
+      "name": "Punto turístico de referencia",
+      "latitude": 9.766,
+      "longitude": -84.878,
+      "type": "TOURISM",
+      "status": "REFERENCE",
+      "description": "Referencia general para contexto del área; no contiene coordenadas sensibles."
+    }
   ]
 }

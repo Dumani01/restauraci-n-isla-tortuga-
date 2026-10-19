@@ -1,5 +1,15 @@
 # PROJECT STATE
 
+## Formateo global del proyecto
+
+Se aplicó Prettier de forma temporal a los archivos de código, estilos, configuraciones y documentación compatibles, sin añadir dependencias al proyecto ni modificar assets binarios.
+
+## Verification
+
+- `npm run build`: PASS; bundle principal de 413.04 kB.
+- `npm run test`: la ejecución estándar quedó abierta sin emitir el resumen final; la repetición con un solo worker mostró el aviso existente de `window.scrollTo()` y no terminó dentro del tiempo de verificación.
+- `git diff --check`: PASS.
+
 ## Fase 62 - Movimiento suave del ciclo coralino
 
 El recorrido horizontal del ciclo de vida ahora interpola la posición objetivo del scroll mediante requestAnimationFrame, evitando saltos entre actualizaciones y manteniendo la relación entre desplazamiento vertical, línea de progreso e hitos. También se suavizó la entrada de las imágenes de cada etapa y se conservó el soporte para movimiento reducido.
@@ -560,7 +570,6 @@ Se exportó `n8n/coral-assistant-workflow.json` con Webhook POST, validación de
 - `npm run lint`: N/A, no existe script `lint` en `package.json`
 - Ejecución real del webhook: pendiente de configurar/importar el workflow en una instancia n8n con credenciales del proveedor.
 
-
 ## Fase 7 - API meteorológica y clima
 
 Se integró Open-Meteo mediante `src/services/weatherService.js`, reutilizando las coordenadas generales centralizadas de Isla Tortuga desde `mapService.js`. El componente `WeatherCard` muestra clima actual, sensación térmica, humedad, viento, precipitación, condición meteorológica y pronóstico compacto de cinco días. Incluye estados de carga, error con reintento y caché en `sessionStorage` durante 20 minutos. Los códigos WMO se convierten a etiquetas e iconos comprensibles mediante i18n y el narrador puede leer el contenido textual sin iniciar voz automáticamente.
@@ -574,7 +583,6 @@ El widget se integró una sola vez en la página de Mapa, separado de Leaflet. N
 - `npm run lint`: N/A, no existe script `lint` en `package.json`
 - Verificación en vivo de Open-Meteo: pendiente de ejecutar en navegador con red disponible.
 
-
 ## Fase 6 - Mapa interactivo con Leaflet
 
 Se reemplazó el mapa visual simulado por un mapa real con Leaflet, React Leaflet y OpenStreetMap. La vista carga puntos desde `db.json` mediante `src/services/mapService.js`, valida coordenadas sin romper el mapa y mantiene un centro generalizado de Isla Tortuga centralizado. Se agregaron marcadores diferenciados por tipo, popups, leyenda accesible, filtro sin recarga, estados de carga/error/vacío y una advertencia explícita de que los puntos son demo o de referencia.
@@ -586,7 +594,6 @@ La integración conserva i18n y el narrador puede leer la información textual d
 - `npm run test`: PASS (7 tests)
 - `npm run build`: PASS (advertencia existente de bundle > 500 kB)
 - `npm run lint`: N/A, no existe script `lint` en `package.json`
-
 
 ## Fase 5 - Voice / Narrador accesible
 
@@ -601,7 +608,6 @@ Las preferencias se guardan en `localStorage` como `narratorEnabled`, `narratorR
 - `npm run lint`: N/A, no existe script `lint` en `package.json`
 - Verificación visual y de voces reales: pendiente de navegador/dispositivo con SpeechSynthesis disponible; las voces dependen del sistema operativo.
 
-
 ## Fase 4 - Sistema multilenguaje i18n
 
 Se implementó internacionalización completa de la interfaz con `i18next` y `react-i18next`. La aplicación ahora ofrece español, inglés, francés, alemán y portugués mediante un selector accesible en la navegación pública. El idioma se detecta desde `localStorage` o el navegador, se conserva en `preferredLanguage` y actualiza dinámicamente `html[lang]`. Se migraron la navegación, portada, proyecto, mapa, galería, noticias, acceso, dashboard, observaciones y textos del ciclo de vida coral. El contenido divulgativo del proyecto permanece separado de la UI y no se traducen datos creados por usuarios mediante IA.
@@ -611,7 +617,6 @@ Se implementó internacionalización completa de la interfaz con `i18next` y `re
 - `npm run test`: PASS (7 tests)
 - `npm run build`: PASS
 - `npm run lint`: N/A, no existe script `lint` en `package.json`
-
 
 ## Fase 81 - Fondo proporcional al cambiar pestañas
 

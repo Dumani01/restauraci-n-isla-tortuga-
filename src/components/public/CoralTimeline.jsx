@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { lifecycleAssets } from '../../services/lifecycleAssets.js';
-import { lifecycleStages } from '../../services/projectData.js';
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { lifecycleAssets } from "../../services/lifecycleAssets.js";
+import { lifecycleStages } from "../../services/projectData.js";
 
 const clamp = (value) => Math.min(Math.max(value, 0), 1);
 
@@ -23,20 +23,27 @@ export function CoralTimeline() {
     const events = eventsRef.current;
     if (!section || !events) return undefined;
     const measureHorizontalDistance = () => {
-      const edgeInset = Number.parseFloat(window.getComputedStyle(events).left) || 24;
-      const nextDistance = Math.max(0, events.scrollWidth - (window.innerWidth - edgeInset * 2));
+      const edgeInset =
+        Number.parseFloat(window.getComputedStyle(events).left) || 24;
+      const nextDistance = Math.max(
+        0,
+        events.scrollWidth - (window.innerWidth - edgeInset * 2),
+      );
       if (Math.abs(nextDistance - horizontalDistanceRef.current) > 1) {
         horizontalDistanceRef.current = nextDistance;
         setHorizontalDistance(nextDistance);
       }
     };
     measureHorizontalDistance();
-    const resizeObserver = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(measureHorizontalDistance);
+    const resizeObserver =
+      typeof ResizeObserver === "undefined"
+        ? null
+        : new ResizeObserver(measureHorizontalDistance);
     resizeObserver?.observe(events);
-    window.addEventListener('resize', measureHorizontalDistance);
+    window.addEventListener("resize", measureHorizontalDistance);
     return () => {
       resizeObserver?.disconnect();
-      window.removeEventListener('resize', measureHorizontalDistance);
+      window.removeEventListener("resize", measureHorizontalDistance);
     };
   }, []);
 
@@ -47,10 +54,16 @@ export function CoralTimeline() {
       const current = smoothProgressRef.current;
       const target = targetProgressRef.current;
       const distance = target - current;
-      const next = Math.abs(distance) < 0.0005 ? target : current + distance * 0.16;
+      const next =
+        Math.abs(distance) < 0.0005 ? target : current + distance * 0.16;
       smoothProgressRef.current = next;
       setProgress(next);
-      setActiveIndex(Math.min(lifecycleStages.length - 1, Math.round(next * (lifecycleStages.length - 1))));
+      setActiveIndex(
+        Math.min(
+          lifecycleStages.length - 1,
+          Math.round(next * (lifecycleStages.length - 1)),
+        ),
+      );
       if (next !== target) {
         progressAnimationRef.current = requestAnimationFrame(animateProgress);
       } else {
@@ -61,16 +74,18 @@ export function CoralTimeline() {
       const rect = section.getBoundingClientRect();
       const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
       targetProgressRef.current = clamp(-rect.top / travel);
-      if (!progressAnimationRef.current) progressAnimationRef.current = requestAnimationFrame(animateProgress);
+      if (!progressAnimationRef.current)
+        progressAnimationRef.current = requestAnimationFrame(animateProgress);
     };
     update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
     return () => {
-      if (progressAnimationRef.current) cancelAnimationFrame(progressAnimationRef.current);
+      if (progressAnimationRef.current)
+        cancelAnimationFrame(progressAnimationRef.current);
       progressAnimationRef.current = 0;
-      window.removeEventListener('scroll', update);
-      window.removeEventListener('resize', update);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
     };
   }, [horizontalDistance]);
 
@@ -80,36 +95,96 @@ export function CoralTimeline() {
     const travel = Math.max(target.offsetHeight - window.innerHeight, 1);
     const sectionTop = target.getBoundingClientRect().top + window.scrollY;
     const stageProgress = index / Math.max(lifecycleStages.length - 1, 1);
-    window.scrollTo({ top: sectionTop + travel * stageProgress, behavior: 'smooth' });
+    window.scrollTo({
+      top: sectionTop + travel * stageProgress,
+      behavior: "smooth",
+    });
   };
 
   const activeName = t(`lifecycle.${activeStage.id}.name`);
   const activeDescription = t(`lifecycle.${activeStage.id}.description`);
 
-  return <section className="coral-storyline" id="corales" ref={sectionRef} aria-labelledby="coral-storyline-title" style={{ '--story-horizontal-distance': `${horizontalDistance}px`, '--story-horizontal-offset': `${-horizontalDistance * progress}px`, '--story-horizontal-progress': progress }}>
-    <div className="coral-storyline__sticky">
-      <div className="coral-storyline__canvas">
-        <div className="coral-storyline__visual" aria-live="polite">
-          <img key={activeStage.id} src={lifecycleAssets[activeStage.id]} alt={activeName} decoding="async" width="1254" height="1254" />
-          <span className="coral-storyline__visual-label">{activeName}</span>
-        </div>
-        <div className="coral-storyline__heading">
-          <p className="vh-kicker">{t('home.carouselLabel')}</p>
-          <h2 id="coral-storyline-title">{t('home.reefTitle')}<br /><em>{t('home.reefEmphasis')}</em></h2>
-          <p>{t('home.reefIntro')}</p>
-        </div>
-        <div className="coral-storyline__line-wrap" aria-hidden="true"><div className="coral-storyline__line"><i /><b /><span className="coral-storyline__line-dot coral-storyline__line-dot--start" /><span className="coral-storyline__line-dot coral-storyline__line-dot--end" /></div><small>{t('gallery.stage', { current: activeIndex + 1, total: lifecycleStages.length })}</small></div>
-        <div className="coral-storyline__events" ref={eventsRef} role="tablist" aria-label={t('home.selectStage')}>
-          {lifecycleStages.map((item, index) => {
-            const name = t(`lifecycle.${item.id}.name`);
-            const description = t(`lifecycle.${item.id}.description`);
-            return <button className={`coral-storyline__event${activeIndex === index ? ' is-active' : ''}`} id={`coral-storyline-stage-${item.id}`} key={item.id} type="button" role="tab" aria-selected={activeIndex === index} aria-controls="coral-storyline-title" onClick={() => selectStage(index)}>
-              <span className="coral-storyline__event-dot">{String(index + 1).padStart(2, '0')}</span>
-              <span className="coral-storyline__event-copy"><strong>{name}</strong><small>{description}</small></span>
-            </button>;
-          })}
+  return (
+    <section
+      className="coral-storyline"
+      id="corales"
+      ref={sectionRef}
+      aria-labelledby="coral-storyline-title"
+      style={{
+        "--story-horizontal-distance": `${horizontalDistance}px`,
+        "--story-horizontal-offset": `${-horizontalDistance * progress}px`,
+        "--story-horizontal-progress": progress,
+      }}
+    >
+      <div className="coral-storyline__sticky">
+        <div className="coral-storyline__canvas">
+          <div className="coral-storyline__visual" aria-live="polite">
+            <img
+              key={activeStage.id}
+              src={lifecycleAssets[activeStage.id]}
+              alt={activeName}
+              decoding="async"
+              width="1254"
+              height="1254"
+            />
+            <span className="coral-storyline__visual-label">{activeName}</span>
+          </div>
+          <div className="coral-storyline__heading">
+            <p className="vh-kicker">{t("home.carouselLabel")}</p>
+            <h2 id="coral-storyline-title">
+              {t("home.reefTitle")}
+              <br />
+              <em>{t("home.reefEmphasis")}</em>
+            </h2>
+            <p>{t("home.reefIntro")}</p>
+          </div>
+          <div className="coral-storyline__line-wrap" aria-hidden="true">
+            <div className="coral-storyline__line">
+              <i />
+              <b />
+              <span className="coral-storyline__line-dot coral-storyline__line-dot--start" />
+              <span className="coral-storyline__line-dot coral-storyline__line-dot--end" />
+            </div>
+            <small>
+              {t("gallery.stage", {
+                current: activeIndex + 1,
+                total: lifecycleStages.length,
+              })}
+            </small>
+          </div>
+          <div
+            className="coral-storyline__events"
+            ref={eventsRef}
+            role="tablist"
+            aria-label={t("home.selectStage")}
+          >
+            {lifecycleStages.map((item, index) => {
+              const name = t(`lifecycle.${item.id}.name`);
+              const description = t(`lifecycle.${item.id}.description`);
+              return (
+                <button
+                  className={`coral-storyline__event${activeIndex === index ? " is-active" : ""}`}
+                  id={`coral-storyline-stage-${item.id}`}
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeIndex === index}
+                  aria-controls="coral-storyline-title"
+                  onClick={() => selectStage(index)}
+                >
+                  <span className="coral-storyline__event-dot">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="coral-storyline__event-copy">
+                    <strong>{name}</strong>
+                    <small>{description}</small>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
-  </section>;
+    </section>
+  );
 }

@@ -35,6 +35,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
 ## Studiova Bootstrap Template
 
 Se tomaron como referencia visual y de interacción patrones de navegación fija, bloques numerados, tarjetas con overlays, revelado al hacer scroll, carruseles y botón de volver arriba del template Studiova de WrapPixel.
