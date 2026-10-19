@@ -11,7 +11,8 @@
     "Iowan Old Style", "Baskerville Old Face", "Palatino Linotype", Georgia,
     serif;
 
-  background: var(--vh-ink);
+  background-color: transparent;
+  background-image: none;
 
   color: #f4fbf8;
 
@@ -33,16 +34,7 @@
 }
 
 .velorah-home::before {
-  background-image: var(--vh-underwater-image);
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: cover;
-  content: "";
-  inset: 0;
-  opacity: 0.98;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
+  display: none;
 }
 
 .vh-theme-background-night {
@@ -2789,10 +2781,10 @@ html[data-theme="dark"] .coral-storyline__event-copy small {
   bottom: 24%;
   grid-column: auto;
   grid-row: auto;
-  left: max(7vw, 24px);
+  left: max(4vw, 16px);
   margin: 0;
   position: absolute;
-  right: max(7vw, 24px);
+  right: max(4vw, 16px);
 }
 
 .coral-storyline__line b {
@@ -2809,7 +2801,7 @@ html[data-theme="dark"] .coral-storyline__event-copy small {
   display: flex;
   gap: clamp(16px, 3vw, 42px);
   height: 200px;
-  left: max(7vw, 24px);
+  left: max(4vw, 16px);
   overflow: visible;
   right: auto;
   transform: translate3d(var(--story-horizontal-offset, 0px), 0, 0);
@@ -2830,6 +2822,20 @@ html[data-theme="dark"] .coral-storyline__event-copy small {
   width: auto;
 }
 
+.coral-storyline__event-copy {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.coral-storyline__event-copy strong,
+.coral-storyline__event-copy small {
+  display: block;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
 .coral-storyline__event:nth-child(odd) {
   transform: translateY(-98px);
 }
@@ -2841,13 +2847,15 @@ html[data-theme="dark"] .coral-storyline__event-copy small {
 .coral-storyline__event:hover,
 .coral-storyline__event:focus-visible,
 .coral-storyline__event.is-active {
-  transform: translateY(-4px);
+  border-color: rgba(242, 160, 129, 0.72);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
 }
 
 .coral-storyline__event:nth-child(even):hover,
 .coral-storyline__event:nth-child(even):focus-visible,
 .coral-storyline__event:nth-child(even).is-active {
-  transform: translateY(94px);
+  border-color: rgba(242, 160, 129, 0.72);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
 }
 
 @media (max-width: 760px) {
@@ -2857,8 +2865,8 @@ html[data-theme="dark"] .coral-storyline__event-copy small {
 
   .coral-storyline__line-wrap {
     bottom: 19%;
-    left: 24px;
-    right: 24px;
+    left: 16px;
+    right: 16px;
   }
 
   .coral-storyline__events {
@@ -2885,13 +2893,15 @@ html[data-theme="dark"] .coral-storyline__event-copy small {
   .coral-storyline__event:hover,
   .coral-storyline__event:focus-visible,
   .coral-storyline__event.is-active {
-    transform: translateY(-4px);
+    border-color: rgba(242, 160, 129, 0.72);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
   }
 
   .coral-storyline__event:nth-child(even):hover,
   .coral-storyline__event:nth-child(even):focus-visible,
   .coral-storyline__event:nth-child(even).is-active {
-    transform: translateY(74px);
+    border-color: rgba(242, 160, 129, 0.72);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
   }
 }
 
@@ -2907,10 +2917,16 @@ html[data-theme="dark"] .coral-storyline__event-copy small {
 }
 
 .vh-home-video {
-  background: linear-gradient(145deg, #082d38, #04171f);
+  background: transparent;
   padding: clamp(38px, 7vw, 88px) clamp(18px, 6vw, 84px);
   position: relative;
   z-index: 2;
+}
+.vh-home-video::before {
+  display: none;
+}
+.vh-home-video::after {
+  display: none;
 }
 
 .vh-home-video__heading {
