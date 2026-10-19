@@ -1,5 +1,143 @@
 # PROJECT STATE
 
+## Undo de la Fase 76
+
+Se revirtió el último cambio de superficie azul continua bajo los videos. La sección vuelve a fondo transparente y el footer recupera el fondo submarino anterior.
+
+## Verification
+
+- Cambio revertido manualmente sin tocar los cambios previos.
+
+## Fase 76 - Superficie azul continua bajo los videos
+
+Se añadió una superficie azul oceánica profunda bajo los videos, con degradado de entrada desde la imagen submarina y degradado de salida hacia el final de la página. El footer adopta el mismo tono para mantener continuidad visual sin cortes.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 75 - Retiro del overlay azul bajo los videos
+
+Se eliminó el overlay global y la capa atmosférica de la landing que teñían de azul el área bajo los videos. La sección de videos permanece transparente y deja ver el fondo submarino continuo; también se anuló explícitamente el borde superior del footer en la landing.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 74 - Retiro del fondo azul bajo los videos
+
+Se eliminó el fondo azul y sus degradados de la sección de videos para que el área debajo de los reproductores muestre nuevamente la imagen submarina continua de la landing. Los videos y sus marcos permanecen intactos.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 72 - Estabilización de la línea de vida y superficies visuales
+
+Se ajustó la sección azul de videos para que se perciba como un solo bloque continuo con degradados de entrada y salida. La línea del ciclo coralino se acercó a los bordes visibles y las tarjetas dejaron de transformar su posición al pasar el cursor, evitando saltos y parpadeos. También se reforzó el ajuste de texto para impedir superposiciones.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 71 - Degradados oscuros de entrada y salida
+
+Se añadieron degradados azul marino oscuro arriba y debajo de la sección de videos. La transición integra el bloque con la imagen submarina y el footer sin duplicar la fotografía, y conserva el contenido visible.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 70 - Retiro del degradado superior
+
+Se eliminó la capa de degradado superior de la sección de video para que la imagen submarina se vea continua y sin una banda oscura de transición.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 69 - Retiro del fondo azul de la landing
+
+Se eliminaron los fondos azules sólidos de la portada y del contenedor público de la landing. La imagen de playa continúa siendo la capa visual principal y ocupa el contenedor completo.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 68 - Continuidad del fondo hasta el pie
+
+Se extendió la imagen de playa al contenedor completo de la landing, incluyendo el tramo final antes del footer. Se eliminó el fondo duplicado del contenido principal para evitar imágenes fantasma; ahora existe una única composición de fondo en el contenedor público.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 67 - Corrección de imagen fantasma del parallax
+
+Se eliminó el doble renderizado del fondo submarino. La landing conserva una sola imagen como fondo principal; la pseudo-capa ahora solo aporta una atmósfera de color y el clon global dejó de aplicarse sobre la portada.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 66 - Fondo de playa visible en toda la landing
+
+Se corrigió la portada para aplicar explícitamente la imagen principal de playa al contenedor completo de la landing, con `background-size: 100% 100%`, igual que la composición compartida de los demás apartados. La capa parallax y los overlays permanecen encima sin reemplazar el fondo.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 65 - Continuidad visible del fondo submarino
+
+Se corrigió la sección de videos de la portada, que estaba cubriendo con un fondo azul opaco la imagen submarina principal. Ahora usa una capa translúcida para que el fondo continúe visible durante toda la página, conservando el degradado de transición y el contraste del contenido.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 64 - Sistema parallax global con easing
+
+Se implementó un sistema parallax compartido para las rutas públicas y privadas. Un hook centralizado suaviza el scroll con interpolación y expone progreso, profundidad y estado de movimiento reducido mediante variables CSS. Las capas aplican offset, delay implícito por easing, transformaciones, parenting desde el layout raíz, cambio de valores, masking, overlays, clonación visual mediante pseudo-elementos, oscurecimiento, perspectiva, dolly/zoom sutil y soporte de `prefers-reduced-motion`.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.95 kB.
+- `git diff --check`: PASS.
+
+## Fase 63 - Degradado de transición en la portada
+
+Se añadió un degradado CSS en el borde superior de la sección de videos de la portada para suavizar la unión entre la imagen submarina y el bloque oscuro. El efecto es responsive, no requiere bibliotecas externas y no altera el contenido ni la navegación.
+
+## Verification
+
+- `npx vitest run src/app.test.jsx --pool=threads --maxWorkers=1`: PASS, 1 archivo y 6 pruebas.
+- `npm run build`: PASS; bundle principal de 413.04 kB.
+- `git diff --check`: PASS.
+
 ## Formateo global del proyecto
 
 Se aplicó Prettier de forma temporal a los archivos de código, estilos, configuraciones y documentación compatibles, sin añadir dependencias al proyecto ni modificar assets binarios.
