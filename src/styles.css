@@ -1,7 +1,87 @@
 :root {
+  --rc-parallax-scroll: 0px;
+  --rc-parallax-progress: 0;
+  --rc-parallax-depth: 0;
+  --rc-parallax-reveal: 1;
   font-family: "Inter", "Avenir Next", "Segoe UI", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+}
+
+/* Sistema parallax compartido: el padre aporta el progreso y las capas hijas
+   aplican offset, easing, transformación, máscara, profundidad y overlay. */
+.public-site,
+.private {
+  isolation: isolate;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.public-site::before,
+.private::before {
+  background: linear-gradient(
+    180deg,
+    rgba(3, 27, 36, 0.04),
+    rgba(3, 27, 36, calc(0.08 + var(--rc-parallax-depth) * 0.16))
+  );
+  content: "";
+  inset: 0;
+  mask-image: linear-gradient(180deg, transparent 0 8%, #000 28%, #000 100%);
+  opacity: var(--rc-parallax-reveal);
+  pointer-events: none;
+  position: absolute;
+  transform: translate3d(0, calc(var(--rc-parallax-scroll) * -0.012), 0);
+  transform-origin: center top;
+  transition: opacity 0.6s ease;
+  z-index: 4;
+}
+
+.public-site:has(.velorah-home)::before {
+  display: none;
+}
+
+.public-site > .public-page,
+.public-site > .velorah-home,
+.private > .private-main {
+  position: relative;
+  transform: translate3d(0, calc(var(--rc-parallax-scroll) * -0.018), 0);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  z-index: 1;
+}
+
+.public-site > .public-page::before,
+.private > .private-main::before {
+  background: inherit;
+  content: "";
+  inset: -4% 0;
+  opacity: 0.22;
+  pointer-events: none;
+  position: absolute;
+  transform: translate3d(0, calc(var(--rc-parallax-scroll) * 0.035), 0)
+    scale(calc(1 + var(--rc-parallax-depth) * 0.012));
+  transform-origin: center top;
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-site,
+  .private {
+    perspective: none;
+    transform-style: flat;
+  }
+
+  .public-site::before,
+  .private::before,
+  .public-site > .public-page,
+  .public-site > .velorah-home,
+  .private > .private-main,
+  .public-site > .public-page::before,
+  .private > .private-main::before {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 html {
